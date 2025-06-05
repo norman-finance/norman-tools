@@ -1,0 +1,111 @@
+    {
+  "header": {
+    "title": "Free Invoice Generator",
+    "subtitle": "Professional invoices for German freelancers"
+  },
+  "hero": {
+    "title": "Your invoices should be",
+    "subtitle": "as good as your work",
+    "description": "Fill in the template and get flawless professional invoices, adapted for German freelancers.",
+    "free": "Free, no registration needed."
+  },
+  "button": {
+    "fillDemo": "Fill Demo Data",
+    "preview": "Preview",
+    "getInvoice": "Get Me the Invoice",
+    "generating": "Generating..."
+  },
+  "section": {
+    "settings": "Settings",
+    "createFor": "Create for",
+    "details": "Details",
+    "payment": "Payment details",
+    "notes": "Notes & Terms"
+  },
+  "company": {
+    "title": "Your company",
+    "name": "Company name",
+    "address": "Address",
+    "zipCode": "ZIP Code",
+    "city": "City",
+    "country": "Country",
+    "email": "Email",
+    "phone": "Phone",
+    "taxNumber": "Tax number",
+    "vatNumber": "VAT number"
+  },
+  "client": {
+    "title": "Client",
+    "name": "Client name",
+    "type": "Client type",
+    "address": "Address",
+    "zipCode": "ZIP Code",
+    "city": "City",
+    "country": "Country",
+    "email": "Email",
+    "vatNumber": "VAT number",
+    "createNew": "Create a new client"
+  },
+  "details": {
+    "invoiceNumber": "Invoice number",
+    "issued": "Issued",
+    "dueDate": "Due date",
+    "saleType": "Sale type",
+    "serviceFrom": "Service date from",
+    "serviceTo": "Service date to",
+    "deliveryDate": "Delivery date"
+  },
+  "items": {
+    "description": "Item description",
+    "qty": "Qty",
+    "vat": "VAT",
+    "rate": "Rate",
+    "total": "Total",
+    "addNew": "Add a new item",
+    "unitPriceVat": "Unit price with VAT",
+    "removeItem": "Remove item"
+  },
+  "payment": {
+    "iban": "IBAN",
+    "bic": "BIC/SWIFT",
+    "bankName": "Bank Name"
+  },
+  "settings": {
+    "currency": "Currency",
+    "language": "Language",
+    "uiLanguage": "Interface Language",
+    "invoiceLanguage": "Invoice Language",
+    "languageNote": "Interface language affects form labels and buttons. Invoice language affects the generated invoice content.",
+    "saleType": "Sale type",
+    "paymentTerms": "Payment Terms",
+    "vatSettings": "VAT Settings",
+    "kleinunternehmer": "Kleinunternehmer (§19 UStG) - Small business regulation",
+    "kleinunternehmerDesc": "Check this if you're a small business under German tax law and don't charge VAT"
+  },
+  "notes": {
+    "title": "Notes, terms, and conditions",
+    "placeholder": "Add payment terms, notes, or special instructions here..."
+  },
+  "message": {
+    "success": "Invoice generated successfully! Your download should start automatically.",
+    "vatIssues": "VAT Configuration Issues:",
+    "vatValidation": "VAT validation failed:"
+  },
+  "option": {
+    "person": "Person",
+    "business": "Business",
+    "services": "Services",
+    "goods": "Goods"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "number": "Please enter a valid number"
+  },
+  "footer": {
+    "compliance": "Professional invoices with embedded e-invoice XML for German compliance.",
+    "privacy": "No data is stored on our servers. Your information is only used to generate the PDF."
+  },
+  "required": "*",
+  "optional": "(optional)"
+} 

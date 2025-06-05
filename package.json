@@ -1,0 +1,49 @@
+{
+  "name": "norman-invoicing-tool",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "i18n-iso-countries": "^7.14.0",
+    "is-european": "^1.0.8",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.57.0",
+    "react-select-country-list": "^2.2.3",
+    "zod": "^3.25.51"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.51.0",
+    "eslint-config-next": "^14.0.0",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.2.0"
+  },
+  "keywords": [
+    "invoice",
+    "generator",
+    "pdf",
+    "free",
+    "tool"
+  ],
+  "author": "Norman Finance",
+  "license": "MIT",
+  "description": "Free invoice generation tool with professional PDF output and e-invoice support"
+}

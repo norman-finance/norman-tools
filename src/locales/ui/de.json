@@ -1,0 +1,111 @@
+{
+  "header": {
+    "title": "Kostenloser Rechnungsersteller",
+    "subtitle": "Professionelle Rechnungen für deutsche Freelancer"
+  },
+  "hero": {
+    "title": "Ihre Rechnungen sollten so",
+    "subtitle": "gut sein wie Ihre Arbeit",
+    "description": "Füllen Sie die Vorlage aus und erhalten Sie einwandfreie professionelle Rechnungen, angepasst für deutsche Freelancer.",
+    "free": "Kostenlos, keine Registrierung erforderlich."
+  },
+  "button": {
+    "fillDemo": "Demo-Daten ausfüllen",
+    "preview": "Vorschau",
+    "getInvoice": "Rechnung erstellen",
+    "generating": "Wird erstellt..."
+  },
+  "section": {
+    "settings": "Einstellungen",
+    "createFor": "Erstellen für",
+    "details": "Details",
+    "payment": "Zahlungsdetails",
+    "notes": "Notizen & Bedingungen"
+  },
+  "company": {
+    "title": "Ihr Unternehmen",
+    "name": "Firmenname",
+    "address": "Adresse",
+    "zipCode": "PLZ",
+    "city": "Stadt",
+    "country": "Land",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "taxNumber": "Steuernummer",
+    "vatNumber": "USt-IdNr."
+  },
+  "client": {
+    "title": "Kunde",
+    "name": "Kundenname",
+    "type": "Kundentyp",
+    "address": "Adresse",
+    "zipCode": "PLZ",
+    "city": "Stadt",
+    "country": "Land",
+    "email": "E-Mail",
+    "vatNumber": "USt-IdNr.",
+    "createNew": "Neuen Kunden erstellen"
+  },
+  "details": {
+    "invoiceNumber": "Rechnungsnummer",
+    "issued": "Ausgestellt",
+    "dueDate": "Fälligkeitsdatum",
+    "saleType": "Verkaufsart",
+    "serviceFrom": "Leistungsdatum von",
+    "serviceTo": "Leistungsdatum bis",
+    "deliveryDate": "Lieferdatum"
+  },
+  "items": {
+    "description": "Artikelbeschreibung",
+    "qty": "Menge",
+    "vat": "MwSt",
+    "rate": "Preis",
+    "total": "Gesamt",
+    "addNew": "Neuen Artikel hinzufügen",
+    "unitPriceVat": "Einzelpreis mit MwSt",
+    "removeItem": "Artikel entfernen"
+  },
+  "payment": {
+    "iban": "IBAN",
+    "bic": "BIC/SWIFT",
+    "bankName": "Bankname"
+  },
+  "settings": {
+    "currency": "Währung",
+    "language": "Sprache",
+    "uiLanguage": "Benutzeroberfläche",
+    "invoiceLanguage": "Rechnungssprache",
+    "languageNote": "Die Oberflächensprache beeinflusst Formularbeschriftungen und Buttons. Die Rechnungssprache beeinflusst den Inhalt der generierten Rechnung.",
+    "saleType": "Verkaufsart",
+    "paymentTerms": "Zahlungsbedingungen",
+    "vatSettings": "MwSt-Einstellungen",
+    "kleinunternehmer": "Kleinunternehmer (§19 UStG) - Kleinunternehmerregelung",
+    "kleinunternehmerDesc": "Aktivieren Sie dies, wenn Sie Kleinunternehmer nach deutschem Steuerrecht sind und keine MwSt berechnen"
+  },
+  "notes": {
+    "title": "Notizen, Bedingungen und Konditionen",
+    "placeholder": "Fügen Sie hier Zahlungsbedingungen, Notizen oder spezielle Anweisungen hinzu..."
+  },
+  "message": {
+    "success": "Rechnung erfolgreich erstellt! Ihr Download sollte automatisch starten.",
+    "vatIssues": "MwSt-Konfigurationsprobleme:",
+    "vatValidation": "MwSt-Validierung fehlgeschlagen:"
+  },
+  "option": {
+    "person": "Person",
+    "business": "Unternehmen",
+    "services": "Dienstleistungen",
+    "goods": "Waren"
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "number": "Bitte geben Sie eine gültige Zahl ein"
+  },
+  "footer": {
+    "compliance": "Professionelle Rechnungen mit eingebetteter E-Rechnung XML für deutsche Compliance.",
+    "privacy": "Keine Daten werden auf unseren Servern gespeichert. Ihre Informationen werden nur zur PDF-Erstellung verwendet."
+  },
+  "required": "*",
+  "optional": "(optional)"
+} 

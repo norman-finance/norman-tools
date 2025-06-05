@@ -1,0 +1,38 @@
+{
+  "headers": {
+    "invoice": "Invoice"
+  },
+  "dates": {
+    "invoiceDate": "Invoice Date",
+    "dueDate": "Due Date",
+    "deliveryDate": "Delivery Date",
+    "serviceFrom": "Service Period From",
+    "serviceTo": "Service Period To"
+  },
+  "table": {
+    "description": "Description",
+    "qty": "Qty",
+    "unitPrice": "Unit Price",
+    "vat": "VAT",
+    "total": "Total"
+  },
+  "totals": {
+    "subtotal": "Subtotal",
+    "vatAmount": "VAT Amount",
+    "totalAmount": "Total Amount"
+  },
+  "payment": {
+    "paymentTerms": "Payment Terms",
+    "bank": "Bank",
+    "days": "days"
+  },
+  "tax": {
+    "taxNotice": "Tax Notice",
+    "reverseCharge": "Reverse charge - VAT payable by recipient",
+    "taxNumber": "Tax Number",
+    "vatNumber": "VAT Number"
+  },
+  "notes": {
+    "title": "Notes"
+  }
+} 
