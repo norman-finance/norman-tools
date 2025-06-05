@@ -263,3 +263,215 @@ For issues and feature requests, please create an issue in the GitHub repository
 ---
 
 Built with ❤️ for the freelancer community 
+
+## ✨ Features
+
+- **Dual Language System**: Separate control for interface language and invoice content language
+- **URL Parameter Support**: Share specific language configurations via URL
+- **German Tax Compliance**: Professional German business terminology and tax compliance features
+- **Professional Design**: Clean, modern interface with beautiful invoice previews
+- **Real-time Preview**: See your invoice update in real-time as you type
+- **Multiple Currency Support**: Support for EUR, USD, GBP and more
+- **VAT Handling**: Automatic VAT calculations with German Kleinunternehmer support
+- **No Registration Required**: Generate invoices immediately without signup
+
+## 🌐 Language Control
+
+### Interface vs Invoice Language
+
+The application supports **independent language control**:
+
+- **Interface Language**: Controls form labels, buttons, and UI elements
+- **Invoice Language**: Controls the generated invoice content (headers, table labels, etc.)
+
+This allows users to have a German interface while generating English invoices for international clients, or vice versa.
+
+### URL Parameters
+
+You can control languages via URL parameters for easy sharing:
+
+#### UI Language
+- `?ui_lang=en` - English interface
+- `?ui_lang=de` - German interface
+- `?uiLang=en` - Alternative parameter name
+
+#### Invoice Language
+- `?invoice_lang=en` - English invoice content
+- `?invoice_lang=de` - German invoice content  
+- `?invoiceLang=en` - Alternative parameter name
+
+#### Examples
+
+```
+# German interface with English invoice
+https://yoursite.com/?ui_lang=de&invoice_lang=en
+
+# English interface with German invoice
+https://yoursite.com/?ui_lang=en&invoice_lang=de
+
+# All German
+https://yoursite.com/?ui_lang=de&invoice_lang=de
+```
+
+### Language Priority
+
+The system follows this priority order:
+
+1. **URL Parameters** (highest priority)
+2. **localStorage** (saved user preference)
+3. **Default** (English)
+
+When you change language via the interface, the URL is automatically updated to reflect your choice.
+
+## 🚀 Getting Started
+
+### Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+The application will be available at `http://localhost:3000` (or next available port).
+
+### Production
+
+```bash
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                     # Next.js app router
+├── components/
+│   ├── forms/              # Form components
+│   ├── preview/            # Invoice preview components
+│   └── ui/                 # UI components
+├── contexts/
+│   └── UILanguageContext.tsx # UI language management
+├── locales/
+│   ├── ui/                 # Interface translations
+│   │   ├── en.json        # English UI translations
+│   │   └── de.json        # German UI translations
+│   └── invoice/           # Invoice content translations
+│       ├── en.json        # English invoice translations
+│       └── de.json        # German invoice translations
+├── lib/                   # Utilities and constants
+├── types/                 # TypeScript type definitions
+└── utils/                 # Helper functions
+```
+
+## 🛠 Translation System
+
+### Adding New UI Translations
+
+Edit the JSON files in `src/locales/ui/`:
+
+```json
+// en.json
+{
+  "header": {
+    "title": "Free Invoice Generator"
+  },
+  "button": {
+    "save": "Save"
+  }
+}
+```
+
+### Adding New Invoice Translations
+
+Edit the JSON files in `src/locales/invoice/`:
+
+```json
+// en.json
+{
+  "headers": {
+    "invoice": "Invoice"
+  },
+  "dates": {
+    "invoiceDate": "Invoice Date"
+  }
+}
+```
+
+### Using Translations
+
+#### UI Translations
+```tsx
+import { useUILanguage } from '@/contexts/UILanguageContext';
+
+function MyComponent() {
+  const { t } = useUILanguage();
+  
+  return <h1>{t('header.title')}</h1>;
+}
+```
+
+#### Invoice Translations
+```tsx
+import { getInvoiceTranslationFunction } from '@/utils/invoiceTranslations';
+
+const it = await getInvoiceTranslationFunction('en');
+const title = it('headers.invoice'); // "Invoice"
+```
+
+## 💼 Business Features
+
+### German Tax Compliance
+- Kleinunternehmer (§19 UStG) support
+- Proper German tax terminology
+- VAT number validation
+- Professional German invoice format
+
+### International Support
+- Multiple currencies
+- Country-specific formatting
+- Reverse charge mechanism for EU B2B transactions
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+# Add any environment variables here
+```
+
+### Customization
+
+The application is highly customizable through:
+
+- **Constants**: Edit `src/lib/constants.ts` for currencies, countries, etc.
+- **Styling**: Modify Tailwind classes and global CSS
+- **Translations**: Add new languages by creating new JSON files
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add your changes
+4. Update translations if needed
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🏢 About Norman Finance
+
+This tool is part of the Norman Finance ecosystem, providing professional financial tools for freelancers and small businesses.
+
+---
+
+**Made with ❤️ for the global freelancer community** 

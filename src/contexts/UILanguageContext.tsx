@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { getUrlParam, updateUrlParam } from '@/utils/urlParams';
 
 interface UILanguageContextType {
   uiLanguage: 'en' | 'de';
@@ -33,6 +34,8 @@ const loadTranslations = async (language: string) => {
   }
 };
 
+
+
 export const UILanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [uiLanguage, setUILanguageState] = useState<'en' | 'de'>('en');
   const [translations, setTranslations] = useState<any>({});
@@ -47,17 +50,34 @@ export const UILanguageProvider: React.FC<{ children: ReactNode }> = ({ children
     loadLanguageTranslations();
   }, [uiLanguage]);
 
-  // Load saved language preference on mount
+  // Initialize language from URL params or localStorage on mount
   useEffect(() => {
+    // Check URL parameter first (priority: URL > localStorage > default)
+    const urlLang = getUrlParam('ui_lang') || getUrlParam('uiLang');
+    if (urlLang === 'en' || urlLang === 'de') {
+      setUILanguageState(urlLang);
+      // Also save to localStorage for future visits
+      localStorage.setItem('uiLanguage', urlLang);
+      return;
+    }
+
+    // Fallback to localStorage
     const savedLanguage = localStorage.getItem('uiLanguage');
     if (savedLanguage === 'en' || savedLanguage === 'de') {
       setUILanguageState(savedLanguage);
+      // Update URL to reflect current language
+      updateUrlParam('ui_lang', savedLanguage);
+    } else {
+      // Default to English and update URL
+      updateUrlParam('ui_lang', 'en');
     }
   }, []);
 
   const setUILanguage = (language: 'en' | 'de') => {
     setUILanguageState(language);
     localStorage.setItem('uiLanguage', language);
+    // Update URL parameter
+    updateUrlParam('ui_lang', language);
   };
 
   // Translation function with nested key support

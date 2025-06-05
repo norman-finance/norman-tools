@@ -17,6 +17,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import ErrorMessage from '@/components/ui/ErrorMessage';
 import SuccessMessage from '@/components/ui/SuccessMessage';
 import { UILanguageProvider, useUILanguage } from '@/contexts/UILanguageContext';
+import { getUrlParam, updateUrlParam } from '@/utils/urlParams';
 
 function HomePageContent() {
   const { t } = useUILanguage();
@@ -31,8 +32,21 @@ function HomePageContent() {
     mode: 'onChange',
   });
 
-  const { watch, handleSubmit, formState: { errors, isValid } } = form;
+  const { watch, handleSubmit, formState: { errors, isValid }, setValue } = form;
   const formData = watch();
+
+  // Initialize invoice language from URL parameter
+  useEffect(() => {
+    const urlInvoiceLang = getUrlParam('invoice_lang') || getUrlParam('invoiceLang');
+    if (urlInvoiceLang === 'en' || urlInvoiceLang === 'de') {
+      setValue('language', urlInvoiceLang);
+    }
+  }, [setValue]);
+
+  // Update URL when invoice language changes
+  useEffect(() => {
+    updateUrlParam('invoice_lang', formData.language);
+  }, [formData.language]);
 
   // Calculate totals for preview
   const totals = calculateInvoiceTotals(formData.invoiced_items || [], formData.is_vat_included);
