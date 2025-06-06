@@ -30,7 +30,7 @@ deploy_prod() {
     echo "🏭 Building and starting production environment..."
     docker-compose -f docker-compose.prod.yml down --remove-orphans
     docker-compose -f docker-compose.prod.yml up --build -d
-    echo "✅ Production environment is running on http://localhost"
+    echo "✅ Production environment is running on http://localhost:81"
 }
 
 # Function to show logs

@@ -11,7 +11,7 @@ export interface CompanyData {
   company_zip_code: string;
   company_city: string;
   company_country: string;
-  company_email: string;
+  company_email?: string;
   company_phone?: string;
   company_tax_number?: string;
   company_vat_number?: string;

@@ -8,7 +8,7 @@ services:
       target: runner
     container_name: norman-invoicing-tool-prod
     ports:
-      - "80:3000"
+      - "81:3000"
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_API_URL=https://api.norman.finance

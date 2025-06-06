@@ -25,7 +25,7 @@ The app will be available at `http://localhost:3000`
 ./deploy.sh prod
 ```
 
-The app will be available at `http://localhost` (port 80)
+The app will be available at `http://localhost:81`
 
 ## Manual Deployment
 
@@ -173,6 +173,6 @@ jobs:
 For deployment issues, check:
 
 1. Docker daemon is running
-2. Ports 80/3000 are not in use
+2. Ports 81/3000 are not in use
 3. Sufficient disk space for Docker images
 4. Network connectivity to api.norman.finance (production) 
