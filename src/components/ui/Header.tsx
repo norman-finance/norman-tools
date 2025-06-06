@@ -24,16 +24,18 @@ const Header: React.FC = () => {
     }}>
       <div className="container">
         <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '1rem'
+          display: 'grid',
+          gridTemplateColumns: '1fr auto 1fr',
+          alignItems: 'center',
+          gap: '1rem',
+          width: '100%'
         }}>
+          {/* Left Section */}
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: '1rem'
+            gap: '1rem',
+            justifyContent: 'flex-start'
           }}>
             <h1 style={{ 
               fontSize: '1.25rem', 
@@ -50,16 +52,36 @@ const Header: React.FC = () => {
               padding: '0.25rem 0.5rem', 
               borderRadius: '4px'
             }}>
-              Free
+              {t('hero.freeLabel')}
             </span>
           </div>
           
+          {/* Center Logo - Perfectly centered */}
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center'
+          }}>
+            <a href="https://norman.finance" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="/images/norman-logo.svg" 
+              alt="NORMAN" 
+              style={{ 
+                height: '18px',
+                maxWidth: '100px'
+              }}
+            />
+            </a>
+          </div>
+          
+          {/* Right Section */}
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
             gap: '1rem', 
             fontSize: '0.875rem', 
-            color: '#6b7280'
+            color: '#6b7280',
+            justifyContent: 'flex-end'
           }}>
             <select
               value={uiLanguage}

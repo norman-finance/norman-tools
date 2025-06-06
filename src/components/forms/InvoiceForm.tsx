@@ -125,11 +125,11 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </label>
                 <select
                   {...register('currency')}
-                  className="input"
+                  className="input input-compact"
                 >
                   {CURRENCIES.map((currency) => (
                     <option key={currency.code} value={currency.code}>
-                      {currency.symbol} {currency.name} ({currency.code})
+                      {currency.symbol} {t(`currency.${currency.code}`)} ({currency.code})
                     </option>
                   ))}
                 </select>
@@ -145,7 +145,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </label>
                 <select
                   {...register('language')}
-                  className="input"
+                  className="input input-compact"
                 >
                   {LANGUAGES.map((lang) => (
                     <option key={lang.code} value={lang.code}>
@@ -170,11 +170,11 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </label>
                 <select
                   {...register('sale_type')}
-                  className="input"
+                  className="input input-compact"
                 >
                   {SALE_TYPES.map((saleType) => (
                     <option key={saleType.value} value={saleType.value}>
-                      {saleType.icon} {saleType.label}
+                      {saleType.icon} {t(`option.${saleType.value}`)}
                     </option>
                   ))}
                 </select>
@@ -191,10 +191,9 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             <div style={{ 
               display: 'flex', 
               flexDirection: 'column',
-              gap: '0.75rem',
               marginBottom: '1rem',
               padding: '1rem',
-              background: '#f8fafc',
+              background: '#f9fafb',
               border: '1px solid #e2e8f0',
               borderRadius: '6px'
             }}>
@@ -334,7 +333,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    ZIP Code *
+                    {t('company.zipCode')} {t('required')}
                   </label>
                   <input
                     {...register('company_zip_code')}
@@ -345,7 +344,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </div>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    City *
+                    {t('company.city')} {t('required')}
                   </label>
                   <input
                     {...register('company_city')}
@@ -356,7 +355,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </div>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Country *
+                    {t('company.country')} {t('required')}
                   </label>
                   <input
                     type="text"
@@ -371,7 +370,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               
               <div style={{ marginBottom: '1rem' }}>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  Phone
+                  {t('company.phone')}
                 </label>
                 <input
                   {...register('company_phone')}
@@ -384,7 +383,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Tax Number
+                    {t('company.taxNumber')}
                   </label>
                   <input
                     {...register('company_tax_number')}
@@ -400,7 +399,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </div>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    VAT Number
+                    {t('company.vatNumber')}
                   </label>
                   <input
                     {...register('company_vat_number')}
@@ -454,15 +453,15 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 
                 <div style={{ marginBottom: '1rem' }}>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Type *
+                    {t('client.type')} {t('required')}
                   </label>
                   <select
                     {...register('client_type')}
                     className="input input-compact"
                   >
                     {CLIENT_TYPES.map((type) => (
-                      <option key={type.value} value={type.value}>
-                        {type.icon} {type.label}
+                      <option key={type.value} value={type.value} selected={type.value === 'business'}>
+                        {type.icon} {t(`option.${type.value}`)}
                       </option>
                     ))}
                   </select>
@@ -476,7 +475,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                   <div>
                     <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                      ZIP Code *
+                      {t('company.zipCode')} {t('required')}
                     </label>
                     <input
                       {...register('client_zip_code')}
@@ -487,7 +486,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   </div>
                   <div>
                     <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                      City *
+                      {t('company.city')} {t('required')}
                     </label>
                     <input
                       {...register('client_city')}
@@ -498,7 +497,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   </div>
                   <div>
                     <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                      Country *
+                      {t('company.country')} {t('required')}
                     </label>
                     <select
                       {...register('client_country')}
@@ -516,7 +515,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Client Email
+                    {t('client.email')}
                   </label>
                   <input
                     {...register('client_email')}
@@ -527,7 +526,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </div>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Client VAT Number
+                    {t('client.vatNumber')}
                   </label>
                   <input
                     {...register('client_vat_number')}
@@ -563,7 +562,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             marginBottom: '1rem'
           }}
         >
-          <span>Details</span>
+          <span>{t('section.details')}</span>
           <span style={{ transform: expandedSections.details ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>
@@ -574,12 +573,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  Invoice number
+                  {t('details.invoiceNumber')}
                 </label>
                 <input
                   {...register('invoice_number')}
                   type="text"
-                  className="input"
+                  className="input input-compact"
                   placeholder="INV-2025-001"
                 />
                 {errors.invoice_number && (
@@ -590,12 +589,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               </div>
               <div>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  Issued
+                  {t('details.issued')}
                 </label>
                 <input
                   {...register('issue_date')}
                   type="date"
-                  className="input"
+                  className="input input-compact"
                 />
                 {errors.issue_date && (
                   <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -607,12 +606,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                Due date
+                {t('details.dueDate')}
               </label>
               <input
                 {...register('due_date')}
                 type="date"
-                className="input"
+                className="input input-compact"
               />
               {errors.due_date && (
                 <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -626,12 +625,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Service date from
+                    {t('details.serviceFrom')}
                   </label>
                   <input
                     {...register('service_start_date')}
                     type="date"
-                    className="input"
+                    className="input input-compact"
                   />
                   {errors.service_start_date && (
                     <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -641,12 +640,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 </div>
                 <div>
                   <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    Service date to
+                    {t('details.serviceTo')}
                   </label>
                   <input
                     {...register('service_end_date')}
                     type="date"
-                    className="input"
+                    className="input input-compact"
                   />
                   {errors.service_end_date && (
                     <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -660,12 +659,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             {isClient && watchedSaleType === 'goods' && (
               <div style={{ marginBottom: '1rem' }}>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  Delivery date
+                  {t('details.deliveryDate')}
                 </label>
                 <input
                   {...register('delivery_date')}
                   type="date"
-                  className="input"
+                  className="input input-compact"
                 />
                 {errors.delivery_date && (
                   <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -692,11 +691,11 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             fontWeight: '500',
             color: '#6b7280'
           }}>
-            <span>Item description</span>
-            <span>Qty</span>
-            <span>VAT</span>
-            <span>Rate</span>
-            <span>Total</span>
+            <span>{t('items.description')}</span>
+            <span>{t('items.qty')}</span>
+            <span>{t('items.vat')}</span>
+            <span>{t('items.rate')}</span>
+            <span>{t('items.total')}</span>
           </div>
 
           {fields.map((field, index) => (
@@ -711,21 +710,21 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <input
                 {...register(`invoiced_items.${index}.description`)}
                 type="text"
-                className="input"
-                placeholder="Product/Service"
+                className="input input-compact"
+                placeholder={t('items.descriptionPlaceholder')}
                 style={{ fontSize: '0.875rem', padding: '0.5rem' }}
               />
               <input
                 {...register(`invoiced_items.${index}.quantity`, { valueAsNumber: true })}
                 type="number"
-                className="input"
+                className="input input-compact"
                 placeholder="1.00"
                 step="0.01"
                 style={{ fontSize: '0.875rem', padding: '0.5rem' }}
               />
               <select
                 {...register(`invoiced_items.${index}.vat_rate`, { valueAsNumber: true })}
-                className="input"
+                className="input input-compact"
                 style={{ fontSize: '0.875rem', padding: '0.5rem' }}
               >
                 {VAT_RATES.map((rate) => (
@@ -737,7 +736,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <input
                 {...register(`invoiced_items.${index}.unit_price`, { valueAsNumber: true })}
                 type="number"
-                className="input"
+                className="input input-compact"
                 placeholder="0.00"
                 step="0.01"
                 style={{ fontSize: '0.875rem', padding: '0.5rem' }}
@@ -771,7 +770,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent';
                     }}
-                    title="Remove item"
+                    title={t('items.removeItem')}
                   >
                     ×
                   </button>
@@ -795,7 +794,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               marginTop: '0.5rem'
             }}
           >
-            Add a new item
+            {t('items.addNew')}
           </button>
 
           <div style={{ 
@@ -818,7 +817,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               }}
             />
             <label htmlFor="is_vat_included">
-              Unit price with VAT
+              {t('items.unitPriceVat')}
             </label>
           </div>
         </div>
@@ -845,7 +844,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             marginBottom: '1rem'
           }}
         >
-          <span>Payment details</span>
+          <span>{t('section.payment')}</span>
           <span style={{ transform: expandedSections.payment ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>
@@ -856,12 +855,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  IBAN
+                  {t('payment.iban')}
                 </label>
                 <input
                   {...register('iban')}
                   type="text"
-                  className="input"
+                  className="input input-compact"
                   placeholder="DE89 3704 0044 0532 0130 00"
                 />
                 {errors.iban && (
@@ -872,12 +871,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               </div>
               <div>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  BIC/SWIFT
+                  {t('payment.bic')}
                 </label>
                 <input
                   {...register('bic')}
                   type="text"
-                  className="input"
+                  className="input input-compact"
                   placeholder="COBADEFFXXX"
                 />
                 {errors.bic && (
@@ -890,12 +889,12 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                Bank Name
+                {t('payment.bankName')}
               </label>
               <input
                 {...register('bank_name')}
                 type="text"
-                className="input"
+                className="input input-compact"
                 placeholder="Commerzbank AG"
               />
               {errors.bank_name && (
@@ -930,7 +929,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             marginBottom: '1rem'
           }}
         >
-          <span>Notes & Terms</span>
+          <span>{t('section.notes')}</span>
           <span style={{ transform: expandedSections.notes ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>

@@ -7,7 +7,8 @@
     "title": "Ihre Rechnungen sollten so",
     "subtitle": "gut sein wie Ihre Arbeit",
     "description": "Füllen Sie die Vorlage aus und erhalten Sie einwandfreie professionelle Rechnungen, angepasst für deutsche Freelancer.",
-    "free": "Kostenlos, keine Registrierung erforderlich."
+    "free": "Kostenlos, keine Registrierung erforderlich.",
+    "freeLabel": "Kostenlos"
   },
   "button": {
     "fillDemo": "Demo-Daten ausfüllen",
@@ -17,10 +18,11 @@
   },
   "section": {
     "settings": "Einstellungen",
-    "createFor": "Erstellen für",
+    "createFor": "Von & Bis",
     "details": "Details",
     "payment": "Zahlungsdetails",
-    "notes": "Notizen & Bedingungen"
+    "notes": "Notizen & Bedingungen",
+    "preview": "Vorschau"
   },
   "company": {
     "title": "Ihr Unternehmen",
@@ -32,13 +34,14 @@
     "email": "E-Mail",
     "phone": "Telefon",
     "taxNumber": "Steuernummer",
-    "vatNumber": "USt-IdNr."
+    "vatNumber": "USt-IdNr.",
+    "namePlaceholder": "Acme GmbH"
   },
   "client": {
     "title": "Kunde",
     "name": "Kundenname",
     "type": "Kundentyp",
-    "address": "Adresse",
+    "address": "Kundenadresse",
     "zipCode": "PLZ",
     "city": "Stadt",
     "country": "Land",
@@ -63,7 +66,8 @@
     "total": "Gesamt",
     "addNew": "Neuen Artikel hinzufügen",
     "unitPriceVat": "Einzelpreis mit MwSt",
-    "removeItem": "Artikel entfernen"
+    "removeItem": "Artikel entfernen",
+    "descriptionPlaceholder": "Produkt/Dienstleistung"
   },
   "payment": {
     "iban": "IBAN",
@@ -91,7 +95,8 @@
   "message": {
     "success": "🎉 Rechnung erfolgreich erstellt! Ihr PDF-Download sollte automatisch starten.",
     "vatIssues": "MwSt-Konfigurationsprobleme:",
-    "vatValidation": "MwSt-Validierung fehlgeschlagen:"
+    "vatValidation": "MwSt-Validierung fehlgeschlagen:",
+    "error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
   "option": {
     "person": "Person",
@@ -121,5 +126,25 @@
     "privacy": "Keine Daten werden auf unseren Servern gespeichert. Ihre Informationen werden nur zur PDF-Erstellung verwendet."
   },
   "required": "*",
-  "optional": "(optional)"
+  "optional": "(optional)",
+  "currency": {
+    "EUR": "Euro",
+    "USD": "US-Dollar",
+    "BRL": "Brasilianischer Real",
+    "CZK": "Tschechische Krone",
+    "DKK": "Dänische Krone",
+    "HKD": "Hongkong-Dollar",
+    "INR": "Indische Rupie",
+    "JPY": "Japanischer Yen",
+    "MXN": "Mexikanischer Peso",
+    "ILS": "Neuer Israelischer Schekel",
+    "NZD": "Neuseeland-Dollar",
+    "NOK": "Norwegische Krone",
+    "PLN": "Polnischer Złoty",
+    "GBP": "Britisches Pfund",
+    "SEK": "Schwedische Krone",
+    "CHF": "Schweizer Franken",
+    "TRY": "Türkische Lira",
+    "AED": "VAE-Dirham"
+  }
 } 

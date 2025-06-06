@@ -7,7 +7,8 @@
     "title": "Your invoices should be",
     "subtitle": "as good as your work",
     "description": "Fill in the template and get flawless professional invoices, adapted for German freelancers.",
-    "free": "Free, no registration needed."
+    "free": "Free, no registration needed.",
+    "freeLabel": "Free"
   },
   "button": {
     "fillDemo": "Fill Demo Data",
@@ -20,7 +21,8 @@
     "createFor": "From & To",
     "details": "Details",
     "payment": "Payment details",
-    "notes": "Notes & Terms"
+    "notes": "Notes & Terms",
+    "preview": "Preview"
   },
   "company": {
     "title": "Your business details",
@@ -39,7 +41,7 @@
     "title": "Client details",
     "name": "Client name",
     "type": "Client type",
-    "address": "Address",
+    "address": "Client address",
     "zipCode": "ZIP Code",
     "city": "City",
     "country": "Country",
@@ -64,7 +66,8 @@
     "total": "Total",
     "addNew": "Add a new item",
     "unitPriceVat": "Unit price with VAT",
-    "removeItem": "Remove item"
+    "removeItem": "Remove item",
+    "descriptionPlaceholder": "Product/Service"
   },
   "payment": {
     "iban": "IBAN",
@@ -83,6 +86,26 @@
     "kleinunternehmer": "Kleinunternehmer (§19 UStG) - Small business regulation",
     "kleinunternehmerDesc": "Check this if you're a small business under German tax law and don't charge VAT"
   },
+  "currency": {
+    "EUR": "Euro",
+    "USD": "US Dollar",
+    "BRL": "Brazilian Real",
+    "CZK": "Czech Koruna",
+    "DKK": "Danish Krone",
+    "HKD": "Hong Kong Dollar",
+    "INR": "Indian Rupee",
+    "JPY": "Japanese Yen",
+    "MXN": "Mexican Peso",
+    "ILS": "New Israeli Sheqel",
+    "NZD": "New Zealand Dollar",
+    "NOK": "Norwegian Krone",
+    "PLN": "Polish Złoty",
+    "GBP": "Pound Sterling",
+    "SEK": "Swedish Krona",
+    "CHF": "Swiss Franc",
+    "TRY": "Turkish Lira",
+    "AED": "UAE Dirham"
+  },
   "notes": {
     "title": "Notes",
     "placeholder": "Add any additional information, special instructions, or notes here...",
@@ -92,7 +115,8 @@
   "message": {
     "success": "🎉 Invoice generated successfully! Your PDF download should start automatically.",
     "vatIssues": "VAT Configuration Issues:",
-    "vatValidation": "VAT validation failed:"
+    "vatValidation": "VAT validation failed:",
+    "error": "There was an error generating the invoice. Please try again."
   },
   "option": {
     "person": "Person",

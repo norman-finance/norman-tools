@@ -26,22 +26,25 @@ function HomePageContent() {
   const [success, setSuccess] = useState<string | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
 
+  // Get initial values with URL parameters
+  const getInitialValues = () => {
+    const urlInvoiceLang = getUrlParam('invoice_lang') || getUrlParam('invoiceLang');
+    const validLang: 'en' | 'de' = (urlInvoiceLang === 'en' || urlInvoiceLang === 'de') ? urlInvoiceLang : 'en';
+    
+    return {
+      ...DEFAULT_INVOICE_DATA,
+      language: validLang as 'en' | 'de',
+    } as InvoiceFormData;
+  };
+
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceFormSchema),
-    defaultValues: DEFAULT_INVOICE_DATA,
+    defaultValues: getInitialValues(),
     mode: 'onChange',
   });
 
   const { watch, handleSubmit, formState: { errors, isValid }, setValue } = form;
   const formData = watch();
-
-  // Initialize invoice language from URL parameter
-  useEffect(() => {
-    const urlInvoiceLang = getUrlParam('invoice_lang') || getUrlParam('invoiceLang');
-    if (urlInvoiceLang === 'en' || urlInvoiceLang === 'de') {
-      setValue('language', urlInvoiceLang);
-    }
-  }, [setValue]);
 
   // Update URL when invoice language changes
   useEffect(() => {
@@ -182,41 +185,47 @@ function HomePageContent() {
     
     form.reset({
       ...DEFAULT_INVOICE_DATA,
-      company_name: 'Demo Company GmbH',
+      company_name: 'Acme GmbH',
       company_address: 'Musterstraße 123',
       company_zip_code: '10115',
       company_city: 'Berlin',
       company_country: 'DE',
-      company_email: 'hello@democompany.com',
+      company_email: 'hello@acme.com',
       company_phone: '+49 30 12345678',
       company_vat_number: 'DE123456789',
+      company_tax_number: '12/345/67890',
       
-      client_name: 'Client Company Ltd.',
+      client_name: 'Max Mustermann',
       client_type: 'business' as const,
-      client_address: 'Customer Street 456',
+      client_address: 'Hamburger Straße 456',
       client_zip_code: '20095',
       client_city: 'Hamburg',
       client_country: 'DE',
-      client_email: 'contact@client.com',
+      client_email: 'max@mustermann.de',
       client_vat_number: 'DE987654321',
+      payment_terms: 'Bitte zahlen Sie innerhalb von 14 Tagen',
+      iban: 'DE1234567890',
+      bic: 'COBADEHD001',
+      bank_name: 'Commerzbank',
       
       // Explicitly set dates in YYYY-MM-DD format
       issue_date: today,
       due_date: dueDate,
       sale_type: 'services' as const,
       delivery_date: '',
-      service_start_date: today,
+      service_start_date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
       service_end_date: today,
+      language: 'de',
       
       invoiced_items: [
         {
-          description: 'Web Development Services',
+          description: 'Webentwicklung',
           quantity: 40,
           unit_price: 85,
           vat_rate: 19,
         },
         {
-          description: 'Consulting & Strategy',
+          description: 'Beratung & Strategie',
           quantity: 8,
           unit_price: 120,
           vat_rate: 19,
@@ -256,7 +265,7 @@ function HomePageContent() {
             color: '#9ca3af', 
             marginBottom: '2rem'
           }}>
-            Free, no registration needed.
+            {t('hero.free')}
           </p>
           
           {/* Quick Actions */}
@@ -279,14 +288,13 @@ function HomePageContent() {
             </div>
           </div>
         </div>
-
         {/* Error/Success Messages */}
         {error && (
           <div style={{ 
             marginBottom: '2rem',
             padding: '1.25rem',
-            background: '#fef2f2',
-            border: '1px solid rgb(0, 0, 0)',
+            background: 'rgb(255 255 255)',
+            border: '1px solid rgb(0, 0, 0, 0.1)',
             borderRadius: '12px',
             boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
           }}>
@@ -297,7 +305,7 @@ function HomePageContent() {
             }}>
               <span style={{ 
                 fontSize: '1.25rem',
-                color: '#dc2626',
+                color: 'rgb(0 0 0)',
                 flexShrink: 0
               }}>
                 ❌
@@ -306,14 +314,14 @@ function HomePageContent() {
                 <h3 style={{
                   fontSize: '1rem',
                   fontWeight: '600',
-                  color: '#dc2626',
+                  color: 'rgb(0 0 0)',
                   margin: '0 0 0.5rem 0'
                 }}>
-                  Please fix the following issues:
+                  {t('message.error')}
                 </h3>
                 <p style={{
                   fontSize: '0.875rem',
-                  color: '#b91c1c',
+                  color: 'rgb(0 0 0)',
                   margin: '0',
                   lineHeight: '1.6'
                 }}>
@@ -464,7 +472,7 @@ function HomePageContent() {
                   color: '#111827', 
                   margin: '0'
                 }}>
-                  Preview
+                  {t('section.preview')}
                 </h2>
                 
                 {/* Generate Invoice Button */}
