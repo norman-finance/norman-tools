@@ -147,13 +147,13 @@ export const validateVatSetup = (formData: InvoiceFormData): string[] => {
   const errors: string[] = [];
   const vatData = calculateVatData({ formData, language: formData.language });
   
-  // Check if VAT number is required but missing
-  if (vatData.isVatNumberRequired && !formData.client_vat_number) {
-    errors.push(formData.language === 'en' 
-      ? 'Client VAT number is required for this type of transaction'
-      : 'Kunden-USt-ID ist für diese Art von Transaktion erforderlich'
-    );
-  }
+//   // Check if VAT number is required but missing
+//   if (vatData.isVatNumberRequired && !formData.client_vat_number) {
+//     errors.push(formData.language === 'en' 
+//       ? 'Client VAT number is required for this type of transaction'
+//       : 'Kunden-USt-ID ist für diese Art von Transaktion erforderlich'
+//     );
+//   }
   
   // Check if VAT rates are correct for kleinunternehmer
   if (formData.is_kleinunternehmer) {

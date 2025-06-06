@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  norman-invoicing-tool:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: norman-invoicing-tool-prod
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=https://api.norman.finance
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - norman-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+networks:
+  norman-network:
+    driver: bridge 

@@ -83,7 +83,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
     <div 
       className={className}
       style={{ 
-        fontFamily: selectedFont?.family || 'Inter, sans-serif',
+        fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
         color: data.color_schema === '#FFFFFF' ? '#000000' : data.color_schema,
         background: '#ffffff',
         border: '1px solid #e5e7eb',
@@ -103,7 +103,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         }}>
           <div>
             <h1 style={{ 
-              fontSize: '2rem', 
+              fontSize: '1.5rem', 
               fontWeight: 'bold', 
               marginBottom: '0.5rem',
               color: '#000000'
@@ -112,7 +112,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
             </h1>
             <p style={{ 
               color: '#6b7280', 
-              fontSize: '1.125rem',
+              fontSize: '0.875rem',
               fontWeight: '500'
             }}>
               {data.invoice_number}
@@ -120,7 +120,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           </div>
           <div style={{ textAlign: 'right' }}>
             <h2 style={{ 
-              fontSize: '1.25rem', 
+              fontSize: '1rem', 
               fontWeight: '600',
               color: '#000000',
               marginBottom: '0.5rem'
@@ -128,9 +128,9 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
               {data.company_name}
             </h2>
             <div style={{ 
-              fontSize: '0.875rem', 
+              fontSize: '0.75rem', 
               color: '#6b7280', 
-              lineHeight: '1.5'
+              lineHeight: '1.4'
             }}>
               <p>{data.company_address}</p>
               <p>{data.company_zip_code} {data.company_city}</p>
@@ -146,8 +146,8 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
 
           {/* To */}
           <div>
-            <div className="text-sm space-y-1">
-              <p className="font-medium">{data.client_name}</p>
+            <div style={{ fontSize: '0.75rem', lineHeight: '1.4' }}>
+              <p style={{ fontWeight: '500', marginBottom: '0.25rem' }}>{data.client_name}</p>
               <p>{data.client_address}</p>
               <p>{data.client_zip_code} {data.client_city}</p>
               <p>{clientCountry?.name}</p>
@@ -160,16 +160,16 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         </div>
 
         {/* Invoice Details */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ fontSize: '0.75rem' }}>
           <div>
-            <p className="font-semibold text-gray-900">
+            <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
               {it('dates.invoiceDate')}
             </p>
             <p>{formatDateDisplay(data.issue_date)}</p>
           </div>
           {data.due_date && (
             <div>
-              <p className="font-semibold text-gray-900">
+              <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                 {it('dates.dueDate')}
               </p>
               <p>{formatDateDisplay(data.due_date)}</p>
@@ -177,7 +177,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           )}
           {isClient && data.sale_type === 'goods' && data.delivery_date && (
             <div>
-              <p className="font-semibold text-gray-900">
+              <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                 {it('dates.deliveryDate')}
               </p>
               <p>{formatDateDisplay(data.delivery_date)}</p>
@@ -185,7 +185,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           )}
           {isClient && data.sale_type === 'services' && data.service_start_date && (
             <div>
-              <p className="font-semibold text-gray-900">
+              <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                 {it('dates.serviceFrom')}
               </p>
               <p>
@@ -204,7 +204,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         }}>
           <table style={{ 
             width: '100%', 
-            fontSize: '0.875rem',
+            fontSize: '0.75rem',
             borderCollapse: 'collapse'
           }}>
             <thead>
@@ -214,7 +214,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
               }}>
                 <th style={{ 
                   textAlign: 'left', 
-                  padding: '1rem', 
+                  padding: '0.75rem', 
                   fontWeight: '600',
                   color: '#374151'
                 }}>
@@ -222,7 +222,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                 </th>
                 <th style={{ 
                   textAlign: 'center', 
-                  padding: '1rem', 
+                  padding: '0.75rem', 
                   fontWeight: '600',
                   color: '#374151'
                 }}>
@@ -230,7 +230,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                 </th>
                 <th style={{ 
                   textAlign: 'right', 
-                  padding: '1rem', 
+                  padding: '0.75rem', 
                   fontWeight: '600',
                   color: '#374151'
                 }}>
@@ -238,7 +238,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                 </th>
                 <th style={{ 
                   textAlign: 'center', 
-                  padding: '1rem', 
+                  padding: '0.75rem', 
                   fontWeight: '600',
                   color: '#374151'
                 }}>
@@ -246,7 +246,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                 </th>
                 <th style={{ 
                   textAlign: 'right', 
-                  padding: '1rem', 
+                  padding: '0.75rem', 
                   fontWeight: '600',
                   color: '#374151'
                 }}>
@@ -263,14 +263,14 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                     background: index % 2 === 0 ? '#ffffff' : '#fafafa'
                   }}>
                     <td style={{ 
-                      padding: '1rem',
+                      padding: '0.75rem',
                       color: '#111827'
                     }}>
                       {item.description || 'Service description'}
                     </td>
                     <td style={{ 
                       textAlign: 'center', 
-                      padding: '1rem',
+                      padding: '0.75rem',
                       color: '#111827',
                       fontWeight: '500'
                     }}>
@@ -278,7 +278,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                     </td>
                     <td style={{ 
                       textAlign: 'right', 
-                      padding: '1rem',
+                      padding: '0.75rem',
                       color: '#111827',
                       fontFamily: 'monospace'
                     }}>
@@ -286,15 +286,15 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                     </td>
                     <td style={{ 
                       textAlign: 'center', 
-                      padding: '1rem',
+                      padding: '0.75rem',
                       color: '#6b7280',
-                      fontSize: '0.8rem'
+                      fontSize: '0.7rem'
                     }}>
                       {item.vat_rate}%
                     </td>
                     <td style={{ 
                       textAlign: 'right', 
-                      padding: '1rem',
+                      padding: '0.75rem',
                       color: '#111827',
                       fontWeight: '600',
                       fontFamily: 'monospace'
@@ -375,79 +375,68 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         {vatData.note && (
           <div style={{ 
             padding: '1rem',
-            background: '#fef3c7',
-            border: '1px solid #f59e0b',
+            background: '#f9fafb',
+            border: '1px solid #e5e7eb',
             borderRadius: '8px',
             marginTop: '1rem'
           }}>
-            <div style={{ 
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '0.5rem'
-            }}>
-              <span style={{ 
-                fontSize: '1rem',
-                color: '#d97706'
+            <div>
+              <h3 style={{ 
+                fontSize: '0.875rem',
+                fontWeight: '600',
+                color: '#374151',
+                margin: '0 0 0.5rem 0'
               }}>
-                ⚠️
-              </span>
-              <div>
-                <h3 style={{ 
-                  fontSize: '0.875rem',
-                  fontWeight: '600',
-                  color: '#92400e',
-                  margin: '0 0 0.25rem 0'
-                }}>
-{it('tax.taxNotice')}
-                </h3>
+                {it('tax.taxNotice')}
+              </h3>
+              <p style={{ 
+                fontSize: '0.875rem',
+                color: '#6b7280',
+                margin: '0',
+                lineHeight: '1.5'
+              }}>
+                {vatData.note}
+              </p>
+              {vatData.isReverseCharge && (
                 <p style={{ 
-                  fontSize: '0.875rem',
-                  color: '#92400e',
-                  margin: '0',
-                  lineHeight: '1.4'
+                  fontSize: '0.8rem',
+                  color: '#9ca3af',
+                  margin: '0.5rem 0 0 0',
+                  fontStyle: 'italic'
                 }}>
-                  {vatData.note}
+                  {it('tax.reverseCharge')}
                 </p>
-                {vatData.isReverseCharge && (
-                  <p style={{ 
-                    fontSize: '0.75rem',
-                    color: '#b45309',
-                    margin: '0.5rem 0 0 0',
-                    fontStyle: 'italic'
-                  }}>
-{it('tax.reverseCharge')}
-                  </p>
-                )}
-              </div>
+              )}
             </div>
           </div>
         )}
 
-        {/* Payment Information */}
-        {(data.iban || data.bic || data.bank_name) && (
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-            <h3 className="font-semibold text-gray-900 mb-2">
-              {it('payment.paymentTerms')}
+        {/* Terms & Conditions */}
+        {data.payment_terms && (
+          <div style={{ 
+            padding: '1rem',
+            background: '#f9fafb',
+            border: '1px solid #e5e7eb',
+            borderRadius: '8px',
+            marginTop: '1rem'
+          }}>
+            <h3 style={{ 
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              color: '#111827',
+              margin: '0 0 0.5rem 0'
+            }}>
+              {it('termsConditions.title')}
             </h3>
-            <div className="text-sm space-y-1">
-              {data.bank_name && (
-                <p><span className="font-medium">{it('payment.bank')}</span> {data.bank_name}</p>
-              )}
-              {data.iban && (
-                <p><span className="font-medium">IBAN:</span> {data.iban}</p>
-              )}
-              {data.bic && (
-                <p><span className="font-medium">BIC:</span> {data.bic}</p>
-              )}
-              {data.payment_terms && (
-                <p>
-                  <span className="font-medium">
-                    {it('payment.paymentTerms')}
-                  </span>{' '}
-                  {data.payment_terms} {it('payment.days')}
-                </p>
-              )}
-            </div>
+            <p style={{ 
+              fontSize: '0.875rem',
+              color: '#374151',
+              margin: '0',
+              lineHeight: '1.5',
+              whiteSpace: 'pre-wrap'
+            }}>
+              {data.payment_terms}
+            </p>
           </div>
         )}
 
@@ -461,35 +450,65 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           </div>
         )}
 
-        {/* Company Tax Details Footer */}
-        {(data.company_tax_number || data.company_vat_number) && (
+        {/* Footer with Payment and Tax Details */}
+        {(data.iban || data.bic || data.bank_name || data.company_tax_number || data.company_vat_number) && (
           <div style={{ 
-            display: 'flex',
-            justifyContent: 'flex-end',
             marginTop: '2rem',
             paddingTop: '1rem',
             borderTop: '1px solid #e5e7eb'
           }}>
             <div style={{ 
+              display: 'flex',
+              justifyContent: 'space-between',
               fontSize: '0.75rem',
               color: '#6b7280',
-              textAlign: 'right',
               lineHeight: '1.5'
             }}>
-              {data.company_tax_number && (
+              {/* Payment Information */}
+              {(data.iban || data.bic || data.bank_name) && (
                 <div>
-                  <span style={{ fontWeight: '500' }}>
-                    {it('tax.taxNumber')}
-                  </span>{' '}
-                  {data.company_tax_number}
+                  {data.bank_name && (
+                    <div>
+                      <span style={{ fontWeight: '500' }}>
+                        {it('payment.bank')}
+                      </span>
+                      {': '}{data.bank_name}
+                    </div>
+                  )}
+                  {data.iban && (
+                    <div>
+                      <span style={{ fontWeight: '500' }}>IBAN</span>
+                      {': '}{data.iban}
+                    </div>
+                  )}
+                  {data.bic && (
+                    <div>
+                      <span style={{ fontWeight: '500' }}>BIC/SWIFT</span>
+                      {': '}{data.bic}
+                    </div>
+                  )}
                 </div>
               )}
-              {data.company_vat_number && (
-                <div>
-                  <span style={{ fontWeight: '500' }}>
-                    {it('tax.vatNumber')}
-                  </span>{' '}
-                  {data.company_vat_number}
+              
+              {/* Tax Information */}
+              {(data.company_tax_number || data.company_vat_number) && (
+                <div style={{ textAlign: 'right' }}>
+                  {data.company_tax_number && (
+                    <div>
+                      <span style={{ fontWeight: '500' }}>
+                        {it('tax.taxNumber')}
+                      </span>
+                      {': '}{data.company_tax_number}
+                    </div>
+                  )}
+                  {data.company_vat_number && (
+                    <div>
+                      <span style={{ fontWeight: '500' }}>
+                        {it('tax.vatNumber')}
+                      </span>
+                      {': '}{data.company_vat_number}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

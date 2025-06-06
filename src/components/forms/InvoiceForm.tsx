@@ -3,7 +3,7 @@
 import React from 'react';
 import { UseFormReturn, useFieldArray } from 'react-hook-form';
 import { InvoiceFormData } from '../../types/invoice';
-import { VAT_RATES, CURRENCIES, LANGUAGES, PAYMENT_TERMS, SALE_TYPES, CLIENT_TYPES, COMPANY_COUNTRY, getCountriesList } from '../../lib/constants';
+import { VAT_RATES, CURRENCIES, LANGUAGES, SALE_TYPES, CLIENT_TYPES, COMPANY_COUNTRY, getCountriesList } from '../../lib/constants';
 import { useUILanguage } from '@/contexts/UILanguageContext';
 
 interface InvoiceFormProps {
@@ -118,7 +118,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
         
         {expandedSections.settings && (
           <div style={{ padding: '0 1rem' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
                   {t('settings.currency')} {t('required')}
@@ -139,10 +139,6 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   </p>
                 )}
               </div>
-        
-            </div>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
                 <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
                   {t('settings.invoiceLanguage')} {t('required')}
@@ -163,7 +159,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   </p>
                 )}
               </div>
-              <div></div>
+        
             </div>
         
             
@@ -188,26 +184,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   </p>
                 )}
               </div>
-              <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-{t('settings.paymentTerms')} {t('required')}
-                </label>
-                <select
-                  {...register('payment_terms', { valueAsNumber: true })}
-                  className="input"
-                >
-                  {PAYMENT_TERMS.map((term) => (
-                    <option key={term.value} value={term.value}>
-                      {term.label}
-                    </option>
-                  ))}
-                </select>
-                {errors.payment_terms && (
-                  <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
-                    {errors.payment_terms.message}
-                  </p>
-                )}
-              </div>
+
             </div>
             
             {/* VAT Settings */}
@@ -302,16 +279,16 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
 {t('company.title')}
               </h4>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.25rem', display: 'block' }}>
 {t('company.name')} {t('required')}
                   </label>
                   <input
                     {...register('company_name')}
                     type="text"
-                    className="input"
-                    placeholder="Your Company Ltd."
+                    className="input input-compact"
+                    placeholder={t('company.namePlaceholder')}
                   />
                   {errors.company_name && (
                     <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -320,13 +297,13 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   )}
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-{t('company.email')} {t('required')}
+                  <label style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.25rem', display: 'block' }}>
+{t('company.email')}
                   </label>
                   <input
                     {...register('company_email')}
                     type="email"
-                    className="input"
+                    className="input input-compact"
                     placeholder="hello@company.com"
                   />
                   {errors.company_email && (
@@ -344,8 +321,8 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 <input
                   {...register('company_address')}
                   type="text"
-                  className="input"
-                  placeholder="123 Business Street"
+                  className="input input-compact"
+                  placeholder="Hauptstraße 18"
                 />
                 {errors.company_address && (
                   <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
@@ -362,7 +339,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     {...register('company_zip_code')}
                     type="text"
-                    className="input"
+                    className="input input-compact"
                     placeholder="10115"
                   />
                 </div>
@@ -373,7 +350,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     {...register('company_city')}
                     type="text"
-                    className="input"
+                    className="input input-compact"
                     placeholder="Berlin"
                   />
                 </div>
@@ -384,7 +361,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     type="text"
                     value={COMPANY_COUNTRY.name}
-                    className="input"
+                    className="input input-compact"
                     disabled
                     style={{ backgroundColor: '#f9fafb', color: '#6b7280' }}
                   />
@@ -399,7 +376,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 <input
                   {...register('company_phone')}
                   type="tel"
-                  className="input"
+                  className="input input-compact"
                   placeholder="+49 30 12345678"
                 />
               </div>
@@ -412,7 +389,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     {...register('company_tax_number')}
                     type="text"
-                    className="input"
+                    className="input input-compact"
                     placeholder="12/345/67890"
                   />
                   {errors.company_tax_number && (
@@ -428,7 +405,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     {...register('company_vat_number')}
                     type="text"
-                    className="input"
+                    className="input input-compact"
                     placeholder="DE123456789"
                   />
                   {errors.company_vat_number && (
@@ -443,13 +420,16 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             {/* Client Details */}
             <div>
               <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
-                To
+              {t('client.title')}
               </h4>
-              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+              <div style={{ marginBottom: '1rem' }}>
+              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  {t('client.name')} {t('required')}
+                </label>
                 <input
                   {...register('client_name')}
                   type="text"
-                  className="input"
+                  className="input input-compact"
                   placeholder="Acme GmbH"
                   style={{ flex: 1 }}
                 />
@@ -462,7 +442,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 <input
                   {...register('client_address')}
                   type="text"
-                  className="input"
+                  className="input input-compact"
                   placeholder="Hauptstraße 18"
                 />
                 {errors.client_address && (
@@ -478,7 +458,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   </label>
                   <select
                     {...register('client_type')}
-                    className="input"
+                    className="input input-compact"
                   >
                     {CLIENT_TYPES.map((type) => (
                       <option key={type.value} value={type.value}>
@@ -501,7 +481,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     <input
                       {...register('client_zip_code')}
                       type="text"
-                      className="input"
+                      className="input input-compact"
                       placeholder="20095"
                     />
                   </div>
@@ -512,7 +492,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     <input
                       {...register('client_city')}
                       type="text"
-                      className="input"
+                      className="input input-compact"
                       placeholder="Hamburg"
                     />
                   </div>
@@ -522,7 +502,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     </label>
                     <select
                       {...register('client_country')}
-                      className="input"
+                      className="input input-compact"
                     >
                       {countriesList.map((country) => (
                         <option key={country.code} value={country.code}>
@@ -541,7 +521,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     {...register('client_email')}
                     type="email"
-                    className="input"
+                    className="input input-compact"
                     placeholder="contact@client.com"
                   />
                 </div>
@@ -552,7 +532,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   <input
                     {...register('client_vat_number')}
                     type="text"
-                    className="input"
+                    className="input input-compact"
                     placeholder="DE987654321"
                   />
                 </div>
@@ -958,14 +938,39 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
         
         {expandedSections.notes && (
           <div style={{ padding: '0 1rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                {t('notes.termsConditions')}
+              </label>
+              <textarea
+                {...register('payment_terms')}
+                className="form-textarea"
+                placeholder={t('notes.termsConditionsPlaceholder')}
+                rows={3}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: '1px solid #d1d5db',
+                  borderRadius: '6px',
+                  fontSize: '0.875rem',
+                  resize: 'vertical',
+                  fontFamily: 'inherit'
+                }}
+              />
+              {errors.payment_terms && (
+                <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
+                  {errors.payment_terms.message}
+                </p>
+              )}
+            </div>
             <div>
               <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                Notes, terms, and conditions
+                {t('notes.title')}
               </label>
               <textarea
                 {...register('notes')}
                 className="form-textarea"
-                placeholder="Add payment terms, notes, or special instructions here..."
+                placeholder={t('notes.placeholder')}
                 rows={4}
                 style={{
                   width: '100%',

@@ -19,12 +19,11 @@ export const generateInvoice = async (data: InvoiceFormData): Promise<Blob> => {
     // Transform empty date strings to null for the API
     const processedData = {
       ...data,
-      due_date: data.due_date || null,
-      delivery_date: data.delivery_date || null,
-      service_start_date: data.service_start_date || null,
-      service_end_date: data.service_end_date || null,
+      due_date: data.due_date || new Date().toISOString().split('T')[0],
+      delivery_date: data.delivery_date || new Date().toISOString().split('T')[0],
+      service_start_date: data.service_start_date || new Date().toISOString().split('T')[0],
+      service_end_date: data.service_end_date || new Date().toISOString().split('T')[0],
     };
-    
     // Debug: log the data being sent
     console.log('Sending invoice data:', JSON.stringify(processedData, null, 2));
     

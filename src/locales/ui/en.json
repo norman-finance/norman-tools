@@ -17,14 +17,14 @@
   },
   "section": {
     "settings": "Settings",
-    "createFor": "Create for",
+    "createFor": "From & To",
     "details": "Details",
     "payment": "Payment details",
     "notes": "Notes & Terms"
   },
   "company": {
-    "title": "Your company",
-    "name": "Company name",
+    "title": "Your business details",
+    "name": "Name",
     "address": "Address",
     "zipCode": "ZIP Code",
     "city": "City",
@@ -32,10 +32,11 @@
     "email": "Email",
     "phone": "Phone",
     "taxNumber": "Tax number",
-    "vatNumber": "VAT number"
+    "vatNumber": "VAT number",
+    "namePlaceholder": "Acme GmbH"
   },
   "client": {
-    "title": "Client",
+    "title": "Client details",
     "name": "Client name",
     "type": "Client type",
     "address": "Address",
@@ -83,11 +84,13 @@
     "kleinunternehmerDesc": "Check this if you're a small business under German tax law and don't charge VAT"
   },
   "notes": {
-    "title": "Notes, terms, and conditions",
-    "placeholder": "Add payment terms, notes, or special instructions here..."
+    "title": "Notes",
+    "placeholder": "Add any additional information, special instructions, or notes here...",
+    "termsConditions": "Terms & Conditions",
+    "termsConditionsPlaceholder": "Add payment terms, terms & conditions, or specific instructions here..."
   },
   "message": {
-    "success": "Invoice generated successfully! Your download should start automatically.",
+    "success": "🎉 Invoice generated successfully! Your PDF download should start automatically.",
     "vatIssues": "VAT Configuration Issues:",
     "vatValidation": "VAT validation failed:"
   },
@@ -100,7 +103,19 @@
   "validation": {
     "required": "This field is required",
     "email": "Please enter a valid email address",
-    "number": "Please enter a valid number"
+    "number": "Please enter a valid number",
+    "companyNameRequired": "Company name is required",
+    "companyAddressRequired": "Company address is required", 
+    "companyCityRequired": "Company city is required",
+    "companyZipRequired": "Company ZIP code is required",
+    "clientNameRequired": "Client name is required",
+    "clientAddressRequired": "Client address is required",
+    "clientCityRequired": "Client city is required", 
+    "clientZipRequired": "Client ZIP code is required",
+    "itemsRequired": "At least one item is required",
+    "itemDescriptionRequired": "Item description is required",
+    "itemQuantityRequired": "Item quantity must be greater than 0",
+    "itemPriceRequired": "Item price must be greater than 0"
   },
   "footer": {
     "compliance": "Professional invoices with embedded e-invoice XML for German compliance.",

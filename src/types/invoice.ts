@@ -49,7 +49,7 @@ export interface InvoiceSettings {
   language: 'en' | 'de';
   is_vat_included: boolean;
   is_kleinunternehmer: boolean;
-  payment_terms: number;
+  payment_terms?: string;
   notes?: string;
   color_schema: string;
   font: string;

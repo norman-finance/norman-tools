@@ -70,16 +70,55 @@ function HomePageContent() {
     }
   }, [success]);
 
+  // Enhanced validation function
+  const validateFormData = (data: InvoiceFormData) => {
+    const validationErrors: string[] = [];
+    
+    // Check business details
+    if (!data.company_name?.trim()) validationErrors.push(t('validation.companyNameRequired'));
+    if (!data.company_address?.trim()) validationErrors.push(t('validation.companyAddressRequired'));
+    if (!data.company_city?.trim()) validationErrors.push(t('validation.companyCityRequired'));
+    if (!data.company_zip_code?.trim()) validationErrors.push(t('validation.companyZipRequired'));
+    
+    // Check client details
+    if (!data.client_name?.trim()) validationErrors.push(t('validation.clientNameRequired'));
+    if (!data.client_address?.trim()) validationErrors.push(t('validation.clientAddressRequired'));
+    if (!data.client_city?.trim()) validationErrors.push(t('validation.clientCityRequired'));
+    if (!data.client_zip_code?.trim()) validationErrors.push(t('validation.clientZipRequired'));
+    
+    // Check items
+    if (!data.invoiced_items || data.invoiced_items.length === 0) {
+      validationErrors.push(t('validation.itemsRequired'));
+    } else {
+      data.invoiced_items.forEach((item, index) => {
+        if (!item.description?.trim()) {
+          validationErrors.push(`Item ${index + 1}: ${t('validation.itemDescriptionRequired')}`);
+        }
+        if (!item.quantity || item.quantity <= 0) {
+          validationErrors.push(`Item ${index + 1}: ${t('validation.itemQuantityRequired')}`);
+        }
+        if (!item.unit_price || item.unit_price <= 0) {
+          validationErrors.push(`Item ${index + 1}: ${t('validation.itemPriceRequired')}`);
+        }
+      });
+    }
+    
+    return validationErrors;
+  };
+
   const onSubmit = async (data: InvoiceFormData) => {
     setIsGenerating(true);
     setError(null);
     setSuccess(null);
 
     try {
-      // Validate VAT setup before submission
+      // Enhanced validation
+      const formValidationErrors = validateFormData(data);
       const vatErrors = validateVatSetup(data);
-      if (vatErrors.length > 0) {
-        setError(`VAT validation failed: ${vatErrors.join(', ')}`);
+      const allErrors = [...formValidationErrors, ...vatErrors];
+      
+      if (allErrors.length > 0) {
+        setError(allErrors.join(' • '));
         setIsGenerating(false);
         return;
       }
@@ -94,7 +133,7 @@ function HomePageContent() {
       // Track the generation
       trackInvoiceGeneration(data);
       
-setSuccess(t('message.success'));
+      setSuccess(t('message.success'));
     } catch (err) {
       const errorMessage = formatAPIError(err);
       setError(errorMessage);
@@ -129,6 +168,8 @@ setSuccess(t('message.success'));
     formData.client_vat_number,
     form
   ]);
+
+
 
   const togglePreview = () => {
     setPreviewMode(!previewMode);
@@ -241,19 +282,107 @@ setSuccess(t('message.success'));
 
         {/* Error/Success Messages */}
         {error && (
-          <div style={{ marginBottom: '1.5rem' }}>
-            <ErrorMessage message={error} onDismiss={() => setError(null)} />
+          <div style={{ 
+            marginBottom: '2rem',
+            padding: '1.25rem',
+            background: '#fef2f2',
+            border: '1px solid rgb(0, 0, 0)',
+            borderRadius: '12px',
+            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '0.75rem'
+            }}>
+              <span style={{ 
+                fontSize: '1.25rem',
+                color: '#dc2626',
+                flexShrink: 0
+              }}>
+                ❌
+              </span>
+              <div style={{ flex: '1' }}>
+                <h3 style={{
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  color: '#dc2626',
+                  margin: '0 0 0.5rem 0'
+                }}>
+                  Please fix the following issues:
+                </h3>
+                <p style={{
+                  fontSize: '0.875rem',
+                  color: '#b91c1c',
+                  margin: '0',
+                  lineHeight: '1.6'
+                }}>
+                  {error}
+                </p>
+              </div>
+              <button
+                onClick={() => setError(null)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '1.25rem',
+                  color: '#9ca3af',
+                  cursor: 'pointer',
+                  padding: '0',
+                  flexShrink: 0
+                }}
+              >
+                ×
+              </button>
+            </div>
           </div>
         )}
         
         {success && (
-          <div style={{ marginBottom: '1.5rem' }}>
-            <SuccessMessage message={success} onDismiss={() => setSuccess(null)} />
+          <div style={{ 
+            marginBottom: '2rem',
+            padding: '1.25rem',
+            background: '#f0fdf4',
+            border: '1px solid #bbf7d0',
+            borderRadius: '12px',
+            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem'
+            }}>
+              <div style={{ flex: '1' }}>
+                <p style={{
+                  fontSize: '1rem',
+                  fontWeight: '500',
+                  color: '#16a34a',
+                  margin: '0',
+                  lineHeight: '1.5'
+                }}>
+                  {success}
+                </p>
+              </div>
+              <button
+                onClick={() => setSuccess(null)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '1.25rem',
+                  color: '#9ca3af',
+                  cursor: 'pointer',
+                  padding: '0',
+                  flexShrink: 0
+                }}
+              >
+                ×
+              </button>
+            </div>
           </div>
         )}
 
         {/* VAT Validation Warnings */}
-        {vatValidationErrors.length > 0 && (
+        {/* {vatValidationErrors.length > 0 && (
           <div style={{ 
             marginBottom: '1.5rem',
             padding: '1rem',
@@ -294,31 +423,104 @@ setSuccess(t('message.success'));
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Main Content */}
-        <div className="grid grid-cols-2" style={{ gap: '2rem', alignItems: 'flex-start' }}>
+        <div 
+          className="main-content-grid" 
+          style={{ 
+            gap: '1.5rem', 
+            alignItems: 'start',
+            minHeight: '80vh'
+          }}
+        >
           {/* Preview Section - Left Side */}
-          <div className={!previewMode ? 'mobile-hidden' : ''}>
-            <div style={{ 
-              background: '#ffffff',
-              borderRadius: '8px',
-              padding: '1.5rem',
-              position: 'sticky',
-              top: '2rem'
-            }}>
-              <h2 style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: '600', 
-                color: '#000000', 
+          <div className={`preview-section preview-container ${!previewMode ? 'mobile-hidden' : 'mobile-section'}`}>
+            <div 
+              className="preview-sticky"
+              style={{ 
+                background: '#ffffff',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                border: '1px solid #f3f4f6',
+                display: 'flex',
+                flexDirection: 'column',
+                height: 'fit-content'
+              }}
+            >
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
                 marginBottom: '1.5rem',
                 borderBottom: '1px solid #e5e7eb',
-                paddingBottom: '1rem'
+                paddingBottom: '1rem',
+                flexShrink: 0
               }}>
-{t('button.preview')}
-              </h2>
+                <h2 style={{ 
+                  fontSize: '1.5rem', 
+                  fontWeight: '600', 
+                  color: '#111827', 
+                  margin: '0'
+                }}>
+                  Preview
+                </h2>
+                
+                {/* Generate Invoice Button */}
+                <button
+                  onClick={handleSubmit(onSubmit)}
+                  disabled={isGenerating}
+                  style={{
+                    background: isGenerating ? '#9ca3af' : '#000000',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '0.75rem 1.5rem',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    cursor: isGenerating ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.2s ease',
+                    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isGenerating) {
+                      e.currentTarget.style.background = '#1f2937';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
+                      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isGenerating) {
+                      e.currentTarget.style.background = '#000000';
+                      e.currentTarget.style.transform = 'translateY(0px)';
+                      e.currentTarget.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
+                    }
+                  }}
+                >
+                  {isGenerating ? (
+                    <>
+                      <LoadingSpinner />
+                      {t('button.generating')}
+                    </>
+                  ) : (
+                    <>
+                      <span>📄</span>
+                      {t('button.getInvoice')}
+                    </>
+                  )}
+                </button>
+              </div>
               
-              <div style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+              <div style={{ 
+                flex: 1, 
+                overflowY: 'auto', 
+                paddingRight: '0.5rem',
+                minHeight: '200px'
+              }}>
                 <InvoicePreview 
                   data={formData} 
                   totals={totals}
@@ -328,60 +530,49 @@ setSuccess(t('message.success'));
           </div>
 
           {/* Form Section - Right Side */}
-          <div className={previewMode ? 'mobile-hidden' : ''}>
+          <div className={`form-section ${previewMode ? 'mobile-hidden' : 'mobile-section'}`}>
             <div style={{ 
               background: '#ffffff',
-              borderRadius: '8px',
-              padding: '1.5rem'
+              borderRadius: '12px',
+              padding: '1rem',
+              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+              border: '1px solid #f3f4f6'
             }}>
-              <h2 style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: '600', 
-                color: '#000000', 
-                marginBottom: '1.5rem',
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '1rem',
                 borderBottom: '1px solid #e5e7eb',
-                paddingBottom: '1rem'
+                paddingBottom: '0.75rem'
               }}>
-{t('section.details')}
-              </h2>
-              
-              <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <InvoiceForm form={form} />
-                
-                {/* Submit Button */}
-                <div style={{ 
-                  marginTop: '2rem', 
-                  paddingTop: '1.5rem',
-                  display: 'flex',
-                  gap: '1rem'
+                <h2 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  color: '#111827',
+                  margin: '0'
                 }}>
-                  <button
-                    type="submit"
-                    disabled={isGenerating || !isValid}
-                    className="btn btn-primary"
-                    style={{ flex: '2' }}
-                  >
-                    {isGenerating ? (
-                      <>
-                        <LoadingSpinner />
-{t('button.generating')}
-                      </>
-                    ) : (
-                      t('button.getInvoice')
-                    )}
-                  </button>
-                </div>
+                  Details
+                </h2>
                 
-                {Object.keys(errors).length > 0 && (
-                  <p style={{ 
-                    fontSize: '0.875rem', 
-                    color: '#dc2626', 
-                    marginTop: '0.5rem', 
-                    textAlign: 'center' 
-                  }}>
-                    Please fix the errors above before continuing.
-                  </p>
-                )}
+                {/* Mobile Preview Button */}
+                <button
+                  onClick={togglePreview}
+                  className="btn btn-outline btn-sm"
+                  style={{ 
+                    display: 'none',
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.75rem'
+                  }}
+                  type="button"
+                  data-mobile-only="true"
+                >
+                  👁️ Preview
+                </button>
+              </div>
+              
+              <form noValidate>
+                <InvoiceForm form={form} />
               </form>
             </div>
           </div>
@@ -391,15 +582,31 @@ setSuccess(t('message.success'));
         <div className="mobile-toggle-btn">
           <button
             onClick={togglePreview}
-            className="btn btn-primary"
             style={{ 
+              background: '#000000',
+              color: '#ffffff',
+              border: 'none',
               borderRadius: '50%', 
               width: '3.5rem', 
               height: '3.5rem',
-              boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)'
+              boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.25rem',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
             }}
             type="button"
             aria-label={previewMode ? 'Edit form' : 'Preview invoice'}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#1f2937';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#000000';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
             {previewMode ? '✏️' : '👁️'}
           </button>
@@ -414,9 +621,6 @@ setSuccess(t('message.success'));
         }}>
           <p style={{ marginBottom: '0.5rem' }}>
             {t('footer.compliance')}
-          </p>
-          <p>
-            {t('footer.privacy')}
           </p>
         </div>
       </main>

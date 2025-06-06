@@ -83,11 +83,13 @@
     "kleinunternehmerDesc": "Aktivieren Sie dies, wenn Sie Kleinunternehmer nach deutschem Steuerrecht sind und keine MwSt berechnen"
   },
   "notes": {
-    "title": "Notizen, Bedingungen und Konditionen",
-    "placeholder": "Fügen Sie hier Zahlungsbedingungen, Notizen oder spezielle Anweisungen hinzu..."
+    "title": "Notizen",
+    "placeholder": "Fügen Sie hier zusätzliche Informationen, spezielle Anweisungen oder Notizen hinzu...",
+    "termsConditions": "Geschäftsbedingungen",
+    "termsConditionsPlaceholder": "Fügen Sie hier Zahlungsbedingungen, Geschäftsbedingungen oder spezielle Anweisungen hinzu..."
   },
   "message": {
-    "success": "Rechnung erfolgreich erstellt! Ihr Download sollte automatisch starten.",
+    "success": "🎉 Rechnung erfolgreich erstellt! Ihr PDF-Download sollte automatisch starten.",
     "vatIssues": "MwSt-Konfigurationsprobleme:",
     "vatValidation": "MwSt-Validierung fehlgeschlagen:"
   },
@@ -100,7 +102,19 @@
   "validation": {
     "required": "Dieses Feld ist erforderlich",
     "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
-    "number": "Bitte geben Sie eine gültige Zahl ein"
+    "number": "Bitte geben Sie eine gültige Zahl ein",
+    "companyNameRequired": "Firmenname ist erforderlich",
+    "companyAddressRequired": "Firmenadresse ist erforderlich", 
+    "companyCityRequired": "Firmenstadt ist erforderlich",
+    "companyZipRequired": "Firmen-PLZ ist erforderlich",
+    "clientNameRequired": "Kundenname ist erforderlich",
+    "clientAddressRequired": "Kundenadresse ist erforderlich",
+    "clientCityRequired": "Kundenstadt ist erforderlich", 
+    "clientZipRequired": "Kunden-PLZ ist erforderlich",
+    "itemsRequired": "Mindestens ein Artikel ist erforderlich",
+    "itemDescriptionRequired": "Artikelbeschreibung ist erforderlich",
+    "itemQuantityRequired": "Artikelmenge muss größer als 0 sein",
+    "itemPriceRequired": "Artikelpreis muss größer als 0 sein"
   },
   "footer": {
     "compliance": "Professionelle Rechnungen mit eingebetteter E-Rechnung XML für deutsche Compliance.",

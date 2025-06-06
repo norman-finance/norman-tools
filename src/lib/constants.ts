@@ -131,7 +131,7 @@ export const DEFAULT_INVOICE_DATA = {
   language: 'en' as const,
   is_vat_included: false,
   is_kleinunternehmer: false,
-  payment_terms: 14,
+  payment_terms: '',
   notes: '',
   color_schema: '#FFFFFF',
   font: 'Inter',

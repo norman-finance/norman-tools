@@ -61,10 +61,6 @@ const Header: React.FC = () => {
             fontSize: '0.875rem', 
             color: '#6b7280'
           }}>
-            <span>{t('hero.free')}</span>
-            <span>•</span>
-            <span>{t('header.subtitle')}</span>
-            <span>•</span>
             <select
               value={uiLanguage}
               onChange={(e) => setUILanguage(e.target.value as 'en' | 'de')}
@@ -81,36 +77,6 @@ const Header: React.FC = () => {
               <option value="en">🇺🇸 English</option>
               <option value="de">🇩🇪 Deutsch</option>
             </select>
-            <span>•</span>
-            <button
-              onClick={handleCopyUrl}
-              style={{
-                background: copySuccess ? '#10b981' : 'transparent',
-                border: '1px solid #d1d5db',
-                borderRadius: '4px',
-                padding: '0.25rem 0.5rem',
-                fontSize: '0.875rem',
-                color: copySuccess ? '#ffffff' : '#6b7280',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.25rem'
-              }}
-              title="Copy shareable URL with current language settings"
-            >
-              {copySuccess ? (
-                <>
-                  <span>✓</span>
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <span>🔗</span>
-                  <span>Copy URL</span>
-                </>
-              )}
-            </button>
           </div>
         </div>
       </div>
