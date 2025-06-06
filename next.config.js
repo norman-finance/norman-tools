@@ -17,13 +17,10 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
+          // Remove X-Frame-Options to let CSP handle frame control
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://*.framer.com https://*.framer.website;",
+            value: "frame-ancestors *;",
           },
         ],
       },
