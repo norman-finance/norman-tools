@@ -4,14 +4,14 @@
     "subtitle": "Professional invoices for German freelancers"
   },
   "hero": {
-    "title": "Your invoices should be",
-    "subtitle": "as good as your work",
-    "description": "Fill in the template and get flawless professional invoices, adapted for German freelancers.",
-    "free": "Free, no registration needed.",
+    "title": "Flawless e-invoices,",
+    "subtitle": "ready in seconds",
+    "description": "Create unlimited, legally compliant e-invoices — fast and for free. Includes everything required by German tax authorities.",
+    "free": "🧾 No sign-up needed. Try with demo data.",
     "freeLabel": "Free"
   },
   "button": {
-    "fillDemo": "Fill Demo Data",
+    "fillDemo": "Fill with Demo Data",
     "preview": "Preview",
     "getInvoice": "Get Me the Invoice",
     "generating": "Generating..."
