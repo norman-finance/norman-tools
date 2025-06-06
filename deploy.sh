@@ -20,25 +20,25 @@ echo "📦 Environment: $ENVIRONMENT"
 # Function to deploy development
 deploy_dev() {
     echo "🔧 Building and starting development environment..."
-    docker-compose down --remove-orphans
-    docker-compose up --build -d
+    docker compose down --remove-orphans
+    docker compose up --build -d
     echo "✅ Development environment is running on http://localhost:3000"
 }
 
 # Function to deploy production
 deploy_prod() {
     echo "🏭 Building and starting production environment..."
-    docker-compose -f docker-compose.prod.yml down --remove-orphans
-    docker-compose -f docker-compose.prod.yml up --build -d
+    docker compose -f docker-compose.prod.yml down --remove-orphans
+    docker compose -f docker-compose.prod.yml up --build -d
     echo "✅ Production environment is running on http://localhost:81"
 }
 
 # Function to show logs
 show_logs() {
     if [ "$ENVIRONMENT" = "production" ]; then
-        docker-compose -f docker-compose.prod.yml logs -f norman-invoicing-tool
+        docker compose -f docker-compose.prod.yml logs -f norman-invoicing-tool
     else
-        docker-compose logs -f norman-invoicing-tool
+        docker compose logs -f norman-invoicing-tool
     fi
 }
 
@@ -46,9 +46,9 @@ show_logs() {
 stop_services() {
     echo "🛑 Stopping services..."
     if [ "$ENVIRONMENT" = "production" ]; then
-        docker-compose -f docker-compose.prod.yml down
+        docker compose -f docker-compose.prod.yml down
     else
-        docker-compose down
+        docker compose down
     fi
     echo "✅ Services stopped"
 }
