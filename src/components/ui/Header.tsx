@@ -15,6 +15,14 @@ const Header: React.FC = () => {
       setTimeout(() => setCopySuccess(false), 2000);
     }
   };
+  const signUpLink = (() => {
+    switch (window?.location?.pathname) {
+      case '/erechnung':
+        return "https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=erechnung&destination=invoice&utm_medium=header";
+      default:
+        return "https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=main&utm_medium=header";
+    }
+  })();
 
   return (
     <header style={{ 
@@ -57,7 +65,9 @@ const Header: React.FC = () => {
           }}>
             <h1
             className="text-xl font-semibold">
-              {t('header.title')}
+              {typeof window !== 'undefined' && window.location.pathname === '/erechnung' 
+                ? t('header.title') 
+                : t('header.mainPage')}
             </h1>
             {/*<span
             className="text-gray-500 bg-gray-100"
@@ -92,7 +102,7 @@ const Header: React.FC = () => {
               <option value="de">🇩🇪 Deutsch</option>
               <option value="en">🇺🇸 English</option>
             </select>
-            <a href="https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=erechnung&destination=invoice&utm_medium=header">
+            <a href={signUpLink}>
               <button
                 className="btn btn-primary btn-sm"
                 type="button"

@@ -1,12 +1,14 @@
     {
   "header": {
     "title": "E-Invoice maker",
-    "subtitle": "Professional invoices for German freelancers"
+    "subtitle": "Professional invoices for German freelancers",
+    "mainPage": "Norman free tools",
+    "breadcrumb": "← Back to Tools"
   },
   "hero": {
-    "title": "Create e-invoices for free",
+    "title": "Free Business Tools",
     "subtitle": "for free",
-    "description": "Free software to create compliant e-invoices. Generate and download ZUGFeRD PDF e-invoice. ",
+    "description": "Professional business tools to streamline your operations. All free, no sign-up required.",
     "free": "No sign-up. No watermarks/ads. 100% free.",
     "freeLabel": "Free"
   },
@@ -15,7 +17,8 @@
     "preview": "Preview",
     "getInvoice": "Download e-invoice",
     "generating": "Generating...",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "getStarted": "Get started"
   },
   "section": {
     "settings": "Settings",
@@ -176,6 +179,17 @@
       "description": "Get paid 2x faster with payment links."
     }
   },
+  "tools": {
+    "title": "Available Tools",
+    "description": "Choose from our collection of free business tools designed to help you work more efficiently.",
+    "erechnung": {
+      "title": "Create e-invoices for free",
+      "description": "Free software to create compliant e-invoices. Generate and download ZUGFeRD PDF e-invoice.",
+      "feature1": "ZUGFeRD compliant e-invoices",
+      "feature2": "German tax law compliance",
+      "feature3": "No sign-up required"
+    }
+  },
   "cta": {
     "title": "Get more for free",
     "description": "Join thousands of freelancers and businesses who trust Norman for invoicing. Start creating professional invoices today.",
@@ -206,7 +220,7 @@
     "book": "Book",
     "deductibles": "Deductibles",
     "taxCalculator": "Tax calculator",
-    "freeTools": "Free tools",
+    "mcpServer": "MCP Server",
     "aboutUs": "About us",
     "blog": "Blog",
     "careers": "Careers",

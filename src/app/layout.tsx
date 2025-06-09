@@ -2,24 +2,24 @@ import type { Metadata, Viewport } from 'next';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Free Invoice Generator | Professional PDF Invoices',
-  description: 'Generate professional invoices instantly with our free invoice generator. Create PDF invoices with e-invoice XML support. No registration required.',
-  keywords: 'invoice generator, free invoice, PDF invoice, e-invoice, professional invoices, invoice maker',
+  title: 'Free Business Tools | Norman Finance',
+  description: 'Professional business tools to streamline your operations. Free invoice generator, and more tools for freelancers and businesses. No registration required.',
+  keywords: 'business tools, invoice generator, free invoice, PDF invoice, e-invoice, professional invoices, invoice maker, freelance tools',
   authors: [{ name: 'Norman Finance' }],
   creator: 'Norman Finance',
   publisher: 'Norman Finance',
   robots: 'index, follow',
   openGraph: {
-    title: 'Free Invoice Generator | Professional PDF Invoices',
-    description: 'Generate professional invoices instantly with our free invoice generator. Create PDF invoices with e-invoice XML support.',
+    title: 'Free Business Tools | Norman Finance',
+    description: 'Professional business tools to streamline your operations. Free invoice generator and more tools for freelancers and businesses.',
     type: 'website',
     locale: 'en_US',
     alternateLocale: 'de_DE',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Invoice Generator | Professional PDF Invoices',
-    description: 'Generate professional invoices instantly with our free invoice generator.',
+    title: 'Free Business Tools | Norman Finance',
+    description: 'Professional business tools to streamline your operations. Free invoice generator and more.',
   },
   manifest: '/manifest.json',
   icons: {

@@ -1,12 +1,14 @@
 {
   "header": {
     "title": "E-Rechnungsersteller",
-    "subtitle": "Professionelle Rechnungen für deutsche Freelancer"
+    "subtitle": "Professionelle Rechnungen für deutsche Freelancer",
+    "mainPage": "Norman kostenlose tools",
+    "breadcrumb": "← Zurück zu den Tools"
   },
   "hero": {
-    "title": "Erstelle E-Rechnungen kostenlos",
+    "title": "Kostenlose Business-Tools",
     "subtitle": "kostenlos",
-    "description": "Kostenlose Software zur Erstellung konformer E-Rechnungen. ZUGFeRD-PDF-E-Rechnung erstellen und herunterladen.",
+    "description": "Professionelle Business-Tools zur Optimierung Ihrer Arbeitsabläufe. Alle kostenlos, ohne Anmeldung.",
     "free": "Keine Anmeldung. Keine Wasserzeichen/Werbung. 100% kostenlos.",
     "freeLabel": "Kostenlos"
   },
@@ -15,7 +17,8 @@
     "preview": "Vorschau",
     "getInvoice": "E-Rechnung herunterladen",
     "generating": "Wird erstellt...",
-    "signUp": "Anmelden"
+    "signUp": "Anmelden",
+    "getStarted": "Jetzt starten"
   },
   "section": {
     "settings": "Einstellungen",
@@ -156,6 +159,17 @@
       "description": "Werde 2x schneller bezahlt mit Zahlungslinks."
     }
   },
+  "tools": {
+    "title": "Verfügbare Tools",
+    "description": "Wählen Sie aus unserer Sammlung kostenloser Business-Tools, die Ihnen dabei helfen, effizienter zu arbeiten.",
+    "erechnung": {
+      "title": "Erstelle E-Rechnungen kostenlos",
+      "description": "Kostenlose Software zur Erstellung konformer E-Rechnungen. ZUGFeRD-PDF-E-Rechnung erstellen und herunterladen.",
+      "feature1": "ZUGFeRD-konforme E-Rechnungen",
+      "feature2": "Deutsches Steuerrecht konform",
+      "feature3": "Keine Anmeldung erforderlich"
+    }
+  },
   "cta": {
     "title": "Mehr kostenlos bekommen",
     "description": "Schließ dich tausenden Freelancer*innen und Unternehmen an, die Norman für ihre Rechnungsstellung nutzen. Erstelle noch heute professionelle Rechnungen.",
@@ -206,7 +220,7 @@
     "book": "Buchen",
     "deductibles": "Absetzbare Kosten",
     "taxCalculator": "Steuerrechner",
-    "freeTools": "Freie Tools",
+    "mcpServer": "MCP-Server",
     "aboutUs": "Über uns",
     "blog": "Blog",
     "careers": "Karriere",

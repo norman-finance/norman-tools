@@ -143,16 +143,7 @@ const Footer: React.FC = () => {
               padding: '0',
               margin: '0'
             }}>
-              <li style={{ marginBottom: '0.5rem' }}>
-                <a href="https://github.com/norman-finance/norman-mcp-server" style={{ 
-                  textDecoration: 'none',
-                  fontSize: '0.875rem'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#111827'}
-                onMouseLeave={(e) => e.currentTarget.style.color = '#080809'}>
-                  {t('links.freeTools')}
-                </a>
-              </li>
+        
               <li style={{ marginBottom: '0.5rem' }}>
                 <a href="https://norman.finance/blueprint" style={{ 
                   textDecoration: 'none',
@@ -181,6 +172,16 @@ const Footer: React.FC = () => {
                 onMouseEnter={(e) => e.currentTarget.style.color = '#111827'}
                 onMouseLeave={(e) => e.currentTarget.style.color = '#080809'}>
                   {t('links.taxCalculator')}
+                </a>
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <a href="https://github.com/norman-finance/norman-mcp-server" style={{ 
+                  textDecoration: 'none',
+                  fontSize: '0.875rem'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#111827'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#080809'}>
+                  {t('links.mcpServer')}
                 </a>
               </li>
             </ul>
