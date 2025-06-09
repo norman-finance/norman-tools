@@ -21,7 +21,7 @@ A free, professional invoicing tool built with Next.js and Django. Generate beau
 
 1. **Install dependencies**
    ```bash
-   cd norman-invoicing-tool
+   cd norman-tools
    npm install
    ```
 

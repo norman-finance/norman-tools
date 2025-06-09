@@ -1,645 +1,212 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import { InvoiceFormData, invoiceFormSchema } from '@/lib/validation';
-import { DEFAULT_INVOICE_DATA } from '@/lib/constants';
-import { generateInvoice, downloadPDF, trackInvoiceGeneration, formatAPIError } from '@/lib/api';
-import { calculateInvoiceTotals } from '@/utils/calculations';
-import { calculateVatData, getRecommendedVatRate, validateVatSetup } from '@/lib/vat-calculations';
-
+import React from 'react';
 import Header from '@/components/ui/Header';
-import InvoiceForm from '@/components/forms/InvoiceForm';
-import InvoicePreview from '@/components/preview/InvoicePreview';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import ErrorMessage from '@/components/ui/ErrorMessage';
-import SuccessMessage from '@/components/ui/SuccessMessage';
+import Footer from '@/components/ui/Footer';
 import { UILanguageProvider, useUILanguage } from '@/contexts/UILanguageContext';
-import { getUrlParam, updateUrlParam } from '@/utils/urlParams';
 
-function HomePageContent() {
+function ToolsPageContent() {
   const { t } = useUILanguage();
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [previewMode, setPreviewMode] = useState(false);
 
-  // Get initial values with URL parameters
-  const getInitialValues = () => {
-    const urlInvoiceLang = getUrlParam('invoice_lang') || getUrlParam('invoiceLang');
-    const validLang: 'en' | 'de' = (urlInvoiceLang === 'en' || urlInvoiceLang === 'de') ? urlInvoiceLang : 'en';
-    
-    return {
-      ...DEFAULT_INVOICE_DATA,
-      language: validLang as 'en' | 'de',
-    } as InvoiceFormData;
-  };
-
-  const form = useForm<InvoiceFormData>({
-    resolver: zodResolver(invoiceFormSchema),
-    defaultValues: getInitialValues(),
-    mode: 'onChange',
-  });
-
-  const { watch, handleSubmit, formState: { errors, isValid }, setValue } = form;
-  const formData = watch();
-
-  // Update URL when invoice language changes
-  useEffect(() => {
-    updateUrlParam('invoice_lang', formData.language);
-  }, [formData.language]);
-
-  // Calculate totals for preview
-  const totals = calculateInvoiceTotals(formData.invoiced_items || [], formData.is_vat_included);
-  
-  // Calculate VAT data for business rules
-  const vatData = calculateVatData({ formData, language: formData.language });
-  const vatValidationErrors = validateVatSetup(formData);
-
-  // Clear messages after a delay
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => setError(null), 10000);
-      return () => clearTimeout(timer);
+  const tools = [
+    {
+      id: 'erechnung',
+      title: t('tools.erechnung.title'),
+      description: t('tools.erechnung.description'),
+      href: '/erechnung',
+      icon: '📄',
+      badge: t('hero.freeLabel'),
+      features: [
+        t('tools.erechnung.feature1'),
+        t('tools.erechnung.feature2'),
+        t('tools.erechnung.feature3')
+      ]
     }
-  }, [error]);
-
-  useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => setSuccess(null), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [success]);
-
-  // Enhanced validation function
-  const validateFormData = (data: InvoiceFormData) => {
-    const validationErrors: string[] = [];
-    
-    // Check business details
-    if (!data.company_name?.trim()) validationErrors.push(t('validation.companyNameRequired'));
-    if (!data.company_address?.trim()) validationErrors.push(t('validation.companyAddressRequired'));
-    if (!data.company_city?.trim()) validationErrors.push(t('validation.companyCityRequired'));
-    if (!data.company_zip_code?.trim()) validationErrors.push(t('validation.companyZipRequired'));
-    
-    // Check client details
-    if (!data.client_name?.trim()) validationErrors.push(t('validation.clientNameRequired'));
-    if (!data.client_address?.trim()) validationErrors.push(t('validation.clientAddressRequired'));
-    if (!data.client_city?.trim()) validationErrors.push(t('validation.clientCityRequired'));
-    if (!data.client_zip_code?.trim()) validationErrors.push(t('validation.clientZipRequired'));
-    
-    // Check items
-    if (!data.invoiced_items || data.invoiced_items.length === 0) {
-      validationErrors.push(t('validation.itemsRequired'));
-    } else {
-      data.invoiced_items.forEach((item, index) => {
-        if (!item.description?.trim()) {
-          validationErrors.push(`Item ${index + 1}: ${t('validation.itemDescriptionRequired')}`);
-        }
-        if (!item.quantity || item.quantity <= 0) {
-          validationErrors.push(`Item ${index + 1}: ${t('validation.itemQuantityRequired')}`);
-        }
-        if (!item.unit_price || item.unit_price <= 0) {
-          validationErrors.push(`Item ${index + 1}: ${t('validation.itemPriceRequired')}`);
-        }
-      });
-    }
-    
-    return validationErrors;
-  };
-
-  const onSubmit = async (data: InvoiceFormData) => {
-    setIsGenerating(true);
-    setError(null);
-    setSuccess(null);
-
-    try {
-      // Enhanced validation
-      const formValidationErrors = validateFormData(data);
-      const vatErrors = validateVatSetup(data);
-      const allErrors = [...formValidationErrors, ...vatErrors];
-      
-      if (allErrors.length > 0) {
-        setError(allErrors.join(' • '));
-        setIsGenerating(false);
-        return;
-      }
-
-      // Generate the invoice PDF
-      const pdfBlob = await generateInvoice(data);
-      
-      // Download the PDF
-      const filename = `invoice_${data.invoice_number.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
-      downloadPDF(pdfBlob, filename);
-      
-      // Track the generation
-      trackInvoiceGeneration(data);
-      
-      setSuccess(t('message.success'));
-    } catch (err) {
-      const errorMessage = formatAPIError(err);
-      setError(errorMessage);
-      console.error('Invoice generation failed:', err);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  // Automatically adjust VAT rates when business rules change
-  useEffect(() => {
-    const recommendedRate = getRecommendedVatRate(formData);
-    const currentItems = form.getValues('invoiced_items');
-    
-    // Check if any items have different VAT rates than recommended
-    const needsAdjustment = currentItems.some(item => item.vat_rate !== recommendedRate);
-    
-    if (needsAdjustment) {
-      const updatedItems = currentItems.map(item => ({
-        ...item,
-        vat_rate: recommendedRate
-      }));
-      
-      form.setValue('invoiced_items', updatedItems);
-    }
-  }, [
-    formData.is_kleinunternehmer,
-    formData.client_country,
-    formData.client_type,
-    formData.sale_type,
-    formData.company_country,
-    formData.client_vat_number,
-    form
-  ]);
-
-
-
-  const togglePreview = () => {
-    setPreviewMode(!previewMode);
-  };
-
-  const fillDemoData = () => {
-    // Fill form with demo data for quick testing
-    const today = new Date().toISOString().split('T')[0];
-    const dueDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    
-    form.reset({
-      ...DEFAULT_INVOICE_DATA,
-      company_name: 'Acme GmbH',
-      company_address: 'Musterstraße 123',
-      company_zip_code: '10115',
-      company_city: 'Berlin',
-      company_country: 'DE',
-      company_email: 'hello@acme.com',
-      company_phone: '+49 30 12345678',
-      company_vat_number: 'DE123456789',
-      company_tax_number: '12/345/67890',
-      
-      client_name: 'Max Mustermann',
-      client_type: 'business' as const,
-      client_address: 'Hamburger Straße 456',
-      client_zip_code: '20095',
-      client_city: 'Hamburg',
-      client_country: 'DE',
-      client_email: 'max@mustermann.de',
-      client_vat_number: 'DE987654321',
-      payment_terms: 'Bitte zahlen Sie innerhalb von 14 Tagen',
-      iban: 'DE1234567890',
-      bic: 'COBADEHD001',
-      bank_name: 'Commerzbank',
-      
-      // Explicitly set dates in YYYY-MM-DD format
-      issue_date: today,
-      due_date: dueDate,
-      sale_type: 'services' as const,
-      delivery_date: '',
-      service_start_date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      service_end_date: today,
-      language: 'de',
-      
-      invoiced_items: [
-        {
-          description: 'Webentwicklung',
-          quantity: 40,
-          unit_price: 85,
-          vat_rate: 19,
-        },
-        {
-          description: 'Beratung & Strategie',
-          quantity: 8,
-          unit_price: 120,
-          vat_rate: 19,
-        },
-      ],
-    });
-  };
+  ];
 
   return (
     <div style={{ minHeight: '100vh', background: '#ffffff' }}>
       <Header />
       
-      <main className="container" style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
+      <main className="container">
         {/* Hero Section */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h1 style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: 'bold', 
-            color: '#000000', 
-            marginBottom: '1rem',
-            lineHeight: '1.2'
+        <div className="text-center" 
+          style={{ 
+            paddingTop: '3rem', 
+            paddingBottom: '3rem' 
+        }}>
+          <h1 className="text-5xl font-semibold leading-tight" style={{ 
+            maxWidth: '800px',
+            margin: '2rem auto'
           }}>
-{t('hero.title')}<br />
-            <span style={{ color: '#666666' }}>{t('hero.subtitle')}</span>
+            {t('hero.title')}
           </h1>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            color: '#666666', 
-            marginBottom: '2rem',
-            maxWidth: '600px',
-            margin: '0 auto 2rem auto'
+          
+          <p className="text-xl text-gray-500 leading-tight" style={{ 
+            maxWidth: '800px',
+            margin: '2rem auto'
           }}>
-{t('hero.description')}
+            {t('hero.description')}
           </p>
-          <p style={{ 
-            fontSize: '0.875rem', 
-            color: '#9ca3af', 
-            marginBottom: '2rem'
+          <p className="leading-tight" style={{ 
+            maxWidth: '800px',
+            margin: '2rem auto'
           }}>
             {t('hero.free')}
           </p>
-          
-          {/* Quick Actions */}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            gap: '1rem', 
-            justifyContent: 'center', 
-            marginBottom: '2rem',
-            alignItems: 'center'
-          }}>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <button
-                onClick={fillDemoData}
-                className="btn btn-outline btn-sm"
-                type="button"
-              >
-{t('button.fillDemo')}
-              </button>
-            </div>
-          </div>
         </div>
-        {/* Error/Success Messages */}
-        {error && (
+
+              {/* Tools Section */}
+        <div style={{ 
+          marginTop: '2rem',
+          marginBottom: '4rem'
+        }}>
           <div style={{ 
-            marginBottom: '2rem',
-            padding: '1.25rem',
-            background: 'rgb(255 255 255)',
-            border: '1px solid rgb(0, 0, 0, 0.1)',
-            borderRadius: '12px',
-            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.5rem',
+            maxWidth: '800px',
+            margin: '0 auto'
           }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '0.75rem'
-            }}>
-              <span style={{ 
-                fontSize: '1.25rem',
-                color: 'rgb(0 0 0)',
-                flexShrink: 0
-              }}>
-                ❌
-              </span>
-              <div style={{ flex: '1' }}>
-                <h3 style={{
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  color: 'rgb(0 0 0)',
-                  margin: '0 0 0.5rem 0'
-                }}>
-                  {t('message.error')}
-                </h3>
-                <p style={{
-                  fontSize: '0.875rem',
-                  color: 'rgb(0 0 0)',
-                  margin: '0',
-                  lineHeight: '1.6'
-                }}>
-                  {error}
-                </p>
-              </div>
-              <button
-                onClick={() => setError(null)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  fontSize: '1.25rem',
-                  color: '#9ca3af',
-                  cursor: 'pointer',
-                  padding: '0',
-                  flexShrink: 0
+            {tools.map((tool) => (
+              <a
+                key={tool.id}
+                href={tool.href}
+                style={{ 
+                  textDecoration: 'none',
+                  color: 'inherit'
                 }}
               >
-                ×
-              </button>
-            </div>
-          </div>
-        )}
-        
-        {success && (
-          <div style={{ 
-            marginBottom: '2rem',
-            padding: '1.25rem',
-            background: '#f0fdf4',
-            border: '1px solid #bbf7d0',
-            borderRadius: '12px',
-            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.75rem'
-            }}>
-              <div style={{ flex: '1' }}>
-                <p style={{
-                  fontSize: '1rem',
-                  fontWeight: '500',
-                  color: '#16a34a',
-                  margin: '0',
+                <div style={{ 
+                  background: '#ffffff',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  textAlign: 'center',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 1px 3px 0 rgb(0 0 0 / 0.1)';
+                }}
+              >
+                <div style={{ 
+                  fontSize: '2.5rem',
+                  marginBottom: '1rem'
+                }}>
+                  {tool.icon}
+                </div>
+                
+                <div style={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  marginBottom: '0.75rem'
+                }}>
+                  <h3 style={{ 
+                    fontSize: '1.25rem',
+                    fontWeight: '600',
+                    color: '#1f2937',
+                    margin: '0'
+                  }}>
+                    {tool.title}
+                  </h3>
+                  <span style={{ 
+                    background: '#000000',
+                    color: 'white',
+                    padding: '0.05rem 0.3rem',
+                    borderRadius: '4px',
+                    fontSize: '0.75rem',
+                    fontWeight: '500'
+                  }}>
+                    {tool.badge}
+                  </span>
+                </div>
+                
+                <p style={{ 
+                  color: '#6b7280',
+                  marginBottom: '1rem',
+                  fontSize: '0.875rem',
                   lineHeight: '1.5'
                 }}>
-                  {success}
+                  {tool.description}
                 </p>
-              </div>
-              <button
-                onClick={() => setSuccess(null)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  fontSize: '1.25rem',
-                  color: '#9ca3af',
-                  cursor: 'pointer',
-                  padding: '0',
-                  flexShrink: 0
-                }}
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* VAT Validation Warnings */}
-        {/* {vatValidationErrors.length > 0 && (
-          <div style={{ 
-            marginBottom: '1.5rem',
-            padding: '1rem',
-            background: '#fef3c7',
-            border: '1px solid #f59e0b',
-            borderRadius: '8px'
-          }}>
-            <div style={{ 
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '0.5rem'
-            }}>
-              <span style={{ 
-                fontSize: '1rem',
-                color: '#d97706'
-              }}>
-                ⚠️
-              </span>
-              <div>
-                <h3 style={{ 
-                  fontSize: '0.875rem',
-                  fontWeight: '600',
-                  color: '#92400e',
-                  margin: '0 0 0.5rem 0'
-                }}>
-{t('message.vatIssues')}
-                </h3>
+                
                 <ul style={{ 
-                  fontSize: '0.875rem',
-                  color: '#92400e',
-                  margin: '0',
-                  paddingLeft: '1rem'
+                  listStyle: 'none',
+                  padding: '0',
+                  margin: 'auto',
+                  flex: '1',
+                  paddingBottom: '2rem',
+                  paddingTop: '1rem',
                 }}>
-                  {vatValidationErrors.map((error, index) => (
-                    <li key={index}>{error}</li>
+                  {tool.features.map((feature, index) => (
+                    <li key={index} style={{ 
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      marginBottom: '0.5rem',
+                      fontSize: '0.8rem',
+                      color: '#4b5563'
+                    }}>
+                      <span style={{ color: '#10b981' }}>✓</span>
+                      {feature}
+                    </li>
                   ))}
                 </ul>
-              </div>
-            </div>
-          </div>
-        )} */}
-
-        {/* Main Content */}
-        <div 
-          className="main-content-grid" 
-          style={{ 
-            gap: '1.5rem', 
-            alignItems: 'start',
-            minHeight: '80vh'
-          }}
-        >
-          {/* Preview Section - Left Side */}
-          <div className={`preview-section preview-container ${!previewMode ? 'mobile-hidden' : 'mobile-section'}`}>
-            <div 
-              className="preview-sticky"
-              style={{ 
-                background: '#ffffff',
-                borderRadius: '12px',
-                padding: '1.5rem',
-                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-                border: '1px solid #f3f4f6',
-                display: 'flex',
-                flexDirection: 'column',
-                height: 'fit-content'
-              }}
-            >
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                marginBottom: '1.5rem',
-                borderBottom: '1px solid #e5e7eb',
-                paddingBottom: '1rem',
-                flexShrink: 0
-              }}>
-                <h2 style={{ 
-                  fontSize: '1.5rem', 
-                  fontWeight: '600', 
-                  color: '#111827', 
-                  margin: '0'
-                }}>
-                  {t('section.preview')}
-                </h2>
                 
-                {/* Generate Invoice Button */}
-                <button
-                  onClick={handleSubmit(onSubmit)}
-                  disabled={isGenerating}
-                  style={{
-                    background: isGenerating ? '#9ca3af' : '#000000',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: '0.75rem 1.5rem',
-                    fontSize: '0.875rem',
-                    fontWeight: '600',
-                    cursor: isGenerating ? 'not-allowed' : 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    transition: 'all 0.2s ease',
-                    boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isGenerating) {
-                      e.currentTarget.style.background = '#1f2937';
-                      e.currentTarget.style.transform = 'translateY(-1px)';
-                      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isGenerating) {
-                      e.currentTarget.style.background = '#000000';
-                      e.currentTarget.style.transform = 'translateY(0px)';
-                      e.currentTarget.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
-                    }
-                  }}
+                <button style={{ 
+                  background: '#000000',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '4px',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  width: '50%',
+                  margin: 'auto'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#1f2937';
+                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#000000';
+                  e.currentTarget.style.transform = 'translateY(0px)';
+                  e.currentTarget.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
+                }}
                 >
-                  {isGenerating ? (
-                    <>
-                      <LoadingSpinner />
-                      {t('button.generating')}
-                    </>
-                  ) : (
-                    <>
-                      <span>📄</span>
-                      {t('button.getInvoice')}
-                    </>
-                  )}
+                  {t('button.getStarted')}
                 </button>
               </div>
-              
-              <div style={{ 
-                flex: 1, 
-                overflowY: 'auto', 
-                paddingRight: '0.5rem',
-                minHeight: '200px'
-              }}>
-                <InvoicePreview 
-                  data={formData} 
-                  totals={totals}
-                />
-              </div>
-            </div>
+              </a>
+            ))}
           </div>
-
-          {/* Form Section - Right Side */}
-          <div className={`form-section ${previewMode ? 'mobile-hidden' : 'mobile-section'}`}>
-            <div style={{ 
-              background: '#ffffff',
-              borderRadius: '12px',
-              padding: '1rem',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-              border: '1px solid #f3f4f6'
-            }}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '1rem',
-                borderBottom: '1px solid #e5e7eb',
-                paddingBottom: '0.75rem'
-              }}>
-                <h2 style={{ 
-                  fontSize: '1.25rem', 
-                  fontWeight: '600', 
-                  color: '#111827',
-                  margin: '0'
-                }}>
-                  Details
-                </h2>
-                
-                {/* Mobile Preview Button */}
-                <button
-                  onClick={togglePreview}
-                  className="btn btn-outline btn-sm"
-                  style={{ 
-                    display: 'none',
-                    padding: '0.5rem 1rem',
-                    fontSize: '0.75rem'
-                  }}
-                  type="button"
-                  data-mobile-only="true"
-                >
-                  👁️ Preview
-                </button>
-              </div>
-              
-              <form noValidate>
-                <InvoiceForm form={form} />
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Toggle Button */}
-        <div className="mobile-toggle-btn">
-          <button
-            onClick={togglePreview}
-            style={{ 
-              background: '#000000',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '50%', 
-              width: '3.5rem', 
-              height: '3.5rem',
-              boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.25rem',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
-            type="button"
-            aria-label={previewMode ? 'Edit form' : 'Preview invoice'}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#1f2937';
-              e.currentTarget.style.transform = 'scale(1.05)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#000000';
-              e.currentTarget.style.transform = 'scale(1)';
-            }}
-          >
-            {previewMode ? '✏️' : '👁️'}
-          </button>
-        </div>
-
-        {/* Footer Info */}
-        <div style={{ 
-          marginTop: '4rem', 
-          textAlign: 'center', 
-          fontSize: '0.875rem', 
-          color: '#9ca3af' 
-        }}>
-          <p style={{ marginBottom: '0.5rem' }}>
-            {t('footer.compliance')}
-          </p>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
 
-export default function HomePage() {
+export default function ToolsPage() {
   return (
     <UILanguageProvider>
-      <HomePageContent />
+      <ToolsPageContent />
     </UILanguageProvider>
   );
 } 

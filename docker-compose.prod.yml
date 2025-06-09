@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  norman-invoicing-tool:
+  norman-tools:
     build:
       context: .
       dockerfile: Dockerfile
       target: runner
-    container_name: norman-invoicing-tool-prod
+    container_name: norman-tools-prod
     ports:
       - "81:3000"
     environment:
