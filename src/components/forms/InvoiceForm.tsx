@@ -872,7 +872,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 <input
                   {...register('bic')}
                   type="text"
-                  className="input"
+                  className="input input-compact"
                   placeholder="COBADEFFXXX"
                 />
                 {errors.bic && (
@@ -890,7 +890,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               <input
                 {...register('bank_name')}
                 type="text"
-                className="input"
+                className="input input-compact"
                 placeholder="Commerzbank AG"
               />
               {errors.bank_name && (
