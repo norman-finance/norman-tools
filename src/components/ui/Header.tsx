@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { useUILanguage } from '@/contexts/UILanguageContext';
 import { getCurrentUrl, copyToClipboard } from '@/utils/urlParams';
 
 const Header: React.FC = () => {
   const { uiLanguage, setUILanguage, t } = useUILanguage();
   const [copySuccess, setCopySuccess] = useState(false);
+  const pathname = usePathname();
 
   const handleCopyUrl = async () => {
     const currentUrl = getCurrentUrl();
@@ -15,8 +17,9 @@ const Header: React.FC = () => {
       setTimeout(() => setCopySuccess(false), 2000);
     }
   };
+
   const signUpLink = (() => {
-    switch (window?.location?.pathname) {
+    switch (pathname) {
       case '/erechnung':
         return "https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=erechnung&destination=invoice&utm_medium=header";
       default:
@@ -65,7 +68,7 @@ const Header: React.FC = () => {
           }}>
             <h1
             className="text-xl font-semibold">
-              {typeof window !== 'undefined' && window.location.pathname === '/erechnung' 
+              {pathname === '/erechnung' 
                 ? t('header.title') 
                 : t('header.mainPage')}
             </h1>
