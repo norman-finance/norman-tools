@@ -11,6 +11,7 @@ import { calculateInvoiceTotals } from '@/utils/calculations';
 import { calculateVatData, getRecommendedVatRate, validateVatSetup } from '@/lib/vat-calculations';
 
 import Header from '@/components/ui/Header';
+import Footer from '@/components/ui/Footer';
 import InvoiceForm from '@/components/forms/InvoiceForm';
 import InvoicePreview from '@/components/preview/InvoicePreview';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
@@ -172,6 +173,22 @@ function HomePageContent() {
     form
   ]);
 
+  // Automatically calculate due date when issue date changes (issue_date + 30 days)
+  useEffect(() => {
+    const issueDate = formData.issue_date;
+    const currentDueDate = formData.due_date;
+    
+    if (issueDate && !currentDueDate) {
+      // Only auto-calculate if due date is empty (don't override user's manual input)
+      const issueDateObj = new Date(issueDate);
+      const dueDateObj = new Date(issueDateObj);
+      dueDateObj.setDate(dueDateObj.getDate() + 30); // Add 30 days
+      
+      const calculatedDueDate = dueDateObj.toISOString().split('T')[0];
+      form.setValue('due_date', calculatedDueDate);
+    }
+  }, [formData.issue_date, formData.due_date, form]);
+
 
 
   const togglePreview = () => {
@@ -181,7 +198,7 @@ function HomePageContent() {
   const fillDemoData = () => {
     // Fill form with demo data for quick testing
     const today = new Date().toISOString().split('T')[0];
-    const dueDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const dueDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     
     form.reset({
       ...DEFAULT_INVOICE_DATA,
@@ -238,56 +255,34 @@ function HomePageContent() {
     <div style={{ minHeight: '100vh', background: '#ffffff' }}>
       <Header />
       
-      <main className="container" style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
+      <main className="container">
         {/* Hero Section */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h1 style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: 'bold', 
-            color: '#000000', 
-            marginBottom: '1rem',
-            lineHeight: '1.2'
+        <div className="text-center" 
+          style={{ 
+            paddingTop: '3rem', 
+            paddingBottom: '3rem' 
+        }}>
+          <h1 className="text-5xl font-semibold leading-tight" style={{ 
+            maxWidth: '800px',
+            margin: '2rem auto'
           }}>
-{t('hero.title')}<br />
-            <span style={{ color: '#666666' }}>{t('hero.subtitle')}</span>
+            {t('hero.title')}
           </h1>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            color: '#666666', 
-            marginBottom: '2rem',
-            maxWidth: '600px',
-            margin: '0 auto 2rem auto'
+          
+          <p className="text-xl text-gray-500 leading-tight" style={{ 
+            maxWidth: '800px',
+            margin: '2rem auto'
           }}>
-{t('hero.description')}
+            {t('hero.description')}
           </p>
-          <p style={{ 
-            fontSize: '0.875rem', 
-            color: '#9ca3af', 
-            marginBottom: '2rem'
+          <p className="leading-tight" style={{ 
+            maxWidth: '800px',
+            margin: '2rem auto'
           }}>
             {t('hero.free')}
           </p>
-          
-          {/* Quick Actions */}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            gap: '1rem', 
-            justifyContent: 'center', 
-            marginBottom: '2rem',
-            alignItems: 'center'
-          }}>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <button
-                onClick={fillDemoData}
-                className="btn btn-outline btn-sm"
-                type="button"
-              >
-{t('button.fillDemo')}
-              </button>
-            </div>
-          </div>
         </div>
+
         {/* Error/Success Messages */}
         {error && (
           <div style={{ 
@@ -352,8 +347,7 @@ function HomePageContent() {
             padding: '1.25rem',
             background: '#f0fdf4',
             border: '1px solid #bbf7d0',
-            borderRadius: '12px',
-            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+            borderRadius: '4px',
           }}>
             <div style={{
               display: 'flex',
@@ -437,7 +431,7 @@ function HomePageContent() {
         <div 
           className="main-content-grid" 
           style={{ 
-            gap: '1.5rem', 
+            gap: '1rem', 
             alignItems: 'start',
             minHeight: '80vh'
           }}
@@ -448,16 +442,13 @@ function HomePageContent() {
               className="preview-sticky"
               style={{ 
                 background: '#ffffff',
-                borderRadius: '12px',
                 padding: '1.5rem',
-                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-                border: '1px solid #f3f4f6',
                 display: 'flex',
                 flexDirection: 'column',
                 height: 'fit-content'
               }}
             >
-              <div style={{ 
+              {/*<div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 alignItems: 'center',
@@ -475,7 +466,7 @@ function HomePageContent() {
                   {t('section.preview')}
                 </h2>
                 
-                {/* Generate Invoice Button */}
+                
                 <button
                   onClick={handleSubmit(onSubmit)}
                   disabled={isGenerating}
@@ -521,7 +512,7 @@ function HomePageContent() {
                     </>
                   )}
                 </button>
-              </div>
+              </div>*/}
               
               <div style={{ 
                 flex: 1, 
@@ -541,27 +532,41 @@ function HomePageContent() {
           <div className={`form-section ${previewMode ? 'mobile-hidden' : 'mobile-section'}`}>
             <div style={{ 
               background: '#ffffff',
-              borderRadius: '12px',
               padding: '1rem',
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-              border: '1px solid #f3f4f6'
             }}>
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginBottom: '1rem',
-                borderBottom: '1px solid #e5e7eb',
+                borderBottom: 'var(--border-line)',
                 paddingBottom: '0.75rem'
               }}>
                 <h2 style={{ 
                   fontSize: '1.25rem', 
                   fontWeight: '600', 
-                  color: '#111827',
                   margin: '0'
                 }}>
-                  Details
+                  {t('section.details')}
                 </h2>
+                {/* Quick Actions */}
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: '1rem', 
+                  justifyContent: 'center', 
+                  alignItems: 'center'
+                }}>
+                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <button
+                      onClick={fillDemoData}
+                      className="btn btn-primary btn-sm"
+                      type="button"
+                    >
+                      {t('button.fillDemo')}
+                    </button>
+                  </div>
+                </div>
                 
                 {/* Mobile Preview Button */}
                 <button
@@ -582,6 +587,52 @@ function HomePageContent() {
               <form noValidate>
                 <InvoiceForm form={form} />
               </form>
+              {/* Generate Invoice Button */}
+              <button
+                  onClick={handleSubmit(onSubmit)}
+                  disabled={isGenerating}
+                  style={{
+                    background: isGenerating ? '#9ca3af' : '#000000',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '4px',
+                    padding: '0.75rem 1.5rem',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    cursor: isGenerating ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.2s ease',
+                    marginTop: '2.5rem'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isGenerating) {
+                      e.currentTarget.style.background = '#1f2937';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
+                      e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isGenerating) {
+                      e.currentTarget.style.background = '#000000';
+                      e.currentTarget.style.transform = 'translateY(0px)';
+                      e.currentTarget.style.boxShadow = '0 1px 2px 0 rgb(0 0 0 / 0.05)';
+                    }
+                  }}
+                >
+                  {isGenerating ? (
+                    <>
+                      <LoadingSpinner />
+                      {t('button.generating')}
+                    </>
+                  ) : (
+                    <>
+                      <span>📥</span>
+                      {t('button.getInvoice')}
+                    </>
+                  )}
+                </button>
             </div>
           </div>
         </div>
@@ -620,18 +671,264 @@ function HomePageContent() {
           </button>
         </div>
 
-        {/* Footer Info */}
+        {/* Features Section */}
         <div style={{ 
-          marginTop: '4rem', 
-          textAlign: 'center', 
-          fontSize: '0.875rem', 
-          color: '#9ca3af' 
+          marginTop: '10rem', 
+          marginBottom: '10rem' 
         }}>
-          <p style={{ marginBottom: '0.5rem' }}>
-            {t('footer.compliance')}
+          <div style={{ 
+            textAlign: 'center', 
+            marginBottom: '4rem' 
+          }}>
+            <h2 style={{ 
+              fontSize: '2.25rem', 
+              fontWeight: '600', 
+              marginBottom: '1rem',
+            }}>
+              {t('features.title')}
+            </h2>
+            <p className="text-gray-500" style={{ 
+              fontSize: '1.125rem',
+              maxWidth: '600px',
+              margin: '0 auto'
+            }}>
+              {t('features.description')}
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '2rem',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
+            {/* Customize your invoices */}
+            <div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.5rem' }}>{t('features.feature1.icon')}</span>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  margin: '0',
+                }}>
+                  {t('features.feature1.title')}
+                </h3>
+              </div>
+              <p className="text-gray-500" style={{
+                lineHeight: '1.6',
+                margin: '0'
+              }}>
+                {t('features.feature1.description')}
+              </p>
+            </div>
+
+            {/* Save time */}
+            <div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.5rem' }}>{t('features.feature2.icon')}</span>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  margin: '0',
+                }}>
+                  {t('features.feature2.title')}
+                </h3>
+              </div>
+              <p className="text-gray-500" style={{ 
+                lineHeight: '1.6',
+                margin: '0'
+              }}>
+                {t('features.feature2.description')}
+              </p>
+            </div>
+
+            {/* Track payments */}
+            <div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.5rem' }}>{t('features.feature3.icon')}</span>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  margin: '0',
+                }}>
+                  {t('features.feature3.title')}
+                </h3>
+              </div>
+              <p className="text-gray-500" style={{ 
+                lineHeight: '1.6',
+                margin: '0'
+              }}>
+                {t('features.feature3.description')}
+              </p>
+            </div>
+
+            {/* Recurring invoices */}
+            <div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.5rem' }}>{t('features.feature4.icon')}</span>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  margin: '0',
+                }}>
+                  {t('features.feature4.title')}
+                </h3>
+              </div>
+              <p className="text-gray-500" style={{ 
+                lineHeight: '1.6',
+                margin: '0'
+              }}>
+                {t('features.feature4.description')}
+              </p>
+            </div>
+
+            {/* Payment links */}
+            <div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.5rem' }}>{t('features.feature5.icon')}</span>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  margin: '0',
+                }}>
+                  {t('features.feature5.title')}
+                </h3>
+              </div>
+              <p className="text-gray-500" style={{ 
+                lineHeight: '1.6',
+                margin: '0'
+              }}>
+                {t('features.feature5.description')}
+              </p>
+            </div>
+
+            {/* Auto-follow ups */}
+            <div>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '1rem'
+              }}>
+                <span style={{ fontSize: '1.5rem' }}>{t('features.feature6.icon')}</span>
+                <h3 style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '600', 
+                  margin: '0',
+                }}>
+                  {t('features.feature6.title')}
+                </h3>
+              </div>
+              <p className="text-gray-500" style={{ 
+                lineHeight: '1.6',
+                margin: '0'
+              }}>
+                {t('features.feature6.description')}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div style={{ 
+          marginTop: '10rem', 
+          marginBottom: '10rem',
+          padding: '4rem 2rem',
+          background: 'var(--color-primary)',
+          borderRadius: '12px',
+          textAlign: 'center',
+        }}>
+          <h2 className="text-white" style={{ 
+            fontSize: '2.5rem', 
+            fontWeight: '600', 
+          }}>
+            {t('cta.title')}
+          </h2>
+          <p className="text-gray-100 leading-tight" style={{ 
+            fontSize: '1.25rem',
+            maxWidth: '600px',
+            margin: '2rem auto'
+          }}>
+            {t('cta.description')}
           </p>
+          <div style={{ 
+            display: 'flex', 
+            gap: '1rem', 
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <a href="https://norman.finance/invoicing?utm_source=freetools&utm_campaign=erechnung&destination=invoice&utm_medium=cta">
+            <button className="btn bg-transparent text-white" style={{
+              border: '1px solid rgba(255, 255, 255)',
+              borderRadius: '4px',
+              padding: '0.75rem 1.5rem',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(10px)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.0)';
+              e.currentTarget.style.transform = 'translateY(0px)';
+            }}>
+              {t('cta.buttonLearnMore')}
+            </button></a>
+            <a href="https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=erechnung&destination=invoice&utm_medium=cta">
+            <button className="btn bg-white text-black" style={{
+              border: 'none',
+              borderRadius: '4px',
+              padding: '0.75rem 2rem',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0px)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}>
+              {t('cta.buttonGetStarted')}
+            </button></a>
+          </div>
         </div>
       </main>
+       
+       <Footer />
     </div>
   );
 }

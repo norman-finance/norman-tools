@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { InvoiceFormData } from '@/lib/validation';
 import { InvoiceItem } from '@/types/invoice';
 import { CURRENCIES, FONTS, getCountriesList } from '@/lib/constants';
@@ -13,30 +15,44 @@ interface InvoicePreviewProps {
 }
 
 export default function InvoicePreview({ data, totals, className = '' }: InvoicePreviewProps) {
+  const { 
+    company_name, company_address, company_zip_code, company_city, company_country,
+    client_name, client_address, client_zip_code, client_city, client_country,
+    invoice_number, issue_date, due_date, currency, language, invoiced_items, notes,
+    payment_terms, company_email, company_phone, company_tax_number, company_vat_number,
+    client_email, client_vat_number, color_schema, iban, bic, bank_name, sale_type,
+    delivery_date, service_start_date, service_end_date
+  } = data;
+
   const [isClient, setIsClient] = React.useState(false);
   const [it, setIt] = React.useState<((key: string) => string) | null>(null);
   
-  const currency = CURRENCIES.find(c => c.code === data.currency);
+  const currencyObj = CURRENCIES.find(c => c.code === currency);
   const selectedFont = FONTS.find(f => f.name === data.font);
   
   // Load invoice translations when language changes
   React.useEffect(() => {
     const loadTranslations = async () => {
-      const translationFunction = await getInvoiceTranslationFunction(data.language as 'en' | 'de');
+      const translationFunction = await getInvoiceTranslationFunction(language as 'en' | 'de');
       setIt(() => translationFunction);
     };
     
     loadTranslations();
-  }, [data.language]);
+  }, [language]);
   
-  // Get countries list and find specific countries
-  const countriesList = React.useMemo(() => getCountriesList(data.language), [data.language]);
-  const companyCountry = countriesList.find(c => c.code === data.company_country);
-  const clientCountry = countriesList.find(c => c.code === data.client_country);
+  // Hydration-safe countries list
+  const [countriesList, setCountriesList] = useState(() => getCountriesList('en'));
+  
+  // Update countries list when language changes (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCountriesList(getCountriesList(language));
+    }
+  }, [language]);
   
   // Calculate VAT data for notes
   const vatData = React.useMemo(() => {
-    return calculateVatData({ formData: data, language: data.language });
+    return calculateVatData({ formData: data, language: language });
   }, [data]);
 
   React.useEffect(() => {
@@ -48,7 +64,7 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
     return (
       <div className={className} style={{ 
         background: '#ffffff',
-        border: '1px solid #e5e7eb',
+        border: 'var(--border-line)',
         borderRadius: '12px',
         padding: '2rem',
         textAlign: 'center',
@@ -70,13 +86,13 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
       day: '2-digit'
     };
     
-    const locale = data.language === 'de' ? 'de-DE' : 'en-US';
+    const locale = language === 'de' ? 'de-DE' : 'en-US';
     return date.toLocaleDateString(locale, options);
   };
 
   const formatCurrencyDisplay = (amount: number) => {
-    const locale = data.language === 'de' ? 'de-DE' : 'en-US';
-    return formatCurrency(amount, data.currency, locale);
+    const locale = language === 'de' ? 'de-DE' : 'en-US';
+    return formatCurrency(amount, currency, locale);
   };
 
   return (
@@ -84,11 +100,10 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
       className={className}
       style={{ 
         fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
-        color: data.color_schema === '#FFFFFF' ? '#000000' : data.color_schema,
+        color: color_schema === '#FFFFFF' ? '#000000' : color_schema,
         background: '#ffffff',
-        border: '1px solid #e5e7eb',
-        borderRadius: '12px',
-        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+        border: 'var(--border-line)',
+        borderRadius: '4px',
         overflow: 'hidden'
       }}
     >
@@ -99,44 +114,40 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           justifyContent: 'space-between', 
           alignItems: 'flex-start',
           paddingBottom: '1.5rem',
-          borderBottom: '2px solid #f3f4f6'
+          borderBottom: 'var(--border-line)'
         }}>
           <div>
             <h1 style={{ 
               fontSize: '1.5rem', 
-              fontWeight: 'bold', 
+              fontWeight: '600', 
               marginBottom: '0.5rem',
-              color: '#000000'
             }}>
               {it('headers.invoice')}
             </h1>
             <p style={{ 
-              color: '#6b7280', 
               fontSize: '0.875rem',
-              fontWeight: '500'
+              fontWeight: '400'
             }}>
-              {data.invoice_number}
+              {invoice_number}
             </p>
           </div>
           <div style={{ textAlign: 'right' }}>
             <h2 style={{ 
               fontSize: '1rem', 
               fontWeight: '600',
-              color: '#000000',
               marginBottom: '0.5rem'
             }}>
-              {data.company_name}
+              {company_name}
             </h2>
             <div style={{ 
               fontSize: '0.75rem', 
-              color: '#6b7280', 
               lineHeight: '1.4'
             }}>
-              <p>{data.company_address}</p>
-              <p>{data.company_zip_code} {data.company_city}</p>
-              <p>{companyCountry?.name}</p>
-              {data.company_email && <p>{data.company_email}</p>}
-              {data.company_phone && <p>{data.company_phone}</p>}
+              <p>{company_address}</p>
+              <p>{company_zip_code} {company_city}</p>
+              <p>{countriesList.find(c => c.code === company_country)?.name}</p>
+              {company_email && <p>{company_email}</p>}
+              {company_phone && <p>{company_phone}</p>}
             </div>
           </div>
         </div>
@@ -147,14 +158,14 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           {/* To */}
           <div>
             <div style={{ fontSize: '0.75rem', lineHeight: '1.4' }}>
-              <p style={{ fontWeight: '500', marginBottom: '0.25rem' }}>{data.client_name}</p>
-              <p>{data.client_address}</p>
-              <p>{data.client_zip_code} {data.client_city}</p>
-              <p>{clientCountry?.name}</p>
-              {data.client_email && <p>Email: {data.client_email}</p>}
-              {data.client_vat_number && (
-                <p>{it('tax.vatNumber')} {data.client_vat_number}</p>
-              )}
+              <p style={{ fontWeight: '400', marginBottom: '0.25rem' }}>{client_name}</p>
+              <p>{client_address}</p>
+              <p>{client_zip_code} {client_city}</p>
+              <p>{countriesList.find(c => c.code === client_country)?.name}</p>
+              {client_email && <p>Email: {client_email}</p>}
+              {/*{client_vat_number && (
+                <p>{it('tax.vatNumber')} {client_vat_number}</p>
+              )}*/}
             </div>
           </div>
         </div>
@@ -165,32 +176,32 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
             <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
               {it('dates.invoiceDate')}
             </p>
-            <p>{formatDateDisplay(data.issue_date)}</p>
+            <p>{formatDateDisplay(issue_date)}</p>
           </div>
-          {data.due_date && (
+          {due_date && (
             <div>
               <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                 {it('dates.dueDate')}
               </p>
-              <p>{formatDateDisplay(data.due_date)}</p>
+              <p>{formatDateDisplay(due_date)}</p>
             </div>
           )}
-          {isClient && data.sale_type === 'goods' && data.delivery_date && (
+          {isClient && sale_type === 'goods' && delivery_date && (
             <div>
               <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                 {it('dates.deliveryDate')}
               </p>
-              <p>{formatDateDisplay(data.delivery_date)}</p>
+              <p>{formatDateDisplay(delivery_date)}</p>
             </div>
           )}
-          {isClient && data.sale_type === 'services' && data.service_start_date && (
+          {isClient && sale_type === 'services' && service_start_date && (
             <div>
               <p style={{ fontWeight: '600', color: '#111827', marginBottom: '0.25rem' }}>
                 {it('dates.serviceFrom')}
               </p>
               <p>
-                {formatDateDisplay(data.service_start_date)}
-                {data.service_end_date && ` - ${formatDateDisplay(data.service_end_date)}`}
+                {formatDateDisplay(service_start_date)}
+                {service_end_date && ` - ${formatDateDisplay(service_end_date)}`}
               </p>
             </div>
           )}
@@ -199,8 +210,6 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         {/* Items Table */}
         <div style={{ 
           overflowX: 'auto',
-          border: '1px solid #e5e7eb',
-          borderRadius: '8px'
         }}>
           <table style={{ 
             width: '100%', 
@@ -209,22 +218,19 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
           }}>
             <thead>
               <tr style={{ 
-                background: '#f9fafb',
-                borderBottom: '2px solid #e5e7eb'
+                borderBottom: 'var(--border-line)'
               }}>
                 <th style={{ 
                   textAlign: 'left', 
                   padding: '0.75rem', 
                   fontWeight: '600',
-                  color: '#374151'
                 }}>
 {it('table.description')}
                 </th>
                 <th style={{ 
                   textAlign: 'center', 
                   padding: '0.75rem', 
-                  fontWeight: '600',
-                  color: '#374151'
+                  fontWeight: '600'
                 }}>
 {it('table.qty')}
                 </th>
@@ -232,7 +238,6 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                   textAlign: 'right', 
                   padding: '0.75rem', 
                   fontWeight: '600',
-                  color: '#374151'
                 }}>
 {it('table.unitPrice')}
                 </th>
@@ -240,7 +245,6 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                   textAlign: 'center', 
                   padding: '0.75rem', 
                   fontWeight: '600',
-                  color: '#374151'
                 }}>
                   {it('table.vat')}
                 </th>
@@ -248,38 +252,34 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                   textAlign: 'right', 
                   padding: '0.75rem', 
                   fontWeight: '600',
-                  color: '#374151'
                 }}>
                   {it('table.total')}
                 </th>
               </tr>
             </thead>
             <tbody>
-              {data.invoiced_items.map((item: InvoiceItem, index: number) => {
+              {invoiced_items.map((item: InvoiceItem, index: number) => {
                 const lineTotal = item.quantity * item.unit_price;
                 return (
                   <tr key={index} style={{ 
-                    borderBottom: index < data.invoiced_items.length - 1 ? '1px solid #f3f4f6' : 'none',
+                    borderBottom: index < invoiced_items.length - 1 ? '1px solid #f3f4f6' : 'none',
                     background: index % 2 === 0 ? '#ffffff' : '#fafafa'
                   }}>
                     <td style={{ 
                       padding: '0.75rem',
-                      color: '#111827'
                     }}>
                       {item.description || 'Service description'}
                     </td>
                     <td style={{ 
                       textAlign: 'center', 
                       padding: '0.75rem',
-                      color: '#111827',
-                      fontWeight: '500'
+                      fontWeight: '400'
                     }}>
                       {item.quantity}
                     </td>
                     <td style={{ 
                       textAlign: 'right', 
                       padding: '0.75rem',
-                      color: '#111827',
                       fontFamily: 'monospace'
                     }}>
                       {formatCurrencyDisplay(item.unit_price)}
@@ -287,15 +287,12 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                     <td style={{ 
                       textAlign: 'center', 
                       padding: '0.75rem',
-                      color: '#6b7280',
-                      fontSize: '0.7rem'
                     }}>
                       {item.vat_rate}%
                     </td>
                     <td style={{ 
                       textAlign: 'right', 
                       padding: '0.75rem',
-                      color: '#111827',
                       fontWeight: '600',
                       fontFamily: 'monospace'
                     }}>
@@ -312,9 +309,8 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <div style={{ 
             width: '20rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            borderTop: 'var(--border-line)',
+            borderRadius: '4px',
             padding: '1.5rem'
           }}>
             <div style={{ 
@@ -326,7 +322,6 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
               <div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-between',
-                color: '#6b7280'
               }}>
                 <span>{it('totals.subtotal')}</span>
                 <span style={{ fontFamily: 'monospace' }}>
@@ -338,7 +333,6 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                 <div key={breakdown.rate} style={{ 
                   display: 'flex', 
                   justifyContent: 'space-between',
-                  color: '#6b7280'
                 }}>
                   <span>
                     {it('totals.vatAmount')} {breakdown.rate}%:
@@ -349,17 +343,12 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
                 </div>
               ))}
               
-              <div style={{ 
-                borderTop: '2px solid #d1d5db', 
-                paddingTop: '0.75rem',
-                marginTop: '0.5rem'
-              }}>
+              <div>
                 <div style={{ 
                   display: 'flex', 
                   justifyContent: 'space-between',
                   fontWeight: '700',
                   fontSize: '1.125rem',
-                  color: '#000000'
                 }}>
                   <span>{it('totals.totalAmount')}</span>
                   <span style={{ fontFamily: 'monospace' }}>
@@ -412,101 +401,97 @@ export default function InvoicePreview({ data, totals, className = '' }: Invoice
         )}
 
         {/* Terms & Conditions */}
-        {data.payment_terms && (
+        {payment_terms && (
           <div style={{ 
             padding: '1rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            border: 'var(--border-line)',
+            borderRadius: '4px',
             marginTop: '1rem'
           }}>
             <h3 style={{ 
               fontSize: '0.875rem',
               fontWeight: '600',
-              color: '#111827',
               margin: '0 0 0.5rem 0'
             }}>
               {it('termsConditions.title')}
             </h3>
             <p style={{ 
               fontSize: '0.875rem',
-              color: '#374151',
               margin: '0',
               lineHeight: '1.5',
               whiteSpace: 'pre-wrap'
             }}>
-              {data.payment_terms}
+              {payment_terms}
             </p>
           </div>
         )}
 
         {/* Notes */}
-        {data.notes && (
+        {notes && (
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
             <h3 className="font-semibold text-gray-900 mb-2">
               {it('notes.title')}
             </h3>
-            <p className="text-sm whitespace-pre-wrap">{data.notes}</p>
+            <p className="text-sm whitespace-pre-wrap">{notes}</p>
           </div>
         )}
 
         {/* Footer with Payment and Tax Details */}
-        {(data.iban || data.bic || data.bank_name || data.company_tax_number || data.company_vat_number) && (
+        {(iban || bic || bank_name || company_tax_number || company_vat_number) && (
           <div style={{ 
             marginTop: '2rem',
             paddingTop: '1rem',
-            borderTop: '1px solid #e5e7eb'
+            borderTop: 'var(--border-line)'
           }}>
             <div style={{ 
               display: 'flex',
               justifyContent: 'space-between',
               fontSize: '0.75rem',
-              color: '#6b7280',
               lineHeight: '1.5'
             }}>
               {/* Payment Information */}
-              {(data.iban || data.bic || data.bank_name) && (
+              {(iban || bic || bank_name) && (
                 <div>
-                  {data.bank_name && (
+                  {bank_name && (
                     <div>
-                      <span style={{ fontWeight: '500' }}>
+                      <span style={{ fontWeight: '400' }}>
                         {it('payment.bank')}
                       </span>
-                      {': '}{data.bank_name}
+                      {': '}{bank_name}
                     </div>
                   )}
-                  {data.iban && (
+                  {iban && (
                     <div>
-                      <span style={{ fontWeight: '500' }}>IBAN</span>
-                      {': '}{data.iban}
+                      <span style={{ fontWeight: '400' }}>IBAN</span>
+                      {': '}{iban}
                     </div>
                   )}
-                  {data.bic && (
+                  {bic && (
                     <div>
-                      <span style={{ fontWeight: '500' }}>BIC/SWIFT</span>
-                      {': '}{data.bic}
+                      <span style={{ fontWeight: '400' }}>BIC/SWIFT</span>
+                      {': '}{bic}
                     </div>
                   )}
                 </div>
               )}
               
               {/* Tax Information */}
-              {(data.company_tax_number || data.company_vat_number) && (
+              {(company_tax_number || company_vat_number) && (
                 <div style={{ textAlign: 'right' }}>
-                  {data.company_tax_number && (
+                  {company_tax_number && (
                     <div>
-                      <span style={{ fontWeight: '500' }}>
+                      <span style={{ fontWeight: '400' }}>
                         {it('tax.taxNumber')}
                       </span>
-                      {': '}{data.company_tax_number}
+                      {': '}{company_tax_number}
                     </div>
                   )}
-                  {data.company_vat_number && (
+                  {company_vat_number && (
                     <div>
-                      <span style={{ fontWeight: '500' }}>
+                        <span style={{ fontWeight: '400' }}>
                         {it('tax.vatNumber')}
                       </span>
-                      {': '}{data.company_vat_number}
+                      {': '}{company_vat_number}
                     </div>
                   )}
                 </div>

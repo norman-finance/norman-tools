@@ -1,20 +1,21 @@
 {
   "header": {
-    "title": "Kostenloser Rechnungsersteller",
+    "title": "E-Rechnungsersteller",
     "subtitle": "Professionelle Rechnungen für deutsche Freelancer"
   },
   "hero": {
-    "title": "Makellose e-Rechnungen,",
-    "subtitle": "bereit in Sekunden",
-    "description": "Erstelle unbegrenzt, rechtskonforme e-Rechnungen — schnell und kostenlos. Enthält alles, was für deutsche Steuerbehörden erforderlich ist.",
-    "free": "🧾 Keine Registrierung erforderlich. Probieren Sie mit Demo-Daten.",
+    "title": "Erstelle E-Rechnungen kostenlos",
+    "subtitle": "kostenlos",
+    "description": "Kostenlose Software zur Erstellung konformer E-Rechnungen. ZUGFeRD-PDF-E-Rechnung erstellen und herunterladen.",
+    "free": "Keine Anmeldung. Keine Wasserzeichen/Werbung. 100% kostenlos.",
     "freeLabel": "Kostenlos"
   },
   "button": {
-    "fillDemo": "Demo-Daten ausfüllen",
+    "fillDemo": "Mit Demo-Daten ausprobieren",
     "preview": "Vorschau",
-    "getInvoice": "Rechnung erstellen",
-    "generating": "Wird erstellt..."
+    "getInvoice": "E-Rechnung herunterladen",
+    "generating": "Wird erstellt...",
+    "signUp": "Anmelden"
   },
   "section": {
     "settings": "Einstellungen",
@@ -61,11 +62,11 @@
   "items": {
     "description": "Artikelbeschreibung",
     "qty": "Menge",
-    "vat": "MwSt",
+    "vat": "USt",
     "rate": "Preis",
     "total": "Gesamt",
     "addNew": "Neuen Artikel hinzufügen",
-    "unitPriceVat": "Einzelpreis mit MwSt",
+    "unitPriceVat": "Einzelpreis mit USt",
     "removeItem": "Artikel entfernen",
     "descriptionPlaceholder": "Produkt/Dienstleistung"
   },
@@ -82,9 +83,9 @@
     "languageNote": "Die Oberflächensprache beeinflusst Formularbeschriftungen und Buttons. Die Rechnungssprache beeinflusst den Inhalt der generierten Rechnung.",
     "saleType": "Verkaufsart",
     "paymentTerms": "Zahlungsbedingungen",
-    "vatSettings": "MwSt-Einstellungen",
-    "kleinunternehmer": "Kleinunternehmer (§19 UStG) - Kleinunternehmerregelung",
-    "kleinunternehmerDesc": "Aktivieren Sie dies, wenn Sie Kleinunternehmer nach deutschem Steuerrecht sind und keine MwSt berechnen"
+    "vatSettings": "USt-Einstellungen",
+    "kleinunternehmer": "Kleinunternehmer (§19 UStG)",
+    "kleinunternehmerDesc": "Aktiviere dies, wenn du ein Kleinunternehmer nach deutschem Steuerrecht bist und keine Umsatzsteuer erhebst."
   },
   "notes": {
     "title": "Notizen",
@@ -93,9 +94,9 @@
     "termsConditionsPlaceholder": "Fügen Sie hier Zahlungsbedingungen, Geschäftsbedingungen oder spezielle Anweisungen hinzu..."
   },
   "message": {
-    "success": "🎉 Rechnung erfolgreich erstellt! Ihr PDF-Download sollte automatisch starten.",
-    "vatIssues": "MwSt-Konfigurationsprobleme:",
-    "vatValidation": "MwSt-Validierung fehlgeschlagen:",
+    "success": "🎉 Rechnung erfolgreich erstellt! Dein PDF-Download sollte automatisch starten.",
+    "vatIssues": "USt-Konfigurationsprobleme:",
+    "vatValidation": "USt-Validierung fehlgeschlagen:",
     "error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
   "option": {
@@ -121,9 +122,59 @@
     "itemQuantityRequired": "Artikelmenge muss größer als 0 sein",
     "itemPriceRequired": "Artikelpreis muss größer als 0 sein"
   },
+  "features": {
+    "title": "Mehr gefällig?",
+    "description": "Passe deine Rechnungen an, speichere Kunden, verfolge Zahlungen und mehr. Und das alles weiterhin kostenlos.",
+    "feature1": {
+      "icon": "🎨",
+      "title": "Rechnungen anpassen",
+      "description": "Gestalte deine Rechnungen individuell mit Logo, Farben und Schriftarten. Mach deine Rechnungen ansprechend."
+    },
+    "feature2": {
+      "icon": "⏱️",
+      "title": "Zeit sparen",
+      "description": "Nie wieder dieselben Daten doppelt eingeben. Speichere Kunden, Steuernummer, IBAN und mehr für die zukünftige Nutzung."
+    },
+    "feature3": {
+      "icon": "💰",
+      "title": "Zahlungen verfolgen",
+      "description": "Sieh den Zahlungsstatus und die Historie auf einen Blick. Keine Zahlungen mehr verpassen."
+    },
+    "feature4": {
+      "icon": "🔄",
+      "title": "Wiederkehrende Rechnungen",
+      "description": "Erstelle wiederkehrende Rechnungen für deine Kunden. Kein manuelles Erstellen mehr nötig."
+    },
+    "feature5": {
+      "icon": "🤖",
+      "title": "Automatische Erinnerungen",
+      "description": "Kein unangenehmes Nachfassen mehr. Versende automatische Erinnerungs-E-Mails bei überfälligen Rechnungen."
+    },
+    "feature6": {
+      "icon": "🔗",
+      "title": "Zahlungslinks (kommt bald)",
+      "description": "Werde 2x schneller bezahlt mit Zahlungslinks."
+    }
+  },
+  "cta": {
+    "title": "Mehr kostenlos bekommen",
+    "description": "Schließ dich tausenden Freelancer*innen und Unternehmen an, die Norman für ihre Rechnungsstellung nutzen. Erstelle noch heute professionelle Rechnungen.",
+    "buttonLearnMore": "Mehr erfahren",
+    "buttonGetStarted": "Jetzt starten"
+  },
   "footer": {
-    "compliance": "Professionelle Rechnungen mit eingebetteter E-Rechnung XML für deutsche Compliance.",
-    "privacy": "Keine Daten werden auf unseren Servern gespeichert. Ihre Informationen werden nur zur PDF-Erstellung verwendet."
+    "compliance": "Kostenloser deutscher E-Rechnungsersteller — keine Anmeldung erforderlich. Enthält alle deutschen Steueranforderungen.",
+    "privacy": "Keine Daten werden auf unseren Servern gespeichert. Ihre Informationen werden nur zur PDF-Erstellung verwendet.",
+    "tagline": "Mach Geschäft mühelos",
+    "madeInGermany": "Made in Germany",
+    "berlinBased": "Berlin ansässig",
+    "gdprCompliant": "DSGVO-konform",
+    "hostedInGermany": "Gehostet in Deutschland",
+    "copyright": "© 2025 Norman AI GmbH",
+    "products": "Produkte",
+    "tools": "Tools",
+    "company": "Unternehmen",
+    "help": "Hilfe"
   },
   "required": "*",
   "optional": "(optional)",
@@ -146,5 +197,23 @@
     "CHF": "Schweizer Franken",
     "TRY": "Türkische Lira",
     "AED": "VAE-Dirham"
+  },
+  "links": {
+    "becomeSelEmployed": "Selbstständig werden",
+    "eInvoicing": "E-Rechnungsstellung",
+    "fileTaxes": "Steuern einreichen",
+    "getTaxAdvice": "Steuerberatung erhalten",
+    "book": "Buchen",
+    "deductibles": "Absetzbare Kosten",
+    "taxCalculator": "Steuerrechner",
+    "freeTools": "Freie Tools",
+    "aboutUs": "Über uns",
+    "blog": "Blog",
+    "careers": "Karriere",
+    "impressum": "Impressum",
+    "support": "Support",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsAndConditions": "Geschäftsbedingungen",
+    "rewardsRules": "Belohnungsregeln"
   }
 } 

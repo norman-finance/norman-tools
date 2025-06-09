@@ -1,20 +1,21 @@
     {
   "header": {
-    "title": "Free Invoice Generator",
+    "title": "E-Invoice maker",
     "subtitle": "Professional invoices for German freelancers"
   },
   "hero": {
-    "title": "Flawless e-invoices,",
-    "subtitle": "ready in seconds",
-    "description": "Create unlimited, legally compliant e-invoices — fast and for free. Includes everything required by German tax authorities.",
-    "free": "🧾 No sign-up needed. Try with demo data.",
+    "title": "Create e-invoices for free",
+    "subtitle": "for free",
+    "description": "Free software to create compliant e-invoices. Generate and download ZUGFeRD PDF e-invoice. ",
+    "free": "No sign-up. No watermarks/ads. 100% free.",
     "freeLabel": "Free"
   },
   "button": {
-    "fillDemo": "Fill with Demo Data",
+    "fillDemo": "Try with demo data",
     "preview": "Preview",
-    "getInvoice": "Get Me the Invoice",
-    "generating": "Generating..."
+    "getInvoice": "Download e-invoice",
+    "generating": "Generating...",
+    "signUp": "Sign up"
   },
   "section": {
     "settings": "Settings",
@@ -35,7 +36,7 @@
     "phone": "Phone",
     "taxNumber": "Tax number",
     "vatNumber": "VAT number",
-    "namePlaceholder": "Acme GmbH"
+    "namePlaceholder": "Acme GmbH/Max Mustermann"
   },
   "client": {
     "title": "Client details",
@@ -62,7 +63,7 @@
     "description": "Item description",
     "qty": "Qty",
     "vat": "VAT",
-    "rate": "Rate",
+    "rate": "Price",
     "total": "Total",
     "addNew": "Add a new item",
     "unitPriceVat": "Unit price with VAT",
@@ -141,10 +142,78 @@
     "itemQuantityRequired": "Item quantity must be greater than 0",
     "itemPriceRequired": "Item price must be greater than 0"
   },
+  "features": {
+    "title": "Need more?",
+    "description": "Customize your invoices, save clients, track payments, and more. Still free.",
+    "feature1": {
+      "icon": "🎨",
+      "title": "Customize your invoices",
+      "description": "Personalize your invoices with a logo, colors and fonts. Make your invoices beautiful."
+    },
+    "feature2": {
+      "icon": "⏱️",
+      "title": "Save time",
+      "description": "Never enter the same data twice. Save your clients, tax number, IBAN, and more for future use."
+    },
+    "feature3": {
+      "icon": "💰",
+      "title": "Track payments",
+      "description": "Instantly see your payment status and history. No more missing payments."
+    },
+    "feature4": {
+      "icon": "🔄",
+      "title": "Recurring invoices",
+      "description": "Create recurring invoices for your clients. No more manual work."
+    },
+    "feature5": {
+      "icon": "🤖",
+      "title": "Auto-follow ups",
+      "description": "Forget awkward chasing. Send automatic follow up emails for overdue invoices."
+    },
+    "feature6": {
+      "icon": "🔗",
+      "title": "Payment links (coming soon)",
+      "description": "Get paid 2x faster with payment links."
+    }
+  },
+  "cta": {
+    "title": "Get more for free",
+    "description": "Join thousands of freelancers and businesses who trust Norman for invoicing. Start creating professional invoices today.",
+    "buttonLearnMore": "Learn more",
+    "buttonGetStarted": "Get started"
+  },
   "footer": {
-    "compliance": "Professional invoices with embedded e-invoice XML for German compliance.",
-    "privacy": "No data is stored on our servers. Your information is only used to generate the PDF."
+    "compliance": "Free German e-invoice generator — no registration required. Includes all German tax requirements.",
+    "privacy": "No data is stored on our servers. Your information is only used to generate the PDF.",
+    "tagline": "Make business effortless",
+    "madeInGermany": "Made in Germany",
+    "berlinBased": "Berlin based",
+    "gdprCompliant": "GDPR-compliant",
+    "hostedInGermany": "Hosted in Germany",
+    "copyright": "© 2025 Norman AI GmbH",
+    "products": "Products",
+    "tools": "Tools",
+    "company": "Company",
+    "help": "Help"
   },
   "required": "*",
-  "optional": "(optional)"
+  "optional": "(optional)",
+  "links": {
+    "becomeSelEmployed": "Become self-employed",
+    "eInvoicing": "E-invoicing",
+    "fileTaxes": "File taxes",
+    "getTaxAdvice": "Get tax advice",
+    "book": "Book",
+    "deductibles": "Deductibles",
+    "taxCalculator": "Tax calculator",
+    "freeTools": "Free tools",
+    "aboutUs": "About us",
+    "blog": "Blog",
+    "careers": "Careers",
+    "impressum": "Impressum",
+    "support": "Support",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "rewardsRules": "Rewards rules"
+  }
 } 

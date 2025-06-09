@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -15,14 +13,14 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: #000000;
+  color: #080809;
   background: #ffffff;
   line-height: 1.6;
 }
@@ -38,11 +36,11 @@ button {
 
 /* CSS Variables for theming */
 :root {
-  --color-primary: #000000;
+  --color-primary: #080809;
   --color-secondary: #666666;
   --color-background: #ffffff;
   --color-surface: #f8f9fa;
-  --color-border: #e5e7eb;
+  --color-border: #ebedf1;
   --color-border-light: #f3f4f6;
   --color-text: #000000;
   --color-text-secondary: #6b7280;
@@ -51,6 +49,7 @@ button {
   --color-error: #ef4444;
   --color-warning: #f59e0b;
   
+  --border-line: 1px solid #ebedf1;
   --border-radius: 8px;
   --border-radius-sm: 4px;
   --border-radius-lg: 12px;
@@ -80,7 +79,6 @@ button {
 /* Utility classes */
 .container {
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
 }
@@ -116,13 +114,12 @@ button {
 .form-input {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border: var(--border-line);
+  border-radius: 4px;
   font-size: 0.875rem;
   line-height: 1.4;
   transition: all 0.2s ease;
   background: #ffffff;
-  color: #111827;
 }
 
 /* Extra compact input styling */
@@ -196,8 +193,8 @@ select.input,
 .form-select {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: var(--border-line);
+  border-radius: 4px;
   font-size: 1rem;
   background: #ffffff;
   cursor: pointer;
@@ -263,7 +260,7 @@ select.input:focus,
   justify-content: center;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-sm);
   font-size: var(--font-size-base);
   font-weight: 500;
   text-decoration: none;

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { UseFormReturn, useFieldArray } from 'react-hook-form';
 import { InvoiceFormData } from '../../types/invoice';
 import { VAT_RATES, CURRENCIES, LANGUAGES, SALE_TYPES, CLIENT_TYPES, COMPANY_COUNTRY, getCountriesList } from '../../lib/constants';
@@ -31,7 +31,6 @@ function UILanguageSelectorComponent() {
 }
 
 export default function InvoiceForm({ form }: InvoiceFormProps) {
-  const { t } = useUILanguage();
   const { register, control, formState: { errors }, watch, setValue } = form;
   
   const { fields, append, remove } = useFieldArray({
@@ -39,22 +38,34 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
     name: 'invoiced_items'
   });
 
+  // Watch for form changes
   const watchedLanguage = watch('language');
+  
+  // Countries list with hydration-safe loading
+  const [countriesList, setCountriesList] = useState(() => getCountriesList('en'));
+  
+  // Update countries list when language changes (client-side only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCountriesList(getCountriesList(watchedLanguage));
+    }
+  }, [watchedLanguage]);
+
+  // Get translation function
+  const { t } = useUILanguage();
+
   const watchedCountry = watch('company_country');
   const watchedClientCountry = watch('client_country');
   const watchedCurrency = watch('currency');
   const watchedSaleType = watch('sale_type');
   
-  // Get countries list based on language
-  const countriesList = React.useMemo(() => getCountriesList(watchedLanguage), [watchedLanguage]);
-
   // State for collapsible sections
   const [expandedSections, setExpandedSections] = React.useState({
     createFor: true,
     details: true,
     items: true,
-    payment: false,
-    settings: false,
+    payment: true,
+    settings: true,
     notes: false
   });
 
@@ -91,7 +102,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
   {/* Settings Section */}
   <section>
-        <button
+        {/*<button
           type="button"
           onClick={() => toggleSection('settings')}
           style={{
@@ -100,12 +111,10 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '1rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            border: 'var(--border-line)',
+            borderRadius: '4px',
             fontSize: '1rem',
-            fontWeight: '500',
-            color: '#111827',
+            fontWeight: '600',
             cursor: 'pointer',
             marginBottom: '1rem'
           }}
@@ -114,13 +123,13 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
           <span style={{ transform: expandedSections.settings ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>
-        </button>
+        </button>*/}
         
         {expandedSections.settings && (
-          <div style={{ padding: '0 1rem' }}>
+          <div style={{ padding: '1rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('settings.currency')} {t('required')}
                 </label>
                 <select
@@ -140,7 +149,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 )}
               </div>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('settings.invoiceLanguage')} {t('required')}
                 </label>
                 <select
@@ -165,7 +174,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
 {t('settings.saleType')} {t('required')}
                 </label>
                 <select
@@ -193,17 +202,15 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               flexDirection: 'column',
               marginBottom: '1rem',
               padding: '1rem',
-              background: '#f9fafb',
-              border: '1px solid #e2e8f0',
-              borderRadius: '6px'
+              border: 'var(--border-line)',
+              borderRadius: '4px'
             }}>
               <h4 style={{ 
                 fontSize: '0.875rem', 
-                fontWeight: '500', 
-                color: '#374151',
+                fontWeight: '600',
                 margin: '0 0 0.5rem 0'
               }}>
-{t('settings.vatSettings')}
+                {t('settings.vatSettings')}
               </h4>
               
               <div style={{ 
@@ -223,20 +230,17 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 />
                 <label htmlFor="is_kleinunternehmer" style={{ 
                   fontSize: '0.875rem', 
-                  color: '#374151',
                   cursor: 'pointer'
                 }}>
-{t('settings.kleinunternehmer')}
+                  {t('settings.kleinunternehmer')}
                 </label>
               </div>
               
-              <p style={{ 
+              <p className="text-gray-500" style={{ 
                 fontSize: '0.75rem', 
-                color: '#6b7280',
-                margin: '0',
-                fontStyle: 'italic'
+                margin: '0.5rem 0 0 0',
               }}>
-{t('settings.kleinunternehmerDesc')}
+                {t('settings.kleinunternehmerDesc')}
               </p>
             </div>
           </div>
@@ -246,7 +250,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
 
       {/* Create for Section */}
       <section>
-        <button
+        {/*<button
           type="button"
           onClick={() => toggleSection('createFor')}
           style={{
@@ -255,12 +259,10 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '1rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            border: 'var(--border-line)',
+            borderRadius: '4px',
             fontSize: '1rem',
-            fontWeight: '500',
-            color: '#111827',
+            fontWeight: '600',
             cursor: 'pointer',
             marginBottom: '1rem'
           }}
@@ -269,19 +271,19 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
           <span style={{ transform: expandedSections.createFor ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>
-        </button>
+        </button>*/}
         
         {expandedSections.createFor && (
-          <div style={{ padding: '0 1rem', marginBottom: '1rem' }}>
+          <div style={{ padding: '1rem'}}>
             {/* Company Details */}
             <div style={{ marginBottom: '2rem' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
-{t('company.title')}
+              <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', }}>
+                {t('company.title')}
               </h4>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.25rem', display: 'block' }}>
-{t('company.name')} {t('required')}
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.25rem', display: 'block' }}>
+                    {t('company.name')} {t('required')}
                   </label>
                   <input
                     {...register('company_name')}
@@ -296,8 +298,8 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   )}
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.75rem', color: '#6b7280', marginBottom: '0.25rem', display: 'block' }}>
-{t('company.email')}
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.25rem', display: 'block' }}>
+                    {t('company.email')}
                   </label>
                   <input
                     {...register('company_email')}
@@ -314,8 +316,8 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               </div>
               
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-{t('company.address')} {t('required')}
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
+                  {t('company.address')} {t('required')}
                 </label>
                 <input
                   {...register('company_address')}
@@ -332,7 +334,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('company.zipCode')} {t('required')}
                   </label>
                   <input
@@ -343,7 +345,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('company.city')} {t('required')}
                   </label>
                   <input
@@ -354,7 +356,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   />
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('company.country')} {t('required')}
                   </label>
                   <input
@@ -369,7 +371,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               </div>
               
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('company.phone')}
                 </label>
                 <input
@@ -382,7 +384,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('company.taxNumber')}
                   </label>
                   <input
@@ -398,7 +400,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   )}
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('company.vatNumber')}
                   </label>
                   <input
@@ -418,25 +420,47 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
 
             {/* Client Details */}
             <div>
-              <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: '#111827' }}>
+              <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', }}>
               {t('client.title')}
               </h4>
+              
               <div style={{ marginBottom: '1rem' }}>
-              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
+                  {t('client.type')} {t('required')}
+                </label>
+                <select
+                  {...register('client_type')}
+                    className="input input-compact"
+              >
+                    {CLIENT_TYPES.map((type) => (
+                      <option key={type.value} value={type.value} selected={type.value === 'business'}>
+                        {type.icon} {t(`option.${type.value}`)}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.client_type && (
+                    <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
+                      {errors.client_type.message}
+                    </p>
+                  )}
+              </div>
+
+              <div style={{ marginBottom: '1rem' }}>
+              <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('client.name')} {t('required')}
                 </label>
                 <input
                   {...register('client_name')}
                   type="text"
                   className="input input-compact"
-                  placeholder="Acme GmbH"
+                  placeholder={t('company.namePlaceholder')}
                   style={{ flex: 1 }}
                 />
               </div>
               
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                  Client Address *
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
+                  {t('client.address')} {t('required')}
                 </label>
                 <input
                   {...register('client_address')}
@@ -449,32 +473,11 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     {errors.client_address.message}
                   </p>
                 )}
-                              </div>
-                
-                <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
-                    {t('client.type')} {t('required')}
-                  </label>
-                  <select
-                    {...register('client_type')}
-                    className="input input-compact"
-                  >
-                    {CLIENT_TYPES.map((type) => (
-                      <option key={type.value} value={type.value} selected={type.value === 'business'}>
-                        {type.icon} {t(`option.${type.value}`)}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.client_type && (
-                    <p style={{ fontSize: '0.75rem', color: '#dc2626', marginTop: '0.25rem' }}>
-                      {errors.client_type.message}
-                    </p>
-                  )}
                 </div>
                 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                   <div>
-                    <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                    <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                       {t('company.zipCode')} {t('required')}
                     </label>
                     <input
@@ -485,7 +488,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                    <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                       {t('company.city')} {t('required')}
                     </label>
                     <input
@@ -496,7 +499,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     />
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                    <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                       {t('company.country')} {t('required')}
                     </label>
                     <select
@@ -514,7 +517,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('client.email')}
                   </label>
                   <input
@@ -524,8 +527,8 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     placeholder="contact@client.com"
                   />
                 </div>
-                <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                {/*<div>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('client.vatNumber')}
                   </label>
                   <input
@@ -534,7 +537,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     className="input input-compact"
                     placeholder="DE987654321"
                   />
-                </div>
+                </div>*/}
               </div>
             </div>
           </div>
@@ -543,7 +546,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
 
       {/* Details Section */}
       <section>
-        <button
+        {/*<button
           type="button"
           onClick={() => toggleSection('details')}
           style={{
@@ -552,12 +555,10 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '1rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            border: 'var(--border-line)',
+            borderRadius: '4px',
             fontSize: '1rem',
-            fontWeight: '500',
-            color: '#111827',
+            fontWeight: '600',
             cursor: 'pointer',
             marginBottom: '1rem'
           }}
@@ -566,13 +567,13 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
           <span style={{ transform: expandedSections.details ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>
-        </button>
+        </button>*/}
         
         {expandedSections.details && (
-          <div style={{ padding: '0 1rem' }}>
+          <div style={{ padding: '1rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('details.invoiceNumber')}
                 </label>
                 <input
@@ -588,7 +589,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 )}
               </div>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('details.issued')}
                 </label>
                 <input
@@ -605,7 +606,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             </div>
             
             <div style={{ marginBottom: '1rem' }}>
-              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+              <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                 {t('details.dueDate')}
               </label>
               <input
@@ -624,7 +625,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             {isClient && watchedSaleType === 'services' && (
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('details.serviceFrom')}
                   </label>
                   <input
@@ -639,7 +640,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   )}
                 </div>
                 <div>
-                  <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                  <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('details.serviceTo')}
                   </label>
                   <input
@@ -658,7 +659,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             
             {isClient && watchedSaleType === 'goods' && (
               <div style={{ marginBottom: '1rem' }}>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('details.deliveryDate')}
                 </label>
                 <input
@@ -679,23 +680,20 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
 
       {/* Invoice Items Section */}
       <section>
-        <div style={{ marginBottom: '1rem' }}>
+        <div style={{ padding: '1rem' }}>
           <div style={{ 
             display: 'grid', 
             gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', 
             gap: '0.5rem',
-            padding: '0.75rem',
-            background: '#f9fafb',
-            borderRadius: '6px',
+            borderRadius: '4px',
             fontSize: '0.875rem',
-            fontWeight: '500',
-            color: '#6b7280'
+            fontWeight: '600'
           }}>
-            <span>{t('items.description')}</span>
-            <span>{t('items.qty')}</span>
-            <span>{t('items.vat')}</span>
-            <span>{t('items.rate')}</span>
-            <span>{t('items.total')}</span>
+            <span style={{ paddingLeft: '0.25rem' }}>{t('items.description')}</span>
+            <span style={{ paddingLeft: '0.25rem' }}>{t('items.qty')}</span>
+            <span style={{ paddingLeft: '0.25rem' }}>{t('items.vat')}</span>
+            <span style={{ paddingLeft: '0.25rem' }}>{t('items.rate')}</span>
+            <span style={{ paddingLeft: '0.25rem' }}>{t('items.total')}</span>
           </div>
 
           {fields.map((field, index) => (
@@ -703,7 +701,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               display: 'grid', 
               gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', 
               gap: '0.5rem',
-              padding: '0.75rem',
+              padding: '0.5rem 0',
               alignItems: 'center',
               borderBottom: '1px solid #f3f4f6'
             }}>
@@ -780,15 +778,15 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
           ))}
 
           <button
+            className="text-gray-500"
             type="button"
             onClick={addItem}
             style={{
               width: '100%',
               padding: '0.75rem',
               background: 'transparent',
-              border: '1px dashed #d1d5db',
-              borderRadius: '6px',
-              color: '#6b7280',
+              border: '1px dashed #ebedf1',
+              borderRadius: '4px',
               fontSize: '0.875rem',
               cursor: 'pointer',
               marginTop: '0.5rem'
@@ -825,7 +823,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
 
       {/* Payment Section */}
       <section>
-        <button
+        {/*<button
           type="button"
           onClick={() => toggleSection('payment')}
           style={{
@@ -834,12 +832,10 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '1rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            border: 'var(--border-line)',
+            borderRadius: '4px',
             fontSize: '1rem',
-            fontWeight: '500',
-            color: '#111827',
+            fontWeight: '600',
             cursor: 'pointer',
             marginBottom: '1rem'
           }}
@@ -848,13 +844,13 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
           <span style={{ transform: expandedSections.payment ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}>
             ↓
           </span>
-        </button>
+        </button>*/}
         
         {expandedSections.payment && (
-          <div style={{ padding: '0 1rem' }}>
+          <div style={{ padding: '1rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('payment.iban')}
                 </label>
                 <input
@@ -870,7 +866,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                 )}
               </div>
               <div>
-                <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+                <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                   {t('payment.bic')}
                 </label>
                 <input
@@ -888,7 +884,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             </div>
             
             <div style={{ marginBottom: '1rem' }}>
-              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+              <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                 {t('payment.bankName')}
               </label>
               <input
@@ -919,12 +915,10 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '1rem',
-            background: '#f9fafb',
-            border: '1px solid #e5e7eb',
-            borderRadius: '8px',
+            border: 'var(--border-line)',
+            borderRadius: '4px',
             fontSize: '1rem',
-            fontWeight: '500',
-            color: '#111827',
+            fontWeight: '600',
             cursor: 'pointer',
             marginBottom: '1rem'
           }}
@@ -938,7 +932,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
         {expandedSections.notes && (
           <div style={{ padding: '0 1rem' }}>
             <div style={{ marginBottom: '1rem' }}>
-              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+              <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                 {t('notes.termsConditions')}
               </label>
               <textarea
@@ -963,7 +957,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
               )}
             </div>
             <div>
-              <label style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem', display: 'block' }}>
+              <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                 {t('notes.title')}
               </label>
               <textarea
@@ -978,7 +972,8 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                   borderRadius: '6px',
                   fontSize: '0.875rem',
                   resize: 'vertical',
-                  fontFamily: 'inherit'
+                  fontFamily: 'inherit',
+                  marginBottom: '1rem'
                 }}
               />
             </div>

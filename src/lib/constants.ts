@@ -17,10 +17,21 @@ export const COMPANY_COUNTRY = { code: 'DE', name: 'Germany' };
 
 // Function to get all countries with proper language support
 export const getCountriesList = (language: 'en' | 'de' = 'en'): Country[] => {
-  const countryNames = countries.getNames(language, { select: 'official' });
-  return Object.entries(countryNames)
-    .map(([code, name]) => ({ code, name }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  // Fallback to English if running on server to prevent hydration mismatch
+  const safeLanguage = typeof window === 'undefined' ? 'en' : language;
+  
+  try {
+    const countryNames = countries.getNames(safeLanguage, { select: 'official' });
+    return Object.entries(countryNames)
+      .map(([code, name]) => ({ code, name }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  } catch (error) {
+    // Fallback to English if there's any error
+    const countryNames = countries.getNames('en', { select: 'official' });
+    return Object.entries(countryNames)
+      .map(([code, name]) => ({ code, name }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
 };
 
 export const CURRENCIES: Currency[] = [
