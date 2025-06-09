@@ -107,10 +107,10 @@ The deployment script supports the following commands:
 
 ```bash
 # Development
-docker-compose logs -f norman-invoicing-tool
+docker-compose logs -f norman-tools
 
 # Production
-docker-compose -f docker-compose.prod.yml logs -f norman-invoicing-tool
+docker-compose -f docker-compose.prod.yml logs -f norman-tools
 ```
 
 ### Check Container Status
@@ -164,7 +164,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and Deploy
         run: |
-          cd norman-invoicing-tool
+          cd norman-tools
           docker-compose -f docker-compose.prod.yml up --build -d
 ```
 

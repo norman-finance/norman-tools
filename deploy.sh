@@ -36,9 +36,9 @@ deploy_prod() {
 # Function to show logs
 show_logs() {
     if [ "$ENVIRONMENT" = "production" ]; then
-        docker compose -f docker-compose.prod.yml logs -f norman-invoicing-tool
+        docker compose -f docker-compose.prod.yml logs -f norman-tools
     else
-        docker compose logs -f norman-invoicing-tool
+        docker compose logs -f norman-tools
     fi
 }
 
