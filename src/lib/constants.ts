@@ -124,7 +124,7 @@ export const DEFAULT_INVOICE_DATA = {
   client_vat_number: '',
   
   // Invoice details
-  invoice_number: `INV-${new Date().getFullYear()}-001`,
+  invoice_number: `RECH-${new Date().getFullYear()}-001`,
   issue_date: new Date().toISOString().split('T')[0],
   due_date: '',
   sale_type: 'services' as const,

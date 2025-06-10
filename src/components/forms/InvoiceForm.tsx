@@ -527,7 +527,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     placeholder="contact@client.com"
                   />
                 </div>
-                {/*<div>
+                <div>
                   <label style={{ fontSize: '0.875rem', marginBottom: '0.5rem', display: 'block' }}>
                     {t('client.vatNumber')}
                   </label>
@@ -537,7 +537,7 @@ export default function InvoiceForm({ form }: InvoiceFormProps) {
                     className="input input-compact"
                     placeholder="DE987654321"
                   />
-                </div>*/}
+                </div>
               </div>
             </div>
           </div>
