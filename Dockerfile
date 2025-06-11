@@ -17,9 +17,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Set production environment variables
+# Accept build arguments
+ARG OPENAI_API_KEY
+ARG NEXT_PUBLIC_API_URL=https://api.norman.finance
+
+# Set build-time environment variables
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=https://api.norman.finance
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
 
 # Disable telemetry during the build
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -31,9 +36,15 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
+# Accept build arguments for runtime
+ARG OPENAI_API_KEY
+ARG NEXT_PUBLIC_API_URL=https://api.norman.finance
+
+# Set runtime environment variables
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=https://api.norman.finance
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

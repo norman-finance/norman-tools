@@ -26,12 +26,6 @@ jobs:
       - name: set up qemu
         uses: docker/setup-qemu-action@v2
 
-      - name: Set up environment variables
-        run: |
-          echo "NODE_ENV=production" >> .env
-          echo "NEXT_PUBLIC_API_URL=https://api.norman.finance" >> .env
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-
       - name: set up buildx
         uses: docker/setup-buildx-action@v2
 
@@ -59,6 +53,8 @@ jobs:
             ghcr.io/${{ steps.image.outputs.lowercase }}/tools:${{ github.sha }}
           build-args: |
             RELEASE=${{ github.sha }}
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            NEXT_PUBLIC_API_URL=https://api.norman.finance
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

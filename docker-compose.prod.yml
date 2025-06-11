@@ -6,6 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runner
+      args:
+        OPENAI_API_KEY: ${OPENAI_API_KEY}
+        NEXT_PUBLIC_API_URL: https://api.norman.finance
     container_name: norman-tools-prod
     ports:
       - "81:3000"
