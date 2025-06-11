@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
 
       const openai = getOpenAIClient();
       const completion = await openai.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-4.1",
         messages: [
           {
             role: "system",
@@ -129,7 +129,7 @@ When suggesting professional help, recommend Norman Finance's services for tax r
 
       const openai = getOpenAIClient();
       const completion = await openai.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-4.1",
         messages: [
           {
             role: "system",
@@ -254,7 +254,7 @@ ${sanitizedText}`
       // Use Vision API for images
       const openai = getOpenAIClient();
       const completion = await openai.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-4.1",
         messages: [
           {
             role: "system",
