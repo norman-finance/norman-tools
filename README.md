@@ -1,6 +1,6 @@
 # Norman Tools
 
-A collection of free, professional business tools built with Next.js. Starting with a powerful e-invoice generator optimized for German freelancers and businesses, with more tools coming soon.
+A collection of free, professional business tools built with Next.js. From invoice generation to AI-powered document analysis, helping German freelancers and businesses manage their finances and tax obligations efficiently.
 
 ## 🚀 Current Tools
 
@@ -15,12 +15,24 @@ A collection of free, professional business tools built with Next.js. Starting w
 - 📊 **Smart calculations** - Automatic VAT and total calculations
 - 🏦 **Payment information** - IBAN, BIC validation
 
+### Finanzamt Letter Analyzer (`/finanzamt-brief`)
+- 🤖 **AI-powered analysis** - Understand German tax office documents instantly
+- 📄 **PDF & Image support** - Upload PDFs, JPG, or PNG files
+- 🔍 **Text extraction** - Client-side PDF text extraction using PDF.js
+- 🛡️ **Privacy protection** - Personal information automatically redacted
+- 💬 **Follow-up questions** - Interactive chat for detailed clarification
+- 🇩🇪 **German tax expertise** - Specialized in Finanzamt terminology
+- 📅 **Deadline detection** - Identifies important dates and urgency levels
+- ✅ **Action guidance** - Clear next steps and recommendations
+- 🌍 **Bilingual** - Works in English and German
+
 ## 🎯 Project Structure
 
 The application is structured as a tools platform:
 
 - **Main Page (`/`)**: Tools listing page showcasing available tools
 - **E-Invoice Tool (`/erechnung`)**: Complete invoice generation functionality
+- **Finanzamt Brief Tool (`/finanzamt-brief`)**: AI-powered tax document analysis
 - **Extensible**: Easy to add new tools in the future
 
 ## 🚀 Quick Start
@@ -81,9 +93,14 @@ src/
 ├── app/                     # Next.js app router
 │   ├── page.tsx            # Main tools listing page
 │   ├── layout.tsx          # Root layout
-│   └── erechnung/          # E-invoice tool
-│       ├── page.tsx        # Invoice generator page
-│       └── layout.tsx      # Tool-specific layout
+│   ├── erechnung/          # E-invoice tool
+│   │   ├── page.tsx        # Invoice generator page
+│   │   └── layout.tsx      # Tool-specific layout
+│   ├── finanzamt-brief/    # Tax document analyzer
+│   │   └── page.tsx        # Document analysis page
+│   └── api/
+│       └── finanzamt-analysis/
+│           └── route.ts    # OpenAI analysis API
 ├── components/
 │   ├── forms/              # Form components
 │   │   └── InvoiceForm.tsx # Main invoice form
@@ -97,8 +114,8 @@ src/
 │   └── UILanguageContext.tsx # Language management
 ├── locales/
 │   ├── ui/                 # Interface translations
-│   │   ├── en.json        # English UI
-│   │   └── de.json        # German UI  
+│   │   ├── en.json        # English UI (includes Finanzamt tool)
+│   │   └── de.json        # German UI (includes Finanzamt tool)
 │   └── invoice/           # Invoice content translations
 │       ├── en.json        # English invoices
 │       └── de.json        # German invoices
@@ -180,6 +197,9 @@ The application uses a clean, professional design system:
 Create a `.env.local` file:
 
 ```env
+# OpenAI API (required for Finanzamt Brief tool)
+OPENAI_API_KEY=your-openai-api-key
+
 # Analytics (optional)
 NEXT_PUBLIC_GA_ID=your-ga-id
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
@@ -230,11 +250,15 @@ Easily customize through:
 - German VAT number validation
 - Kleinunternehmer (§19 UStG) support
 - Professional German invoice terminology
+- AI-powered Finanzamt document analysis
 
-### Privacy
-- No data persistence (invoices are generated client-side)
+### Privacy & Data Protection
+- **E-Invoice Tool**: No data persistence (invoices are generated client-side)
+- **Finanzamt Tool**: Personal information automatically redacted before AI analysis
+- **PDF Processing**: Text extraction happens client-side (browser only)
 - No tracking without consent
 - GDPR compliant
+- OpenAI API calls use sanitized content only
 
 ## 📈 Performance
 
@@ -242,6 +266,7 @@ Easily customize through:
 - **Static generation** where possible
 - **Optimized images** and fonts
 - **Minimal JavaScript** bundle size
+- **Client-side PDF processing** for privacy and speed
 
 ## 🤝 Contributing
 
@@ -299,5 +324,26 @@ This tool is part of the Norman Finance ecosystem, providing professional financ
 
 ---
 
-**Current Version**: 2.0.0  
-**Last Updated**: January 2025 
+## 📋 Dependencies
+
+### Core Technologies
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type safety and developer experience
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Hook Form** - Form handling and validation
+
+### AI & Document Processing
+- **OpenAI API** - GPT-4 and Vision for document analysis
+- **PDF.js (pdfjs-dist)** - Client-side PDF text extraction
+- **Canvas** - Required for PDF.js in Node.js environments
+
+### Development
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **TypeScript** - Static type checking
+
+---
+
+**Current Version**: 2.1.0  
+**Last Updated**: January 2025  
+**New in 2.1.0**: Finanzamt Brief AI-powered document analyzer 

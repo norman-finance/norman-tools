@@ -21,6 +21,19 @@ function ToolsPageContent() {
         t('tools.erechnung.feature2'),
         t('tools.erechnung.feature3')
       ]
+    },
+    {
+      id: 'finanzamt-brief',
+      title: t('tools.finanzamtBrief.title'),
+      description: t('tools.finanzamtBrief.description'),
+      href: '/finanzamt-brief',
+      icon: '✉️',
+      badge: t('hero.freeLabel'),
+      features: [
+        t('tools.finanzamtBrief.feature1'),
+        t('tools.finanzamtBrief.feature2'),
+        t('tools.finanzamtBrief.feature3')
+      ]
     }
   ];
 

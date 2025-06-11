@@ -30,6 +30,7 @@ jobs:
         run: |
           echo "NODE_ENV=production" >> .env
           echo "NEXT_PUBLIC_API_URL=https://api.norman.finance" >> .env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
 
       - name: set up buildx
         uses: docker/setup-buildx-action@v2

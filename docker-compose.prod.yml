@@ -14,6 +14,7 @@ services:
       - NEXT_PUBLIC_API_URL=https://api.norman.finance
       - PORT=3000
       - HOSTNAME=0.0.0.0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/"]

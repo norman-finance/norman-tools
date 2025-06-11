@@ -3,6 +3,7 @@
     "title": "E-Invoice maker",
     "subtitle": "Professional invoices for German freelancers",
     "mainPage": "Norman free tools",
+    "finanzamtBrief": "Finanzamt Letter Analyzer",
     "breadcrumb": "← Back to Tools"
   },
   "hero": {
@@ -188,6 +189,92 @@
       "feature1": "ZUGFeRD compliant e-invoices",
       "feature2": "German tax law compliance",
       "feature3": "No sign-up required"
+    },
+    "finanzamtBrief": {
+      "title": "Finanzamt Letter Analyzer",
+      "description": "Upload PDFs or images from the German tax office and get a clear, translated summary in plain English.",
+      "feature1": "AI-powered analysis",
+      "feature2": "Plain English summary",
+      "feature3": "Follow-up questions"
+    }
+  },
+  "finanzamtBrief": {
+    "title": "Finanzamt Letter Analyzer",
+    "subtitle": "Decode German tax office letters with AI-powered analysis",
+    "description": "Upload PDFs or images from the German tax office and get a clear, actionable summary in plain English. Ask follow-up questions for better understanding.",
+    "freeLabel": "Free",
+    "breadcrumb": "← Back to Tools",
+    "features": {
+      "feature1": "AI-powered analysis",
+      "feature2": "Plain English summary", 
+      "feature3": "Follow-up questions"
+    },
+    "upload": {
+      "title": "Upload your Finanzamt letter",
+      "subtitle": "Drag & drop your PDF or image letter file here, or click to select",
+      "fileReady": "File ready for analysis",
+      "selectFile": "Select File",
+      "dragDrop": "or drag and drop",
+      "documentPreview": "Document preview"
+    },
+    "analysis": {
+      "analyzing": "Analyzing...",
+      "analyzeDocument": "Analyze",
+      "reset": "Reset",
+      "analyzeNew": "Analyze new",
+      "summary": "Summary",
+      "keyPoints": "Key Points",
+      "actionRequired": "Action Required",
+      "followUp": "Ask Follow-up Questions",
+      "followUpPlaceholder": "Ask about payment options, deadlines, next steps...",
+      "ask": "Ask",
+      "taxAssistant": "Assistant",
+      "deadline": "Deadline"
+    },
+    "urgency": {
+      "high": "high priority",
+      "medium": "medium priority",
+      "low": "low priority"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "How does this tool work?",
+        "answer": "Our AI-powered tool analyzes German tax office documents using advanced OCR and natural language processing. It identifies key information, deadlines, and required actions, then provides a clear summary in plain English."
+      },
+      "q2": {
+        "question": "Is my personal information secure?",
+        "answer": "Yes, absolutely. We automatically remove personal information like names, addresses, and tax numbers before analysis. Your documents are processed securely and are not stored on our servers. The analysis happens in real-time and data is immediately deleted after processing."
+      },
+      "q3": {
+        "question": "What types of documents can I upload?",
+        "answer": "You can upload PDFs or images (JPG, PNG) up to 10MB. The tool works with scanned or digital German tax office letters, including tax assessments, payment notices, and official correspondence."
+      },
+      "q4": {
+        "question": "How accurate is the analysis?",
+        "answer": "Our AI provides highly accurate summaries for most standard German tax documents. However, this tool is for informational purposes only. Always verify important details with the original document."
+      },
+      "q5": {
+        "question": "Is this tool really free?",
+        "answer": "Yes, completely free with no hidden costs, registration requirements, or usage limits. This tool is part of Norman Finance's commitment to making German tax compliance more accessible for everyone."
+      }
+    },
+    "privacy": {
+      "title": "Your Privacy is Protected",
+      "point1": "Personal information is automatically removed before AI analysis",
+      "point2": "Documents are not stored on our servers",
+      "point3": "All data is processed securely and deleted immediately",
+      "point4": "GDPR compliant and hosted in Germany"
+    },
+    "disclaimer": {
+      "title": "Disclaimer:",
+      "text": "This tool provides automated analysis for informational purposes only. While we strive for accuracy, AI-generated summaries may contain errors. Always verify important information with the original document. Norman Finance cannot be held liable for any decisions made based on this analysis."
+    },
+    "errors": {
+      "invalidType": "Please upload a PDF, JPG, or PNG file.",
+      "fileSize": "File size must be less than 10MB.",
+      "analysisFailed": "Failed to analyze the document. Please try again.",
+      "followUpFailed": "Failed to get follow-up answer. Please try again."
     }
   },
   "cta": {

@@ -3,6 +3,7 @@
     "title": "E-Rechnungsersteller",
     "subtitle": "Professionelle Rechnungen für deutsche Freelancer",
     "mainPage": "Norman kostenlose tools",
+    "finanzamtBrief": "Finanzamt Brief Analyzer",
     "breadcrumb": "← Zurück zu den Tools"
   },
   "hero": {
@@ -168,6 +169,92 @@
       "feature1": "ZUGFeRD-konforme E-Rechnungen",
       "feature2": "Deutsches Steuerrecht konform",
       "feature3": "Keine Anmeldung erforderlich"
+    },
+    "finanzamtBrief": {
+      "title": "Finanzamt-Brief Analyzer",
+      "description": "Laden Sie PDFs oder Bilder vom deutschen Finanzamt hoch und erhalten Sie eine klare, verständliche Zusammenfassung.",
+      "feature1": "KI-gestützte Analyse",
+      "feature2": "Verständliche Zusammenfassung",
+      "feature3": "Nachfragen möglich"
+    }
+  },
+  "finanzamtBrief": {
+    "title": "Finanzamt-Brief Analyzer",
+    "subtitle": "Entschlüsseln Sie Finanzamtsbriefe mit KI-gestützter Analyse",
+    "description": "Laden Sie PDFs oder Bilder vom deutschen Finanzamt hoch und erhalten Sie eine klare, verständliche Zusammenfassung. Stellen Sie Nachfragen für besseres Verständnis.",
+    "freeLabel": "Kostenlos",
+    "breadcrumb": "← Zurück zu den Tools",
+    "features": {
+      "feature1": "KI-gestützte Analyse",
+      "feature2": "Verständliche Zusammenfassung",
+      "feature3": "Nachfragen möglich"
+    },
+    "upload": {
+      "title": "Laden Sie Ihren Finanzamt-Brief hoch",
+      "subtitle": "Ziehen Sie Ihre PDF oder Bilddatei hier hin oder klicken Sie zum Auswählen",
+      "fileReady": "Datei bereit zur Analyse",
+      "selectFile": "Datei auswählen",
+      "dragDrop": "oder ziehen und ablegen",
+      "documentPreview": "Dokumentvorschau"
+    },
+    "analysis": {
+      "analyzing": "Analysiert...",
+      "analyzeDocument": "Analysieren",
+      "reset": "Zurücksetzen",
+      "analyzeNew": "Neues analysieren",
+      "summary": "Zusammenfassung",
+      "keyPoints": "Wichtige Punkte",
+      "actionRequired": "Erforderliche Maßnahmen",
+      "followUp": "Nachfragen stellen",
+      "followUpPlaceholder": "Fragen zu Zahlungsoptionen, Fristen, nächsten Schritten...",
+      "ask": "Fragen",
+      "taxAssistant": "Assistent",
+      "deadline": "Frist"
+    },
+    "urgency": {
+      "high": "hohe Priorität",
+      "medium": "mittlere Priorität",
+      "low": "niedrige Priorität"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "q1": {
+        "question": "Wie funktioniert dieses Tool?",
+        "answer": "Unser KI-gestütztes Tool analysiert deutsche Finanzamtsdokumente mit fortschrittlicher OCR- und Sprachverarbeitungstechnologie. Es identifiziert wichtige Informationen, Fristen und erforderliche Maßnahmen und bietet dann eine klare, verständliche Zusammenfassung."
+      },
+      "q2": {
+        "question": "Sind meine persönlichen Daten sicher?",
+        "answer": "Ja, absolut. Wir entfernen automatisch persönliche Informationen wie Namen, Adressen und Steuernummern vor der Analyse. Ihre Dokumente werden sicher verarbeitet und nicht auf unseren Servern gespeichert. Die Analyse erfolgt in Echtzeit und Daten werden sofort nach der Verarbeitung gelöscht."
+      },
+      "q3": {
+        "question": "Welche Arten von Dokumenten kann ich hochladen?",
+        "answer": "Sie können PDFs oder Bilder (JPG, PNG) bis zu 10MB hochladen. Das Tool funktioniert mit gescannten oder digitalen deutschen Finanzamtsbriefen, einschließlich Steuerbescheiden, Zahlungsaufforderungen und offizieller Korrespondenz."
+      },
+      "q4": {
+        "question": "Wie genau ist die Analyse?",
+        "answer": "Unsere KI liefert hochgenaue Zusammenfassungen für die meisten standardmäßigen deutschen Steuerdokumente. Dieses Tool dient jedoch nur zu Informationszwecken. Überprüfen Sie wichtige Details immer mit dem Originaldokument."
+      },
+      "q5": {
+        "question": "Ist dieses Tool wirklich kostenlos?",
+        "answer": "Ja, völlig kostenlos ohne versteckte Kosten, Registrierungsanforderungen oder Nutzungslimits. Dieses Tool ist Teil von Norman Finance's Engagement, die deutsche Steuer-Compliance für alle zugänglicher zu machen."
+      }
+    },
+    "privacy": {
+      "title": "Ihr Datenschutz ist geschützt",
+      "point1": "Persönliche Informationen werden automatisch vor der KI-Analyse entfernt",
+      "point2": "Dokumente werden nicht auf unseren Servern gespeichert",
+      "point3": "Alle Daten werden sicher verarbeitet und sofort gelöscht",
+      "point4": "DSGVO-konform und in Deutschland gehostet"
+    },
+    "disclaimer": {
+      "title": "Haftungsausschluss:",
+      "text": "Dieses Tool bietet automatisierte Analysen nur zu Informationszwecken. Obwohl wir uns um Genauigkeit bemühen, können KI-generierte Zusammenfassungen Fehler enthalten. Überprüfen Sie wichtige Informationen immer mit dem Originaldokument. Norman Finance kann nicht für Entscheidungen haftbar gemacht werden, die auf dieser Analyse basieren."
+    },
+    "errors": {
+      "invalidType": "Bitte laden Sie eine PDF-, JPG- oder PNG-Datei hoch.",
+      "fileSize": "Die Dateigröße muss weniger als 10MB betragen.",
+      "analysisFailed": "Fehler beim Analysieren des Dokuments. Bitte versuchen Sie es erneut.",
+      "followUpFailed": "Fehler beim Beantworten der Nachfrage. Bitte versuchen Sie es erneut."
     }
   },
   "cta": {

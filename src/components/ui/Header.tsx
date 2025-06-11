@@ -22,8 +22,21 @@ const Header: React.FC = () => {
     switch (pathname) {
       case '/erechnung':
         return "https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=erechnung&destination=invoice&utm_medium=header";
+      case '/finanzamt-brief':
+        return "https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=finanzamt-brief&utm_medium=header";
       default:
         return "https://app.norman.finance/sign-up?utm_source=freetools&utm_campaign=main&utm_medium=header";
+    }
+  })();
+
+  const headerTitle = (() => {
+    switch (pathname) {
+      case '/erechnung':
+        return t('header.title');
+      case '/finanzamt-brief':
+        return t('header.finanzamtBrief');
+      default:
+        return t('header.mainPage');
     }
   })();
 
@@ -68,9 +81,7 @@ const Header: React.FC = () => {
           }}>
             <h1
             className="text-xl font-semibold">
-              {pathname === '/erechnung' 
-                ? t('header.title') 
-                : t('header.mainPage')}
+              {headerTitle}
             </h1>
             {/*<span
             className="text-gray-500 bg-gray-100"

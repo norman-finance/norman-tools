@@ -6,12 +6,35 @@ This guide explains how to deploy the Norman Invoicing Tool using Docker.
 
 - Docker and Docker Compose installed
 - Git (for cloning/updating the repository)
+- OpenAI API Key (for Finanzamt Brief tool)
+
+## Environment Setup
+
+### Required Environment Variables
+
+Create a `.env` file in the project root:
+
+```bash
+# OpenAI API Key (required for Finanzamt Brief tool)
+OPENAI_API_KEY=your-actual-openai-api-key
+
+# Optional: Override API URL
+NEXT_PUBLIC_API_URL=https://api.norman.finance
+
+# Optional: Set Node environment  
+NODE_ENV=production
+```
+
+**Important**: Never commit your actual API key to version control. Add `.env` to `.gitignore`.
 
 ## Quick Start
 
 ### Development Deployment
 
 ```bash
+# Set your OpenAI API key
+export OPENAI_API_KEY="your-actual-openai-api-key"
+
 # Run development environment (API: localhost:8000)
 ./deploy.sh dev
 ```
@@ -21,6 +44,9 @@ The app will be available at `http://localhost:3000`
 ### Production Deployment
 
 ```bash
+# Set your OpenAI API key
+export OPENAI_API_KEY="your-actual-openai-api-key"
+
 # Run production environment (API: api.norman.finance)
 ./deploy.sh prod
 ```
@@ -32,12 +58,20 @@ The app will be available at `http://localhost:81`
 ### Development
 
 ```bash
+# Set environment variable
+export OPENAI_API_KEY="your-actual-openai-api-key"
+
+# Deploy
 docker-compose up --build -d
 ```
 
 ### Production
 
 ```bash
+# Set environment variable
+export OPENAI_API_KEY="your-actual-openai-api-key"
+
+# Deploy
 docker-compose -f docker-compose.prod.yml up --build -d
 ```
 
@@ -45,6 +79,7 @@ docker-compose -f docker-compose.prod.yml up --build -d
 
 The application uses the following environment variables:
 
+- `OPENAI_API_KEY`: **Required** - OpenAI API key for AI-powered document analysis
 - `NODE_ENV`: Set to `production` for production builds
 - `NEXT_PUBLIC_API_URL`: API endpoint URL
   - Development: `http://localhost:8000`
@@ -81,6 +116,8 @@ The deployment script supports the following commands:
 ./deploy.sh stop        # Stop all services
 ```
 
+**Note**: Make sure to set `OPENAI_API_KEY` environment variable before running any deployment command.
+
 ## Production Considerations
 
 ### Security
@@ -88,6 +125,7 @@ The deployment script supports the following commands:
 - Runs as non-root user (`nextjs`)
 - Uses security headers in Next.js config
 - Minimal attack surface with Alpine Linux
+- API keys are handled securely via environment variables
 
 ### Performance
 
@@ -102,6 +140,13 @@ The deployment script supports the following commands:
 - Resource monitoring with Docker stats
 
 ## Troubleshooting
+
+### Missing API Key Error
+
+If you see errors related to OpenAI API:
+1. Verify `OPENAI_API_KEY` is set: `echo $OPENAI_API_KEY`
+2. Check the key is valid in your OpenAI dashboard
+3. Ensure the key has sufficient credits/quota
 
 ### View Logs
 
@@ -143,7 +188,7 @@ docker system prune -a
 
 For automated deployments, you can use the Docker setup with:
 
-- GitHub Actions
+- GitHub Actions (configured)
 - GitLab CI/CD
 - Jenkins
 - Any other CI/CD platform that supports Docker
@@ -163,6 +208,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and Deploy
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd norman-tools
           docker-compose -f docker-compose.prod.yml up --build -d
@@ -175,4 +222,6 @@ For deployment issues, check:
 1. Docker daemon is running
 2. Ports 81/3000 are not in use
 3. Sufficient disk space for Docker images
-4. Network connectivity to api.norman.finance (production) 
+4. Network connectivity to api.norman.finance (production)
+5. OpenAI API key is set and valid
+6. OpenAI API quota/credits are available 
