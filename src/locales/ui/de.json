@@ -3,7 +3,7 @@
     "title": "E-Rechnungsersteller",
     "subtitle": "Professionelle Rechnungen für deutsche Freelancer",
     "mainPage": "Norman kostenlose tools",
-    "finanzamtBrief": "Finanzamt Brief Analyzer",
+    "finanzamtBrief": "Finanzamt Brief Leser",
     "breadcrumb": "← Zurück zu den Tools"
   },
   "hero": {
@@ -171,7 +171,7 @@
       "feature3": "Keine Anmeldung erforderlich"
     },
     "finanzamtBrief": {
-      "title": "Finanzamt-Brief Analyzer",
+      "title": "Finanzamt-Brief-Leser",
       "description": "Laden Sie PDFs oder Bilder vom deutschen Finanzamt hoch und erhalten Sie eine klare, verständliche Zusammenfassung.",
       "feature1": "KI-gestützte Analyse",
       "feature2": "Verständliche Zusammenfassung",
@@ -179,7 +179,7 @@
     }
   },
   "finanzamtBrief": {
-    "title": "Finanzamt-Brief Analyzer",
+    "title": "Finanzamt-Brief-Leser",
     "subtitle": "Entschlüsseln Sie Finanzamtsbriefe mit KI-gestützter Analyse",
     "description": "Laden Sie PDFs oder Bilder vom deutschen Finanzamt hoch und erhalten Sie eine klare, verständliche Zusammenfassung. Stellen Sie Nachfragen für besseres Verständnis.",
     "freeLabel": "Kostenlos",

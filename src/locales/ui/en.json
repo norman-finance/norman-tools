@@ -3,7 +3,7 @@
     "title": "E-Invoice maker",
     "subtitle": "Professional invoices for German freelancers",
     "mainPage": "Norman free tools",
-    "finanzamtBrief": "Finanzamt Letter Analyzer",
+    "finanzamtBrief": "Finanzamt Letters Reader",
     "breadcrumb": "← Back to Tools"
   },
   "hero": {
@@ -191,7 +191,7 @@
       "feature3": "No sign-up required"
     },
     "finanzamtBrief": {
-      "title": "Finanzamt Letter Analyzer",
+      "title": "Finanzamt Letters Reader",
       "description": "Upload PDFs or images from the German tax office and get a clear, translated summary in plain English.",
       "feature1": "AI-powered analysis",
       "feature2": "Plain English summary",
@@ -199,7 +199,7 @@
     }
   },
   "finanzamtBrief": {
-    "title": "Finanzamt Letter Analyzer",
+    "title": "Finanzamt Letters Reader",
     "subtitle": "Decode German tax office letters with AI-powered analysis",
     "description": "Upload PDFs or images from the German tax office and get a clear, actionable summary in plain English. Ask follow-up questions for better understanding.",
     "freeLabel": "Free",

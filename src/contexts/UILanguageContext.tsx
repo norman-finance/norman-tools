@@ -89,7 +89,6 @@ export const UILanguageProvider: React.FC<{ children: ReactNode }> = ({ children
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        console.log(`Translation missing for key: ${key}`);
         return key; // Return the key if translation is missing
       }
     }

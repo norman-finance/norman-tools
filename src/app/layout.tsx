@@ -2,29 +2,57 @@ import type { Metadata, Viewport } from 'next';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Free Business Tools | Norman Finance',
-  description: 'Professional business tools to streamline your operations. Free invoice generator, and more tools for freelancers and businesses. No registration required.',
-  keywords: 'business tools, invoice generator, free invoice, PDF invoice, e-invoice, professional invoices, invoice maker, freelance tools',
+  title: {
+    default: 'Free Business Tools | Norman Finance',
+    template: '%s | Norman Tools'
+  },
+  description: 'Professional business tools to streamline your operations. Free invoice generator, and more tools for freelancers and businesses. No registration required. | Professionelle Geschäftstools zur Optimierung Ihrer Abläufe. Kostenloser Rechnungsgenerator und weitere Tools für Freelancer und Unternehmen.',
+  keywords: 'business tools, invoice generator, free invoice, PDF invoice, e-invoice, professional invoices, invoice maker, freelance tools, Geschäftstools, Rechnungsgenerator, kostenlose Rechnung, PDF Rechnung, E-Rechnung, professionelle Rechnungen, Rechnungsersteller, Freelancer Tools, Finanzamt Brief, Steuerdokumente, business software, Unternehmenssoftware',
   authors: [{ name: 'Norman Finance' }],
   creator: 'Norman Finance',
   publisher: 'Norman Finance',
   robots: 'index, follow',
+  metadataBase: new URL('https://tools.norman.finance'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en': '/',
+      'de': '/?ui_lang=de',
+      'x-default': '/',
+    },
+  },
   openGraph: {
-    title: 'Free Business Tools | Norman Finance',
-    description: 'Professional business tools to streamline your operations. Free invoice generator and more tools for freelancers and businesses.',
+    title: 'Free Business Tools | Norman Finance - Professional Tools for Your Business',
+    description: 'Professional business tools to streamline your operations. Free invoice generator and more tools for freelancers and businesses. | Professionelle Geschäftstools für Ihr Unternehmen. Kostenloser Rechnungsgenerator und weitere Tools.',
     type: 'website',
     locale: 'en_US',
-    alternateLocale: 'de_DE',
+    alternateLocale: ['de_DE'],
+    url: '/',
+    siteName: 'Norman Tools',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Norman Finance - Free Business Tools | Kostenlose Geschäftstools',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Free Business Tools | Norman Finance',
-    description: 'Professional business tools to streamline your operations. Free invoice generator and more.',
+    description: 'Professional business tools to streamline your operations. Free invoice generator and more. | Professionelle Geschäftstools zur Optimierung Ihrer Abläufe.',
+    creator: '@norman_finance',
   },
   manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
     apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico',
   },
 };
 
@@ -42,6 +70,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Hreflang tags for language alternates */}
+        <link rel="alternate" hrefLang="en" href="https://tools.norman.finance/" />
+        <link rel="alternate" hrefLang="de" href="https://tools.norman.finance/?ui_lang=de" />
+        <link rel="alternate" hrefLang="x-default" href="https://tools.norman.finance/" />
+        
         {/* Preload critical fonts */}
         <link
           rel="preload"
