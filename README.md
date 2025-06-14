@@ -268,14 +268,6 @@ Easily customize through:
 - **Minimal JavaScript** bundle size
 - **Client-side PDF processing** for privacy and speed
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-tool`)
-3. Add your changes
-4. Update translations if needed
-5. Submit a pull request
-
 ### Development Guidelines
 
 - Follow the existing code structure
