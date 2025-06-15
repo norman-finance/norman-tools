@@ -181,15 +181,6 @@ The platform is designed for easy expansion. To add a new tool:
    }
    ```
 
-## 🎨 Design System
-
-The application uses a clean, professional design system:
-
-- **Colors**: Black and white theme with green accents
-- **Typography**: Clean, readable fonts
-- **Components**: Consistent spacing and hover effects
-- **Responsive**: Mobile-first design approach
-
 ## 🔧 Configuration
 
 ### Environment Variables
@@ -207,15 +198,6 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
 # API Configuration (if using backend)
 NEXT_PUBLIC_API_URL=https://api.yourdomain.com
 ```
-
-### Customization
-
-Easily customize through:
-
-- **Constants**: Edit `src/lib/constants.ts`
-- **Styling**: Modify Tailwind classes and global CSS
-- **Translations**: Add new languages with JSON files
-- **Tools**: Add new tools following the structure above
 
 ## 🌍 Internationalization
 
