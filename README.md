@@ -35,6 +35,7 @@ The application is structured as a tools platform:
 - **Finanzamt Brief Tool (`/finanzamt-brief`)**: AI-powered tax document analysis
 - **Extensible**: Easy to add new tools in the future
 
+
 ## 🚀 Quick Start
 
 ### Development
