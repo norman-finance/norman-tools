@@ -251,14 +251,6 @@ NEXT_PUBLIC_API_URL=https://api.yourdomain.com
 - **Minimal JavaScript** bundle size
 - **Client-side PDF processing** for privacy and speed
 
-### Development Guidelines
-
-- Follow the existing code structure
-- Add proper TypeScript types
-- Include translations for new UI elements
-- Test on mobile devices
-- Maintain the clean design aesthetic
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
