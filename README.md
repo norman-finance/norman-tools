@@ -1,7 +1,6 @@
 # Norman Tools
 
 A collection of free, professional business tools built with Next.js. From invoice generation to AI-powered document analysis, helping German freelancers and businesses manage their finances and tax obligations efficiently.
-
 ## 🚀 Current Tools
 
 ### E-Invoice Generator (`/erechnung`)
