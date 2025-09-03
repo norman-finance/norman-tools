@@ -53,7 +53,6 @@ The application is structured as a tools platform:
    ```
    http://localhost:3000
    ```
-
 ### Production
 
 ```bash
