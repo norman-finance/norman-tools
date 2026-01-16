@@ -259,7 +259,7 @@ const Footer: React.FC = () => {
               margin: '0'
             }}>
               <li style={{ marginBottom: '0.5rem' }}>
-                <a href="https://help.norman.finance/de/" style={{ 
+                <a href="mailto:support@norman.finance?subject=Support%20Request" style={{ 
                   textDecoration: 'none',
                   fontSize: '0.875rem'
                 }}
