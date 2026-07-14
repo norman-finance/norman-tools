@@ -12,22 +12,12 @@ export const metadata: Metadata = {
   creator: 'Norman',
   publisher: 'Norman',
   robots: 'index, follow',
-  metadataBase: new URL('https://tools.norman.finance'),
-  alternates: {
-    canonical: '/erechnung',
-    languages: {
-      'en': '/erechnung',
-      'de': '/erechnung?ui_lang=de',
-      'x-default': '/erechnung',
-    },
-  },
   openGraph: {
     title: 'Free E-Invoice Generator | German ZUGFeRD Invoices - Norman Tools',
     description: 'Generate professional German e-invoices with ZUGFeRD compliance. Free invoice generator for freelancers and businesses. | Erstellen Sie professionelle deutsche E-Rechnungen.',
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['de_DE'],
-    url: '/erechnung',
     siteName: 'Norman Tools',
   },
   twitter: {

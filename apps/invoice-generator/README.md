@@ -1,9 +1,8 @@
 # Invoice Generator
 
-Classic free invoice maker with a live side-by-side preview and professional PDF output — German and English invoices, no sign-up.
+Classic free invoice maker with a live side-by-side preview and professional PDF output — German and English invoices, no sign-up. Self-host it, or use the newer [E-Invoice Generator](https://norman.finance/de/tools/erechnung?utm_source=github_tools) live on norman.finance.
 
 <p>
-   <a href="https://tools.norman.finance/erechnung?utm_source=github_tools"><img src="https://img.shields.io/badge/Live-tools.norman.finance-black?style=flat-square" alt="Live" /></a>
    <img src="https://img.shields.io/badge/License-MIT-black?style=flat-square" alt="MIT" />
 </p>
 

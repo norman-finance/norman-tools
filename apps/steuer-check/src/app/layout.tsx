@@ -35,19 +35,9 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://tools.norman.finance'),
-  alternates: {
-    canonical: '/steuer-check',
-    languages: {
-      'en': '/steuer-check',
-      'de': '/steuer-check?ui_lang=de',
-      'x-default': '/steuer-check',
-    },
-  },
   openGraph: {
     title: 'Free Tax Deduction Finder for German Freelancers | Norman Tools',
     description: 'Upload your bank statement and discover missed tax deductions. AI-powered optimization for German freelancers and small businesses. | Lade deinen Kontoauszug hoch und finde verpasste Steuerabzüge.',
-    url: '/steuer-check',
     siteName: 'Norman Tools',
     locale: 'de_DE',
     alternateLocale: ['en_US'],

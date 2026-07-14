@@ -29,8 +29,8 @@ Every tool in this repo is a **fully standalone Next.js mini-app**: copy one fol
 | **Tax Calculator** | Estimate German income tax, solidarity surcharge, and health insurance for the self-employed — fully client-side | [norman.finance](https://norman.finance/de/steuerrechner?utm_source=github_tools) | [`apps/tax-calculator`](apps/tax-calculator) |
 | **E-Invoice Generator** | Create compliant ZUGFeRD PDF e-invoices with live totals and VAT logic (§19, reverse charge) | [norman.finance](https://norman.finance/de/tools/erechnung?utm_source=github_tools) | [`apps/e-invoice-generator`](apps/e-invoice-generator) |
 | **Tax Letter Assistant** | AI that explains Finanzamt letters in plain language — urgency, deadlines, required actions | [norman.finance](https://norman.finance/de/tools/finanzamt-brief?utm_source=github_tools) | [`apps/tax-letter-assistant`](apps/tax-letter-assistant) |
-| **Invoice Generator** | Classic invoice maker with a live preview and PDF output | [tools.norman.finance](https://tools.norman.finance/erechnung?utm_source=github_tools) | [`apps/invoice-generator`](apps/invoice-generator) |
-| **Steuer-Check** | Tax-deduction finder companion — scans bank statements for missed deductions via a custom GPT | [tools.norman.finance](https://tools.norman.finance/steuer-check?utm_source=github_tools) | [`apps/steuer-check`](apps/steuer-check) |
+| **Invoice Generator** | Classic invoice maker with a live preview and PDF output | self-host | [`apps/invoice-generator`](apps/invoice-generator) |
+| **Steuer-Check** | Tax-deduction finder companion — scans bank statements for missed deductions via a custom GPT | self-host | [`apps/steuer-check`](apps/steuer-check) |
 
 <br/>
 

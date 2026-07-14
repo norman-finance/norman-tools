@@ -3,7 +3,6 @@
 Companion page for the **Steuer-Spar-Scout** custom GPT: upload a bank statement and let AI scan every transaction for missed German tax deductions.
 
 <p>
-   <a href="https://tools.norman.finance/steuer-check?utm_source=github_tools"><img src="https://img.shields.io/badge/Live-tools.norman.finance-black?style=flat-square" alt="Live" /></a>
    <img src="https://img.shields.io/badge/License-MIT-black?style=flat-square" alt="MIT" />
 </p>
 
