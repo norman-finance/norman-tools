@@ -1,0 +1,46 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - tax-calculator
+          - e-invoice-generator
+          - tax-letter-assistant
+          - invoice-generator
+          - steuer-check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter ${{ matrix.app }} build
+
+  # Every app folder is fully standalone — prove it by building one
+  # outside the workspace with plain npm.
+  standalone-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          cp -r apps/tax-calculator "$RUNNER_TEMP/standalone"
+          cd "$RUNNER_TEMP/standalone"
+          npm install
+          npm run build

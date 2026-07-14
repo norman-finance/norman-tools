@@ -1,0 +1,368 @@
+@import "@fontsource/plus-jakarta-sans/latin-400.css";
+@import "@fontsource/plus-jakarta-sans/latin-600.css";
+@import "@fontsource/plus-jakarta-sans/latin-700.css";
+
+/*
+ * Design tokens lifted from norman-website app/globals.css.
+ * Squared corners, no shadows, font weights 400/600 only, 4px spacing grid.
+ */
+:root {
+  --color-main: #080809;
+  --color-primary: var(--color-main);
+  --color-secondary: #4b4b4b;
+  --color-muted: color-mix(in srgb, var(--color-secondary) 72%, var(--color-surface));
+  --color-line: #ebedf1;
+  --color-border: var(--color-line);
+  --color-surface: #ffffff;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --radius-card: 0px;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-plus-jakarta: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-family: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:where(:not([class])) {
+  color: inherit;
+}
+
+main {
+  min-height: 100dvh;
+  background: var(--color-surface);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Utility classes used by the copied widgets (Radix accordion) */
+.contents {
+  display: contents;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* --- Section heading (used by SectionHeading / FAQ) --- */
+
+.germany-section-header {
+  max-width: 760px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.germany-section-title {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.germany-section-subtitle {
+  margin: 14px auto 0;
+  max-width: 680px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+  .germany-section-header {
+    margin-bottom: 32px;
+  }
+
+  .germany-section-subtitle {
+    font-size: 15px;
+  }
+}
+
+/* --- CTA banner --- */
+
+.germany-cta-section {
+  padding: 80px 24px;
+  background-color: var(--color-surface);
+  text-align: center;
+}
+
+.germany-cta-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.germany-cta-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.germany-cta-subtitle {
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-secondary);
+  margin: 16px 0 0;
+}
+
+.germany-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  padding: 0 32px;
+  height: 48px;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  font-family: inherit;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.germany-cta-button:hover {
+  background-color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+  .germany-cta-section {
+    padding: 60px 16px;
+  }
+}
+
+/* --- FAQ (Radix accordion) --- */
+
+.germany-faq-section {
+  padding: 80px 24px;
+  background-color: var(--color-surface);
+}
+
+.germany-faq-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.germany-faq-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.germany-faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.germany-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-align: left;
+}
+
+.germany-faq-icon {
+  flex-shrink: 0;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.germany-faq-question[data-state="closed"] .germany-faq-icon::before {
+  content: "+";
+}
+
+.germany-faq-question[data-state="open"] .germany-faq-icon::before {
+  content: "\00d7";
+}
+
+.germany-faq-answer {
+  padding-bottom: 24px;
+}
+
+.germany-faq-answer p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+  .germany-faq-section {
+    padding: 40px 16px;
+  }
+}
+
+/* --- Minimal tool shell: header --- */
+
+.tool-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tool-header-brand {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-primary);
+}
+
+.tool-header-logo {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+.tool-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.locale-switch {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+}
+
+.locale-switch-button {
+  padding: 8px 12px;
+  background: var(--color-surface);
+  border: none;
+  color: var(--color-secondary);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.locale-switch-button[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.tool-header-github {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+.tool-header-github:hover {
+  color: var(--color-secondary);
+}
+
+/* --- Minimal tool shell: hero --- */
+
+.tool-hero {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+
+.tool-hero-title {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-primary);
+}
+
+.tool-hero-subtitle {
+  margin: 20px auto 0;
+  max-width: 640px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-secondary);
+}
+
+.tool-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  padding: 0 32px;
+  height: 48px;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  transition: background-color 0.2s;
+}
+
+.tool-hero-cta:hover {
+  background-color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+  .tool-hero {
+    padding: 48px 16px 24px;
+  }
+}
+
+/* --- Minimal tool shell: footer --- */
+
+.tool-footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 48px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.tool-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.tool-footer-links a {
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+
+.tool-footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.tool-footer-tagline {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--color-muted);
+}

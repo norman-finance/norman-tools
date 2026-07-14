@@ -1,0 +1,35 @@
+{
+  "name": "invoice-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free German invoice generator with live preview and ZUGFeRD e-invoice output",
+  "license": "MIT",
+  "author": "Norman AI GmbH",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "i18n-iso-countries": "^7.14.0",
+    "is-european": "^1.0.8",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-hook-form": "^7.72.1",
+    "zod": "^3.25.51"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "@types/node": "^20.8.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.2.0"
+  }
+}

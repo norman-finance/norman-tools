@@ -1,0 +1,32 @@
+{
+  "name": "e-invoice-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free ZUGFeRD e-invoice generator for Germany — live totals, VAT logic, PDF via Norman's public API",
+  "license": "MIT",
+  "author": "Norman AI GmbH",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@hookform/resolvers": "^5.2.2",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-hook-form": "^7.72.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.2.0"
+  }
+}

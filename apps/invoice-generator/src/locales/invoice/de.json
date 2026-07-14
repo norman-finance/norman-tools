@@ -1,0 +1,41 @@
+{
+  "headers": {
+    "invoice": "Rechnung"
+  },
+  "dates": {
+    "invoiceDate": "Rechnungsdatum",
+    "dueDate": "Fälligkeitsdatum",
+    "deliveryDate": "Lieferdatum",
+    "serviceFrom": "Leistungszeitraum von",
+    "serviceTo": "Leistungszeitraum bis"
+  },
+  "table": {
+    "description": "Beschreibung",
+    "qty": "Menge",
+    "unitPrice": "Einzelpreis",
+    "vat": "MwSt",
+    "total": "Gesamt"
+  },
+  "totals": {
+    "subtotal": "Zwischensumme",
+    "vatAmount": "MwSt-Betrag",
+    "totalAmount": "Gesamtbetrag"
+  },
+  "payment": {
+    "paymentTerms": "Zahlungsbedingungen",
+    "bank": "Bank",
+    "days": "Tage"
+  },
+  "tax": {
+    "taxNotice": "Steuerhinweis",
+    "reverseCharge": "Steuerschuldnerschaft des Leistungsempfängers",
+    "taxNumber": "Steuernummer",
+    "vatNumber": "USt-IdNr."
+  },
+  "notes": {
+    "title": "Notizen"
+  },
+  "termsConditions": {
+    "title": "Geschäftsbedingungen"
+  }
+} 

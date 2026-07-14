@@ -1,0 +1,402 @@
+    {
+  "header": {
+    "title": "E-Invoice maker",
+    "subtitle": "Professional invoices for German freelancers",
+    "mainPage": "Norman free tools",
+    "finanzamtBrief": "Finanzamt letters reader",
+    "steuerCheck": "Tax deduction finder",
+    "breadcrumb": "← Back to Tools"
+  },
+  "hero": {
+    "title": "Free Business Tools",
+    "subtitle": "for free",
+    "description": "Professional business tools to streamline your operations. All free, no sign-up required.",
+    "free": "No sign-up. No watermarks/ads. 100% free.",
+    "freeLabel": "Free"
+  },
+  "button": {
+    "fillDemo": "Try with demo data",
+    "preview": "Preview",
+    "getInvoice": "Download e-invoice",
+    "generating": "Generating...",
+    "signUp": "Sign up",
+    "getStarted": "Get started"
+  },
+  "section": {
+    "settings": "Settings",
+    "createFor": "From & To",
+    "details": "Details",
+    "payment": "Payment details",
+    "notes": "Notes & Terms",
+    "preview": "Preview"
+  },
+  "company": {
+    "title": "Your business details",
+    "name": "Name",
+    "address": "Address",
+    "zipCode": "ZIP Code",
+    "city": "City",
+    "country": "Country",
+    "email": "Email",
+    "phone": "Phone",
+    "taxNumber": "Tax number",
+    "vatNumber": "VAT number",
+    "namePlaceholder": "Acme GmbH/Max Mustermann"
+  },
+  "client": {
+    "title": "Client details",
+    "name": "Client name",
+    "type": "Client type",
+    "address": "Client address",
+    "zipCode": "ZIP Code",
+    "city": "City",
+    "country": "Country",
+    "email": "Email",
+    "vatNumber": "VAT number",
+    "createNew": "Create a new client"
+  },
+  "details": {
+    "invoiceNumber": "Invoice number",
+    "issued": "Issued",
+    "dueDate": "Due date",
+    "saleType": "Sale type",
+    "serviceFrom": "Service date from",
+    "serviceTo": "Service date to",
+    "deliveryDate": "Delivery date"
+  },
+  "items": {
+    "description": "Item description",
+    "qty": "Qty",
+    "vat": "VAT",
+    "rate": "Price",
+    "total": "Total",
+    "addNew": "Add a new item",
+    "unitPriceVat": "Unit price with VAT",
+    "removeItem": "Remove item",
+    "descriptionPlaceholder": "Product/Service"
+  },
+  "payment": {
+    "iban": "IBAN",
+    "bic": "BIC/SWIFT",
+    "bankName": "Bank Name"
+  },
+  "settings": {
+    "currency": "Currency",
+    "language": "Language",
+    "uiLanguage": "Interface Language",
+    "invoiceLanguage": "Invoice Language",
+    "languageNote": "Interface language affects form labels and buttons. Invoice language affects the generated invoice content.",
+    "saleType": "Sale type",
+    "paymentTerms": "Payment Terms",
+    "vatSettings": "VAT Settings",
+    "kleinunternehmer": "Kleinunternehmer (§19 UStG) - Small business regulation",
+    "kleinunternehmerDesc": "Check this if you're a small business under German tax law and don't charge VAT"
+  },
+  "currency": {
+    "EUR": "Euro",
+    "USD": "US Dollar",
+    "BRL": "Brazilian Real",
+    "CZK": "Czech Koruna",
+    "DKK": "Danish Krone",
+    "HKD": "Hong Kong Dollar",
+    "INR": "Indian Rupee",
+    "JPY": "Japanese Yen",
+    "MXN": "Mexican Peso",
+    "ILS": "New Israeli Sheqel",
+    "NZD": "New Zealand Dollar",
+    "NOK": "Norwegian Krone",
+    "PLN": "Polish Złoty",
+    "GBP": "Pound Sterling",
+    "SEK": "Swedish Krona",
+    "CHF": "Swiss Franc",
+    "TRY": "Turkish Lira",
+    "AED": "UAE Dirham"
+  },
+  "notes": {
+    "title": "Notes",
+    "placeholder": "Add any additional information, special instructions, or notes here...",
+    "termsConditions": "Terms & Conditions",
+    "termsConditionsPlaceholder": "Add payment terms, terms & conditions, or specific instructions here..."
+  },
+  "message": {
+    "success": "🎉 Invoice generated successfully! Your PDF download should start automatically.",
+    "vatIssues": "VAT Configuration Issues:",
+    "vatValidation": "VAT validation failed:",
+    "error": "There was an error generating the invoice. Please try again."
+  },
+  "option": {
+    "person": "Person",
+    "business": "Business",
+    "services": "Services",
+    "goods": "Goods"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "number": "Please enter a valid number",
+    "companyNameRequired": "Company name is required",
+    "companyAddressRequired": "Company address is required", 
+    "companyCityRequired": "Company city is required",
+    "companyZipRequired": "Company ZIP code is required",
+    "clientNameRequired": "Client name is required",
+    "clientAddressRequired": "Client address is required",
+    "clientCityRequired": "Client city is required", 
+    "clientZipRequired": "Client ZIP code is required",
+    "itemsRequired": "At least one item is required",
+    "itemDescriptionRequired": "Item description is required",
+    "itemQuantityRequired": "Item quantity must be greater than 0",
+    "itemPriceRequired": "Item price must be greater than 0"
+  },
+  "features": {
+    "title": "Need more?",
+    "description": "Customize your invoices, save clients, track payments, and more. Still free.",
+    "feature1": {
+      "icon": "🎨",
+      "title": "Customize your invoices",
+      "description": "Personalize your invoices with a logo, colors and fonts. Make your invoices beautiful."
+    },
+    "feature2": {
+      "icon": "⏱️",
+      "title": "Save time",
+      "description": "Never enter the same data twice. Save your clients, tax number, IBAN, and more for future use."
+    },
+    "feature3": {
+      "icon": "💰",
+      "title": "Track payments",
+      "description": "Instantly see your payment status and history. No more missing payments."
+    },
+    "feature4": {
+      "icon": "🔄",
+      "title": "Recurring invoices",
+      "description": "Create recurring invoices for your clients. No more manual work."
+    },
+    "feature5": {
+      "icon": "🤖",
+      "title": "Auto-follow ups",
+      "description": "Forget awkward chasing. Send automatic follow up emails for overdue invoices."
+    },
+    "feature6": {
+      "icon": "🔗",
+      "title": "Payment links (coming soon)",
+      "description": "Get paid 2x faster with payment links."
+    }
+  },
+  "tools": {
+    "title": "Available Tools",
+    "description": "Choose from our collection of free business tools designed to help you work more efficiently.",
+    "erechnung": {
+      "title": "Create e-invoices for free",
+      "description": "Free software to create compliant e-invoices. Generate and download ZUGFeRD PDF e-invoice.",
+      "feature1": "ZUGFeRD compliant e-invoices",
+      "feature2": "German tax law compliance",
+      "feature3": "No sign-up required"
+    },
+    "finanzamtBrief": {
+      "title": "Finanzamt letters reader",
+      "description": "Upload PDFs or images from the German tax office and get a clear, translated summary in plain English.",
+      "feature1": "AI-powered analysis",
+      "feature2": "Plain English summary",
+      "feature3": "Follow-up questions"
+    },
+    "steuerCheck": {
+      "title": "Tax deduction finder",
+      "description": "Upload your bank statement and find missed tax deductions with AI. For freelancers and small businesses in Germany.",
+      "feature1": "AI-powered analysis",
+      "feature2": "German tax law",
+      "feature3": "Free, no sign-up"
+    }
+  },
+  "finanzamtBrief": {
+    "title": "Finanzamt letters reader",
+    "subtitle": "Decode German tax office letters with AI-powered analysis",
+    "description": "Upload PDFs or images from the German tax office and get a clear, actionable summary in plain English. Ask follow-up questions for better understanding.",
+    "freeLabel": "Free",
+    "breadcrumb": "← Back to Tools",
+    "features": {
+      "feature1": "AI-powered analysis",
+      "feature2": "Plain English summary", 
+      "feature3": "Follow-up questions"
+    },
+    "upload": {
+      "title": "Upload your Finanzamt letter",
+      "subtitle": "Drag & drop your PDF or image letter file here, or click to select",
+      "fileReady": "File ready for analysis",
+      "selectFile": "Select File",
+      "dragDrop": "or drag and drop",
+      "documentPreview": "Document preview"
+    },
+    "analysis": {
+      "analyzing": "Analyzing...",
+      "analyzeDocument": "Analyze",
+      "reset": "Reset",
+      "analyzeNew": "Analyze new",
+      "summary": "Summary",
+      "keyPoints": "Key Points",
+      "actionRequired": "Action Required",
+      "followUp": "Ask Follow-up Questions",
+      "followUpPlaceholder": "Ask about payment options, deadlines, next steps...",
+      "ask": "Ask",
+      "taxAssistant": "Assistant",
+      "deadline": "Deadline"
+    },
+    "urgency": {
+      "high": "high priority",
+      "medium": "medium priority",
+      "low": "low priority"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "How does this tool work?",
+        "answer": "AI-powered tool analyzes German tax office documents using advanced OCR and natural language processing. It identifies key information, deadlines, and required actions, then provides a clear summary in plain English."
+      },
+      "q2": {
+        "question": "Is my personal information secure?",
+        "answer": "Yes, absolutely. We automatically remove personal information like names, addresses, and tax numbers before analysis. Your documents are processed securely and are not stored on our servers. The analysis happens in real-time and data is immediately deleted after processing."
+      },
+      "q3": {
+        "question": "What types of documents can I upload?",
+        "answer": "You can upload PDFs or images (JPG, PNG) up to 10MB. The tool works with scanned or digital German tax office letters, including tax assessments, payment notices, and official correspondence."
+      },
+      "q4": {
+        "question": "How accurate is the analysis?",
+        "answer": "AI provides highly accurate summaries for most standard German tax documents. However, this tool is for informational purposes only. Always verify important details with the original document."
+      },
+      "q5": {
+        "question": "Is this tool really free?",
+        "answer": "Yes, completely free with no hidden costs, registration requirements, or usage limits. This tool is part of Norman's commitment to making German tax compliance more accessible for everyone."
+      }
+    },
+    "privacy": {
+      "title": "Your Privacy is Protected",
+      "point1": "Personal information is automatically removed before AI analysis",
+      "point2": "Documents are not stored on our servers",
+      "point3": "All data is processed securely and deleted immediately",
+      "point4": "GDPR compliant and hosted in Germany"
+    },
+    "disclaimer": {
+      "title": "Disclaimer:",
+      "text": "This tool provides automated analysis for informational purposes only. While we strive for accuracy, AI-generated summaries may contain errors. Always verify important information with the original document. Norman Finance cannot be held liable for any decisions made based on this analysis."
+    },
+    "errors": {
+      "invalidType": "Please upload a PDF, JPG, or PNG file.",
+      "fileSize": "File size must be less than 10MB.",
+      "analysisFailed": "Failed to analyze the document. Please try again.",
+      "followUpFailed": "Failed to get follow-up answer. Please try again."
+    }
+  },
+  "steuerCheck": {
+    "title": "Tax deduction finder",
+    "description": "Upload your bank statement and let AI find missed tax deductions. Built for German freelancers, Kleinunternehmer, and small businesses.",
+    "breadcrumb": "← Back to Tools",
+    "features": {
+      "feature1": "AI-powered analysis",
+      "feature2": "German tax law optimized",
+      "feature3": "Free, no sign-up"
+    },
+    "cta": {
+      "startNow": "Find my deductions",
+      "poweredBy": "Powered by ChatGPT — opens in a new tab",
+      "midTitle": "Stop leaving money on the table",
+      "midDescription": "Most freelancers miss deductions worth hundreds of euros every year. Get a free scan of your bank statement now."
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "step1": {
+        "title": "Upload your statement",
+        "description": "Export a bank statement or accounting report (CSV, PDF) from your bank or tools like Norman, SevDesk, Lexoffice, or DATEV."
+      },
+      "step2": {
+        "title": "AI scans for savings",
+        "description": "The AI reviews every transaction against German tax rules — home office, travel, tech, insurance, and more."
+      },
+      "step3": {
+        "title": "Get your savings report",
+        "description": "Receive a clear breakdown of missed deductions with estimated tax savings and actionable next steps."
+      }
+    },
+    "categories": {
+      "title": "What gets checked",
+      "subtitle": "Deductions are scanned across all major expense categories",
+      "homeOffice": "Home office",
+      "techSoftware": "Tech & software",
+      "phoneInternet": "Phone & internet",
+      "travel": "Travel expenses",
+      "education": "Education",
+      "insurance": "Insurance",
+      "bankFees": "Bank fees",
+      "marketing": "Marketing & ads",
+      "hosting": "Hosting & domains",
+      "clientGifts": "Client gifts",
+      "taxCosts": "Tax-related costs",
+      "furniture": "Office furniture"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "How does this tool work?",
+        "answer": "You upload a bank statement or accounting export. The AI analyzes each transaction against German tax rules (EStG, UStG) and identifies expenses that qualify as Betriebsausgaben but may be missing or miscategorized. You get a report with the deduction category, amount, and estimated tax savings."
+      },
+      "q2": {
+        "question": "Who is this for?",
+        "answer": "This tool is built for German freelancers (Freiberufler), Kleinunternehmer, Gewerbe owners, UG and GmbH founders — anyone self-employed in Germany who wants to make sure they're not overpaying on taxes."
+      },
+      "q3": {
+        "question": "What file formats are supported?",
+        "answer": "You can upload bank statements or accounting exports in CSV or PDF format. Most German banks and accounting tools like Norman, SevDesk, Lexoffice, and DATEV export in supported formats."
+      },
+      "q4": {
+        "question": "How accurate are the results?",
+        "answer": "The AI provides well-informed suggestions based on German tax law, but results are non-binding estimates. Tax savings calculations use typical marginal rates (30–42% plus Solidaritätszuschlag). Always keep receipts and use tools like Norman to file your taxes without missing any deductions."
+      },
+      "q5": {
+        "question": "Is it really free?",
+        "answer": "Yes, 100% free. This tool runs on ChatGPT and is provided by Norman as a free resource for the self-employed community in Germany."
+      }
+    },
+    "disclaimer": {
+      "title": "Disclaimer:",
+      "text": "This tool provides automated analysis for informational purposes only. Tax savings estimates are non-binding approximations based on typical marginal tax rates. Always retain receipts and document your allocation logic. Norman cannot be held liable for any decisions made based on this analysis."
+    }
+  },
+  "cta": {
+    "title": "Get more for free",
+    "description": "Join thousands of freelancers and businesses who trust Norman for invoicing. Start creating professional invoices today.",
+    "buttonLearnMore": "Learn more",
+    "buttonGetStarted": "Get started"
+  },
+  "footer": {
+    "compliance": "Free German e-invoice generator — no registration required. Includes all German tax requirements.",
+    "privacy": "No data is stored on our servers. Your information is only used to generate the PDF.",
+    "tagline": "Make business effortless",
+    "madeInGermany": "Made in Germany",
+    "berlinBased": "Berlin based",
+    "gdprCompliant": "GDPR-compliant",
+    "hostedInGermany": "Hosted in Germany",
+    "copyright": "© 2025 Norman AI GmbH",
+    "products": "Products",
+    "tools": "Tools",
+    "company": "Company",
+    "help": "Help"
+  },
+  "required": "*",
+  "optional": "(optional)",
+  "links": {
+    "becomeSelEmployed": "Become self-employed",
+    "eInvoicing": "E-invoicing",
+    "fileTaxes": "File taxes",
+    "getTaxAdvice": "Get tax advice",
+    "book": "Book",
+    "deductibles": "Deductibles",
+    "taxCalculator": "Tax calculator",
+    "mcpServer": "MCP Server",
+    "aboutUs": "About us",
+    "blog": "Blog",
+    "careers": "Careers",
+    "impressum": "Impressum",
+    "support": "Support",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms and Conditions",
+    "rewardsRules": "Rewards rules"
+  }
+} 

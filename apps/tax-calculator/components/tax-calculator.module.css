@@ -1,0 +1,306 @@
+.section {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 4rem 1.5rem;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.header {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.description {
+  margin: 0.875rem 0 0;
+  max-width: 680px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-secondary);
+}
+
+.calculatorShell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.panel {
+  padding: 1.5rem;
+}
+
+.formPanel {
+  border-right: 1px solid var(--color-border);
+}
+
+.panelTitle {
+  margin: 0 0 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.inputGroup {
+  margin-bottom: 1.25rem;
+}
+
+.inputHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.inputLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.inputValue {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.range {
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  accent-color: var(--color-primary);
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--color-border);
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-primary);
+  border-radius: 999px;
+  background: var(--color-surface);
+}
+
+.range::-moz-range-track {
+  height: 4px;
+  background: var(--color-border);
+}
+
+.range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-primary);
+  border-radius: 999px;
+  background: var(--color-surface);
+}
+
+.select {
+  width: 100%;
+  height: 2.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  padding: 0 0.875rem;
+  font: inherit;
+}
+
+.select:focus-visible {
+  outline: 1px solid var(--color-primary);
+  outline-offset: 0;
+}
+
+.radioFieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.radioLegend {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.radioGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.radioOption {
+  display: flex;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radioLabel {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  padding: 0.8rem 0.75rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.radioOption[data-selected="true"] .radioLabel {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
+  color: var(--color-primary);
+}
+
+.disclaimer {
+  margin-top: 1.5rem;
+  border: 1px solid var(--color-border);
+  padding: 0.875rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-secondary);
+}
+
+.disclaimer strong {
+  color: var(--color-primary);
+}
+
+.resultError {
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-secondary);
+}
+
+.resultStack {
+  display: grid;
+  gap: 1rem;
+}
+
+.resultCard {
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  background: var(--color-surface);
+}
+
+.resultHeading {
+  margin: 0 0 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.resultList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.resultListItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--color-secondary);
+}
+
+.resultListItem:last-child {
+  margin-bottom: 0;
+}
+
+.resultListItem span:last-child {
+  color: var(--color-primary);
+  text-align: right;
+  font-weight: 600;
+}
+
+.resultTotal {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  text-align: right;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+@media (max-width: 900px) {
+  .calculatorShell {
+    grid-template-columns: 1fr;
+  }
+
+  .formPanel {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .panel {
+    padding: 1.25rem;
+  }
+
+  .panelTitle {
+    font-size: 1.25rem;
+  }
+
+  .radioGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .resultListItem {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .resultListItem span:last-child,
+  .resultTotal {
+    text-align: left;
+  }
+}

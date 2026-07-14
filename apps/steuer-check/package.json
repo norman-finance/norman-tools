@@ -1,0 +1,30 @@
+{
+  "name": "steuer-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Steuer-Spar-Scout — free AI tax deduction finder companion for German freelancers",
+  "license": "MIT",
+  "author": "Norman AI GmbH",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "@types/node": "^20.8.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.2.0"
+  }
+}

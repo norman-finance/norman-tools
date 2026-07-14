@@ -1,0 +1,402 @@
+{
+  "header": {
+    "title": "E-Rechnungsersteller",
+    "subtitle": "Professionelle Rechnungen für deutsche Freelancer",
+    "mainPage": "Norman kostenlose tools",
+    "finanzamtBrief": "Finanzamt Brief Leser",
+    "steuerCheck": "Steuerabzug-Finder",
+    "breadcrumb": "← Zurück zu den Tools"
+  },
+  "hero": {
+    "title": "Kostenlose Business-Tools",
+    "subtitle": "kostenlos",
+    "description": "Professionelle Business-Tools zur Optimierung Ihrer Arbeitsabläufe. Alle kostenlos, ohne Anmeldung.",
+    "free": "Keine Anmeldung. Keine Wasserzeichen/Werbung. 100% kostenlos.",
+    "freeLabel": "Kostenlos"
+  },
+  "button": {
+    "fillDemo": "Mit Demo-Daten ausprobieren",
+    "preview": "Vorschau",
+    "getInvoice": "E-Rechnung herunterladen",
+    "generating": "Wird erstellt...",
+    "signUp": "Anmelden",
+    "getStarted": "Jetzt starten"
+  },
+  "section": {
+    "settings": "Einstellungen",
+    "createFor": "Von & Bis",
+    "details": "Details",
+    "payment": "Zahlungsdetails",
+    "notes": "Notizen & Bedingungen",
+    "preview": "Vorschau"
+  },
+  "company": {
+    "title": "Ihr Unternehmen",
+    "name": "Firmenname",
+    "address": "Adresse",
+    "zipCode": "PLZ",
+    "city": "Stadt",
+    "country": "Land",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "taxNumber": "Steuernummer",
+    "vatNumber": "USt-IdNr.",
+    "namePlaceholder": "Acme GmbH"
+  },
+  "client": {
+    "title": "Kunde",
+    "name": "Kundenname",
+    "type": "Kundentyp",
+    "address": "Kundenadresse",
+    "zipCode": "PLZ",
+    "city": "Stadt",
+    "country": "Land",
+    "email": "E-Mail",
+    "vatNumber": "USt-IdNr.",
+    "createNew": "Neuen Kunden erstellen"
+  },
+  "details": {
+    "invoiceNumber": "Rechnungsnummer",
+    "issued": "Ausgestellt",
+    "dueDate": "Fälligkeitsdatum",
+    "saleType": "Verkaufsart",
+    "serviceFrom": "Leistungsdatum von",
+    "serviceTo": "Leistungsdatum bis",
+    "deliveryDate": "Lieferdatum"
+  },
+  "items": {
+    "description": "Artikelbeschreibung",
+    "qty": "Menge",
+    "vat": "USt",
+    "rate": "Preis",
+    "total": "Gesamt",
+    "addNew": "Neuen Artikel hinzufügen",
+    "unitPriceVat": "Einzelpreis mit USt",
+    "removeItem": "Artikel entfernen",
+    "descriptionPlaceholder": "Produkt/Dienstleistung"
+  },
+  "payment": {
+    "iban": "IBAN",
+    "bic": "BIC/SWIFT",
+    "bankName": "Bankname"
+  },
+  "settings": {
+    "currency": "Währung",
+    "language": "Sprache",
+    "uiLanguage": "Benutzeroberfläche",
+    "invoiceLanguage": "Rechnungssprache",
+    "languageNote": "Die Oberflächensprache beeinflusst Formularbeschriftungen und Buttons. Die Rechnungssprache beeinflusst den Inhalt der generierten Rechnung.",
+    "saleType": "Verkaufsart",
+    "paymentTerms": "Zahlungsbedingungen",
+    "vatSettings": "USt-Einstellungen",
+    "kleinunternehmer": "Kleinunternehmer (§19 UStG)",
+    "kleinunternehmerDesc": "Aktiviere dies, wenn du ein Kleinunternehmer nach deutschem Steuerrecht bist und keine Umsatzsteuer erhebst."
+  },
+  "notes": {
+    "title": "Notizen",
+    "placeholder": "Fügen Sie hier zusätzliche Informationen, spezielle Anweisungen oder Notizen hinzu...",
+    "termsConditions": "Geschäftsbedingungen",
+    "termsConditionsPlaceholder": "Fügen Sie hier Zahlungsbedingungen, Geschäftsbedingungen oder spezielle Anweisungen hinzu..."
+  },
+  "message": {
+    "success": "🎉 Rechnung erfolgreich erstellt! Dein PDF-Download sollte automatisch starten.",
+    "vatIssues": "USt-Konfigurationsprobleme:",
+    "vatValidation": "USt-Validierung fehlgeschlagen:",
+    "error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "option": {
+    "person": "Person",
+    "business": "Unternehmen",
+    "services": "Dienstleistungen",
+    "goods": "Waren"
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "number": "Bitte geben Sie eine gültige Zahl ein",
+    "companyNameRequired": "Firmenname ist erforderlich",
+    "companyAddressRequired": "Firmenadresse ist erforderlich", 
+    "companyCityRequired": "Firmenstadt ist erforderlich",
+    "companyZipRequired": "Firmen-PLZ ist erforderlich",
+    "clientNameRequired": "Kundenname ist erforderlich",
+    "clientAddressRequired": "Kundenadresse ist erforderlich",
+    "clientCityRequired": "Kundenstadt ist erforderlich", 
+    "clientZipRequired": "Kunden-PLZ ist erforderlich",
+    "itemsRequired": "Mindestens ein Artikel ist erforderlich",
+    "itemDescriptionRequired": "Artikelbeschreibung ist erforderlich",
+    "itemQuantityRequired": "Artikelmenge muss größer als 0 sein",
+    "itemPriceRequired": "Artikelpreis muss größer als 0 sein"
+  },
+  "features": {
+    "title": "Mehr gefällig?",
+    "description": "Passe deine Rechnungen an, speichere Kunden, verfolge Zahlungen und mehr. Und das alles weiterhin kostenlos.",
+    "feature1": {
+      "icon": "🎨",
+      "title": "Rechnungen anpassen",
+      "description": "Gestalte deine Rechnungen individuell mit Logo, Farben und Schriftarten. Mach deine Rechnungen ansprechend."
+    },
+    "feature2": {
+      "icon": "⏱️",
+      "title": "Zeit sparen",
+      "description": "Nie wieder dieselben Daten doppelt eingeben. Speichere Kunden, Steuernummer, IBAN und mehr für die zukünftige Nutzung."
+    },
+    "feature3": {
+      "icon": "💰",
+      "title": "Zahlungen verfolgen",
+      "description": "Sieh den Zahlungsstatus und die Historie auf einen Blick. Keine Zahlungen mehr verpassen."
+    },
+    "feature4": {
+      "icon": "🔄",
+      "title": "Wiederkehrende Rechnungen",
+      "description": "Erstelle wiederkehrende Rechnungen für deine Kunden. Kein manuelles Erstellen mehr nötig."
+    },
+    "feature5": {
+      "icon": "🤖",
+      "title": "Automatische Erinnerungen",
+      "description": "Kein unangenehmes Nachfassen mehr. Versende automatische Erinnerungs-E-Mails bei überfälligen Rechnungen."
+    },
+    "feature6": {
+      "icon": "🔗",
+      "title": "Zahlungslinks (kommt bald)",
+      "description": "Werde 2x schneller bezahlt mit Zahlungslinks."
+    }
+  },
+  "tools": {
+    "title": "Verfügbare Tools",
+    "description": "Wählen Sie aus unserer Sammlung kostenloser Business-Tools, die Ihnen dabei helfen, effizienter zu arbeiten.",
+    "erechnung": {
+      "title": "Erstelle E-Rechnungen kostenlos",
+      "description": "Kostenlose Software zur Erstellung konformer E-Rechnungen. ZUGFeRD-PDF-E-Rechnung erstellen und herunterladen.",
+      "feature1": "ZUGFeRD-konforme E-Rechnungen",
+      "feature2": "Deutsches Steuerrecht konform",
+      "feature3": "Keine Anmeldung erforderlich"
+    },
+    "finanzamtBrief": {
+      "title": "Finanzamt-Brief-Leser",
+      "description": "Laden Sie PDFs oder Bilder vom deutschen Finanzamt hoch und erhalten Sie eine klare, verständliche Zusammenfassung.",
+      "feature1": "KI-gestützte Analyse",
+      "feature2": "Verständliche Zusammenfassung",
+      "feature3": "Nachfragen möglich"
+    },
+    "steuerCheck": {
+      "title": "Steuerabzug-Finder",
+      "description": "Lade deinen Kontoauszug hoch und finde verpasste Steuerabzüge mit KI. Für Freelancer und Selbstständige in Deutschland.",
+      "feature1": "KI-gestützte Analyse",
+      "feature2": "Deutsches Steuerrecht",
+      "feature3": "Kostenlos, ohne Anmeldung"
+    }
+  },
+  "finanzamtBrief": {
+    "title": "Finanzamt-Brief-Leser",
+    "subtitle": "Entschlüsseln Sie Finanzamtsbriefe mit KI-gestützter Analyse",
+    "description": "Laden Sie PDFs oder Bilder vom deutschen Finanzamt hoch und erhalten Sie eine klare, verständliche Zusammenfassung. Stellen Sie Nachfragen für besseres Verständnis.",
+    "freeLabel": "Kostenlos",
+    "breadcrumb": "← Zurück zu den Tools",
+    "features": {
+      "feature1": "KI-gestützte Analyse",
+      "feature2": "Verständliche Zusammenfassung",
+      "feature3": "Nachfragen möglich"
+    },
+    "upload": {
+      "title": "Laden Sie Ihren Finanzamt-Brief hoch",
+      "subtitle": "Ziehen Sie Ihre PDF oder Bilddatei hier hin oder klicken Sie zum Auswählen",
+      "fileReady": "Datei bereit zur Analyse",
+      "selectFile": "Datei auswählen",
+      "dragDrop": "oder ziehen und ablegen",
+      "documentPreview": "Dokumentvorschau"
+    },
+    "analysis": {
+      "analyzing": "Analysiert...",
+      "analyzeDocument": "Analysieren",
+      "reset": "Zurücksetzen",
+      "analyzeNew": "Neues analysieren",
+      "summary": "Zusammenfassung",
+      "keyPoints": "Wichtige Punkte",
+      "actionRequired": "Erforderliche Maßnahmen",
+      "followUp": "Nachfragen stellen",
+      "followUpPlaceholder": "Fragen zu Zahlungsoptionen, Fristen, nächsten Schritten...",
+      "ask": "Fragen",
+      "taxAssistant": "Assistent",
+      "deadline": "Frist"
+    },
+    "urgency": {
+      "high": "hohe Priorität",
+      "medium": "mittlere Priorität",
+      "low": "niedrige Priorität"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "q1": {
+        "question": "Wie funktioniert dieses Tool?",
+        "answer": "Unser KI-gestütztes Tool analysiert deutsche Finanzamtsdokumente mit fortschrittlicher OCR- und Sprachverarbeitungstechnologie. Es identifiziert wichtige Informationen, Fristen und erforderliche Maßnahmen und bietet dann eine klare, verständliche Zusammenfassung."
+      },
+      "q2": {
+        "question": "Sind meine persönlichen Daten sicher?",
+        "answer": "Ja, absolut. Wir entfernen automatisch persönliche Informationen wie Namen, Adressen und Steuernummern vor der Analyse. Ihre Dokumente werden sicher verarbeitet und nicht auf unseren Servern gespeichert. Die Analyse erfolgt in Echtzeit und Daten werden sofort nach der Verarbeitung gelöscht."
+      },
+      "q3": {
+        "question": "Welche Arten von Dokumenten kann ich hochladen?",
+        "answer": "Sie können PDFs oder Bilder (JPG, PNG) bis zu 10MB hochladen. Das Tool funktioniert mit gescannten oder digitalen deutschen Finanzamtsbriefen, einschließlich Steuerbescheiden, Zahlungsaufforderungen und offizieller Korrespondenz."
+      },
+      "q4": {
+        "question": "Wie genau ist die Analyse?",
+        "answer": "Unsere KI liefert hochgenaue Zusammenfassungen für die meisten standardmäßigen deutschen Steuerdokumente. Dieses Tool dient jedoch nur zu Informationszwecken. Überprüfen Sie wichtige Details immer mit dem Originaldokument."
+      },
+      "q5": {
+        "question": "Ist dieses Tool wirklich kostenlos?",
+        "answer": "Ja, völlig kostenlos ohne versteckte Kosten, Registrierungsanforderungen oder Nutzungslimits. Dieses Tool ist Teil von Norman's Engagement, die deutsche Steuer-Compliance für alle zugänglicher zu machen."
+      }
+    },
+    "privacy": {
+      "title": "Ihr Datenschutz ist geschützt",
+      "point1": "Persönliche Informationen werden automatisch vor der KI-Analyse entfernt",
+      "point2": "Dokumente werden nicht auf unseren Servern gespeichert",
+      "point3": "Alle Daten werden sicher verarbeitet und sofort gelöscht",
+      "point4": "DSGVO-konform und in Deutschland gehostet"
+    },
+    "disclaimer": {
+      "title": "Haftungsausschluss:",
+      "text": "Dieses Tool bietet automatisierte Analysen nur zu Informationszwecken. Obwohl wir uns um Genauigkeit bemühen, können KI-generierte Zusammenfassungen Fehler enthalten. Überprüfen Sie wichtige Informationen immer mit dem Originaldokument. Norman Finance kann nicht für Entscheidungen haftbar gemacht werden, die auf dieser Analyse basieren."
+    },
+    "errors": {
+      "invalidType": "Bitte laden Sie eine PDF-, JPG- oder PNG-Datei hoch.",
+      "fileSize": "Die Dateigröße muss weniger als 10MB betragen.",
+      "analysisFailed": "Fehler beim Analysieren des Dokuments. Bitte versuchen Sie es erneut.",
+      "followUpFailed": "Fehler beim Beantworten der Nachfrage. Bitte versuchen Sie es erneut."
+    }
+  },
+  "steuerCheck": {
+    "title": "Steuerabzug-Finder",
+    "description": "Lade deinen Kontoauszug hoch und lass die KI verpasste Steuerabzüge finden. Für Freelancer, Kleinunternehmer und Selbstständige in Deutschland.",
+    "breadcrumb": "← Zurück zu den Tools",
+    "features": {
+      "feature1": "KI-gestützte Analyse",
+      "feature2": "Deutsches Steuerrecht",
+      "feature3": "Kostenlos, ohne Anmeldung"
+    },
+    "cta": {
+      "startNow": "Jetzt Abzüge finden",
+      "poweredBy": "Powered by ChatGPT — öffnet in einem neuen Tab",
+      "midTitle": "Lass kein Geld auf dem Tisch liegen",
+      "midDescription": "Die meisten Freelancer verpassen jedes Jahr Steuerabzüge im Wert von mehreren hundert Euro. Lass deine Kontoauszüge jetzt kostenlos scannen."
+    },
+    "howItWorks": {
+      "title": "So funktioniert's",
+      "step1": {
+        "title": "Kontoauszug hochladen",
+        "description": "Exportiere einen Kontoauszug oder Buchungsbericht (CSV, PDF) aus deiner Bank oder Tools wie Norman, SevDesk, Lexoffice oder DATEV."
+      },
+      "step2": {
+        "title": "KI sucht nach Einsparungen",
+        "description": "Die KI prüft jede Buchung nach deutschem Steuerrecht — Arbeitszimmer, Reisekosten, Technik, Versicherungen und mehr."
+      },
+      "step3": {
+        "title": "Spar-Report erhalten",
+        "description": "Du erhältst eine übersichtliche Aufstellung verpasster Abzüge mit geschätzter Steuerersparnis und konkreten nächsten Schritten."
+      }
+    },
+    "categories": {
+      "title": "Was geprüft wird",
+      "subtitle": "Abzüge werden in allen wichtigen Ausgabenkategorien gescannt",
+      "homeOffice": "Homeoffice",
+      "techSoftware": "Technik & Software",
+      "phoneInternet": "Telefon & Internet",
+      "travel": "Reisekosten",
+      "education": "Weiterbildung",
+      "insurance": "Versicherungen",
+      "bankFees": "Bankgebühren",
+      "marketing": "Marketing & Werbung",
+      "hosting": "Hosting & Domains",
+      "clientGifts": "Kundengeschenke",
+      "taxCosts": "Steuerberatungskosten",
+      "furniture": "Büromöbel"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "q1": {
+        "question": "Wie funktioniert dieses Tool?",
+        "answer": "Du lädst einen Kontoauszug oder Buchhaltungsexport hoch. Die KI analysiert jede Buchung nach deutschem Steuerrecht (EStG, UStG) und identifiziert Ausgaben, die als Betriebsausgaben absetzbar sind, aber möglicherweise fehlen oder falsch kategorisiert wurden. Du erhältst einen Report mit Abzugskategorie, Betrag und geschätzter Steuerersparnis."
+      },
+      "q2": {
+        "question": "Für wen ist dieses Tool?",
+        "answer": "Dieses Tool ist für Freelancer (Freiberufler), Kleinunternehmer, Gewerbetreibende, UG- und GmbH-Gründer — alle Selbstständigen in Deutschland, die sicherstellen wollen, dass sie nicht zu viel Steuern zahlen."
+      },
+      "q3": {
+        "question": "Welche Dateiformate werden unterstützt?",
+        "answer": "Du kannst Kontoauszüge oder Buchhaltungsexporte im CSV- oder PDF-Format hochladen. Die meisten deutschen Banken und Buchhaltungstools wie Norman, SevDesk, Lexoffice und DATEV exportieren in unterstützten Formaten."
+      },
+      "q4": {
+        "question": "Wie genau sind die Ergebnisse?",
+        "answer": "Die KI gibt fundierte Vorschläge basierend auf deutschem Steuerrecht, aber die Ergebnisse sind unverbindliche Schätzungen. Steuerersparnisse werden mit typischen Grenzsteuersätzen (30–42% plus Solidaritätszuschlag) berechnet. Belege immer aufbewahren und Norman nutzen, um deine Steuererklärung ohne verpasste Abzüge einzureichen."
+      },
+      "q5": {
+        "question": "Ist das wirklich kostenlos?",
+        "answer": "Ja, 100% kostenlos. Dieses Tool läuft auf ChatGPT und wird von Norman als kostenloses Angebot für die Selbstständigen-Community in Deutschland bereitgestellt."
+      }
+    },
+    "disclaimer": {
+      "title": "Haftungsausschluss:",
+      "text": "Dieses Tool bietet automatisierte Analysen nur zu Informationszwecken. Steuerersparnisse sind unverbindliche Schätzungen auf Basis typischer Grenzsteuersätze. Belege immer aufbewahren und Zuordnungslogik dokumentieren. Norman haftet nicht für Entscheidungen, die auf dieser Analyse basieren."
+    }
+  },
+  "cta": {
+    "title": "Mehr kostenlos bekommen",
+    "description": "Schließ dich tausenden Freelancer*innen und Unternehmen an, die Norman für ihre Rechnungsstellung nutzen. Erstelle noch heute professionelle Rechnungen.",
+    "buttonLearnMore": "Mehr erfahren",
+    "buttonGetStarted": "Jetzt starten"
+  },
+  "footer": {
+    "compliance": "Kostenloser deutscher E-Rechnungsersteller — keine Anmeldung erforderlich. Enthält alle deutschen Steueranforderungen.",
+    "privacy": "Keine Daten werden auf unseren Servern gespeichert. Ihre Informationen werden nur zur PDF-Erstellung verwendet.",
+    "tagline": "Mach Geschäft mühelos",
+    "madeInGermany": "Made in Germany",
+    "berlinBased": "Berlin ansässig",
+    "gdprCompliant": "DSGVO-konform",
+    "hostedInGermany": "Gehostet in Deutschland",
+    "copyright": "© 2025 Norman AI GmbH",
+    "products": "Produkte",
+    "tools": "Tools",
+    "company": "Unternehmen",
+    "help": "Hilfe"
+  },
+  "required": "*",
+  "optional": "(optional)",
+  "currency": {
+    "EUR": "Euro",
+    "USD": "US-Dollar",
+    "BRL": "Brasilianischer Real",
+    "CZK": "Tschechische Krone",
+    "DKK": "Dänische Krone",
+    "HKD": "Hongkong-Dollar",
+    "INR": "Indische Rupie",
+    "JPY": "Japanischer Yen",
+    "MXN": "Mexikanischer Peso",
+    "ILS": "Neuer Israelischer Schekel",
+    "NZD": "Neuseeland-Dollar",
+    "NOK": "Norwegische Krone",
+    "PLN": "Polnischer Złoty",
+    "GBP": "Britisches Pfund",
+    "SEK": "Schwedische Krone",
+    "CHF": "Schweizer Franken",
+    "TRY": "Türkische Lira",
+    "AED": "VAE-Dirham"
+  },
+  "links": {
+    "becomeSelEmployed": "Selbstständig werden",
+    "eInvoicing": "E-Rechnungsstellung",
+    "fileTaxes": "Steuern einreichen",
+    "getTaxAdvice": "Steuerberatung erhalten",
+    "book": "Buchen",
+    "deductibles": "Absetzbare Kosten",
+    "taxCalculator": "Steuerrechner",
+    "mcpServer": "MCP-Server",
+    "aboutUs": "Über uns",
+    "blog": "Blog",
+    "careers": "Karriere",
+    "impressum": "Impressum",
+    "support": "Support",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsAndConditions": "Geschäftsbedingungen",
+    "rewardsRules": "Belohnungsregeln"
+  }
+} 
