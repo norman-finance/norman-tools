@@ -18,7 +18,7 @@
     "@hookform/resolvers": "^3.10.0",
     "i18n-iso-countries": "^7.14.0",
     "is-european": "^1.0.8",
-    "next": "16.2.9",
+    "next": "16.4.5",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-hook-form": "^7.72.1",
